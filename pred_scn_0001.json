@@ -1,0 +1,698 @@
+{
+  "schema_version": "cita-net-output/1.0",
+  "scenario_id": "scn_0001",
+  "model": {
+    "name": "CITA-Net",
+    "stage": "cita_full"
+  },
+  "config": {
+    "stage": "cita_full",
+    "seed": 20250606,
+    "device": "auto",
+    "data_root": "data/battlefield_stkg_dataset",
+    "ontology_dir": "data/battlefield_stkg_dataset/ontology",
+    "blocking": {
+      "dt_max_s": 180.0,
+      "theta_text": 0.3,
+      "r_err_floor_m": 5.0,
+      "allow_unknown_type": true,
+      "reach_vmax_mult": 1.0,
+      "reach_extra_m": 0.0
+    },
+    "encoder": {
+      "d_model": 128,
+      "text_encoder": "learned",
+      "sbert_model": "paraphrase-multilingual-MiniLM-L12-v2",
+      "text_max_tokens": 16,
+      "use_source_gate": true,
+      "spatiotemporal_freqs": 8
+    },
+    "graph": {
+      "enabled": true,
+      "gnn_layers": 2,
+      "n_heads": 4,
+      "hops": 2
+    },
+    "cta": {
+      "time_eps_s": 5.0,
+      "big_penalty": 50.0,
+      "motion_beta": 2.0,
+      "enabled_terms": [
+        "sem",
+        "time",
+        "motion",
+        "state",
+        "rel",
+        "src"
+      ]
+    },
+    "decoder": {
+      "enabled": true,
+      "num_slots": 12,
+      "sinkhorn_iters": 20,
+      "sinkhorn_temp": 0.5,
+      "sinkhorn_col_strength": 0.1
+    },
+    "loss": {
+      "lambda_pair": 1.0,
+      "lambda_transition": 1.0,
+      "lambda_trajectory": 0.5,
+      "lambda_dangling": 1.0,
+      "lambda_assign": 1.0,
+      "pair_pos_weight": 3.0
+    },
+    "train": {
+      "lr": 0.001,
+      "epochs": 200,
+      "weight_decay": 0.0,
+      "grad_clip": 5.0,
+      "log_every": 20
+    }
+  },
+  "identities": [
+    {
+      "global_id": "G-scn_0001-04",
+      "type": "BTR-80",
+      "type_confidence": 0.634,
+      "match_confidence": 1.0,
+      "local_entity_ids": {
+        "A": "ent_A_005",
+        "B": "ent_B_005"
+      },
+      "members": [
+        {
+          "obs_id": "obs_A_0020",
+          "assign_prob": 0.8498
+        },
+        {
+          "obs_id": "obs_B_0022",
+          "assign_prob": 0.9411
+        },
+        {
+          "obs_id": "obs_A_0021",
+          "assign_prob": 0.977
+        },
+        {
+          "obs_id": "obs_B_0023",
+          "assign_prob": 0.5917
+        }
+      ],
+      "trajectory": [
+        {
+          "obs_id": "obs_A_0020",
+          "time": "2025-06-06T00:00:24Z",
+          "easting": 322355.35,
+          "northing": 4158874.33,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "RADAR"
+        },
+        {
+          "obs_id": "obs_B_0022",
+          "time": "2025-06-06T00:01:08Z",
+          "easting": 322410.37,
+          "northing": 4158880.46,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "RADAR"
+        },
+        {
+          "obs_id": "obs_A_0021",
+          "time": "2025-06-06T00:03:55Z",
+          "easting": 322694.04,
+          "northing": 4158719.83,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "EO_IR"
+        },
+        {
+          "obs_id": "obs_B_0023",
+          "time": "2025-06-06T00:04:17Z",
+          "easting": 322590.93,
+          "northing": 4158800.38,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "HUMINT"
+        }
+      ],
+      "transitions": [
+        {
+          "from_obs": "obs_A_0020",
+          "to_obs": "obs_B_0022",
+          "prob": 0.9847332835197449,
+          "feasible_motion": true,
+          "required_speed_mps": 1.258
+        },
+        {
+          "from_obs": "obs_B_0022",
+          "to_obs": "obs_A_0021",
+          "prob": 0.9783641695976257,
+          "feasible_motion": true,
+          "required_speed_mps": 1.952
+        },
+        {
+          "from_obs": "obs_A_0021",
+          "to_obs": "obs_B_0023",
+          "prob": 0.9909867644309998,
+          "feasible_motion": true,
+          "required_speed_mps": 5.947
+        }
+      ],
+      "rationale": {
+        "sim_sem": 0.9525,
+        "b_time": 0.0,
+        "b_motion": -0.0,
+        "b_state": 0.0168,
+        "b_rel": 1.8404,
+        "b_src": 0.2566
+      },
+      "fused_representative": {
+        "type": "BTR-80",
+        "easting": 322512.67,
+        "northing": 4158818.75,
+        "last_state": "Moving",
+        "last_time": "2025-06-06T00:04:17Z"
+      },
+      "conflicts": []
+    },
+    {
+      "global_id": "G-scn_0001-05",
+      "type": "BMP-2",
+      "type_confidence": 0.617,
+      "match_confidence": 1.0,
+      "local_entity_ids": {
+        "A": "ent_A_002",
+        "B": "ent_B_002"
+      },
+      "members": [
+        {
+          "obs_id": "obs_A_0007",
+          "assign_prob": 0.9999
+        },
+        {
+          "obs_id": "obs_B_0009",
+          "assign_prob": 1.0
+        },
+        {
+          "obs_id": "obs_A_0008",
+          "assign_prob": 0.9999
+        },
+        {
+          "obs_id": "obs_B_0010",
+          "assign_prob": 0.9996
+        }
+      ],
+      "trajectory": [
+        {
+          "obs_id": "obs_A_0007",
+          "time": "2025-06-06T00:00:20Z",
+          "easting": 322209.71,
+          "northing": 4158142.38,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "EO_IR"
+        },
+        {
+          "obs_id": "obs_B_0009",
+          "time": "2025-06-06T00:01:01Z",
+          "easting": 322219.78,
+          "northing": 4158166.64,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "RADAR"
+        },
+        {
+          "obs_id": "obs_A_0008",
+          "time": "2025-06-06T00:03:19Z",
+          "easting": 322528.68,
+          "northing": 4158331.18,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "RADAR"
+        },
+        {
+          "obs_id": "obs_B_0010",
+          "time": "2025-06-06T00:03:41Z",
+          "easting": 322656.46,
+          "northing": 4158355.52,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "HUMINT"
+        }
+      ],
+      "transitions": [
+        {
+          "from_obs": "obs_A_0007",
+          "to_obs": "obs_B_0009",
+          "prob": 0.9846042990684509,
+          "feasible_motion": true,
+          "required_speed_mps": 0.641
+        },
+        {
+          "from_obs": "obs_B_0009",
+          "to_obs": "obs_A_0008",
+          "prob": 0.9858466982841492,
+          "feasible_motion": true,
+          "required_speed_mps": 2.536
+        },
+        {
+          "from_obs": "obs_A_0008",
+          "to_obs": "obs_B_0010",
+          "prob": 0.9917691946029663,
+          "feasible_motion": true,
+          "required_speed_mps": 5.913
+        }
+      ],
+      "rationale": {
+        "sim_sem": 0.9911,
+        "b_time": 0.0,
+        "b_motion": -0.0,
+        "b_state": 0.0168,
+        "b_rel": 1.8404,
+        "b_src": 0.3429
+      },
+      "fused_representative": {
+        "type": "BMP-2",
+        "easting": 322403.66,
+        "northing": 4158248.93,
+        "last_state": "Moving",
+        "last_time": "2025-06-06T00:03:41Z"
+      },
+      "conflicts": []
+    },
+    {
+      "global_id": "G-scn_0001-06",
+      "type": "T-72",
+      "type_confidence": 0.601,
+      "match_confidence": 1.0,
+      "local_entity_ids": {
+        "A": "ent_A_001",
+        "B": "ent_B_001"
+      },
+      "members": [
+        {
+          "obs_id": "obs_A_0001",
+          "assign_prob": 0.9871
+        },
+        {
+          "obs_id": "obs_B_0004",
+          "assign_prob": 0.9547
+        },
+        {
+          "obs_id": "obs_A_0002",
+          "assign_prob": 0.9877
+        },
+        {
+          "obs_id": "obs_B_0005",
+          "assign_prob": 0.925
+        },
+        {
+          "obs_id": "obs_B_0006",
+          "assign_prob": 0.9392
+        },
+        {
+          "obs_id": "obs_A_0003",
+          "assign_prob": 0.9839
+        }
+      ],
+      "trajectory": [
+        {
+          "obs_id": "obs_A_0001",
+          "time": "2025-06-06T00:00:09Z",
+          "easting": 322016.09,
+          "northing": 4158015.6,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "EO_IR"
+        },
+        {
+          "obs_id": "obs_B_0004",
+          "time": "2025-06-06T00:00:43Z",
+          "easting": 322064.95,
+          "northing": 4158034.47,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "RADAR"
+        },
+        {
+          "obs_id": "obs_A_0002",
+          "time": "2025-06-06T00:02:29Z",
+          "easting": 322286.8,
+          "northing": 4158145.23,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "EO_IR"
+        },
+        {
+          "obs_id": "obs_B_0005",
+          "time": "2025-06-06T00:02:47Z",
+          "easting": 322358.22,
+          "northing": 4158218.01,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "SIGINT"
+        },
+        {
+          "obs_id": "obs_B_0006",
+          "time": "2025-06-06T00:04:44Z",
+          "easting": 322458.88,
+          "northing": 4158291.9,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "ACOUSTIC"
+        },
+        {
+          "obs_id": "obs_A_0003",
+          "time": "2025-06-06T00:04:52Z",
+          "easting": 322577.26,
+          "northing": 4158322.94,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "RADAR"
+        }
+      ],
+      "transitions": [
+        {
+          "from_obs": "obs_A_0001",
+          "to_obs": "obs_B_0004",
+          "prob": 0.9845935702323914,
+          "feasible_motion": true,
+          "required_speed_mps": 1.541
+        },
+        {
+          "from_obs": "obs_B_0004",
+          "to_obs": "obs_A_0002",
+          "prob": 0.9802789688110352,
+          "feasible_motion": true,
+          "required_speed_mps": 2.339
+        },
+        {
+          "from_obs": "obs_A_0002",
+          "to_obs": "obs_B_0005",
+          "prob": 0.9912612438201904,
+          "feasible_motion": true,
+          "required_speed_mps": 5.665
+        },
+        {
+          "from_obs": "obs_B_0005",
+          "to_obs": "obs_B_0006",
+          "prob": 0.9832075834274292,
+          "feasible_motion": true,
+          "required_speed_mps": 1.067
+        },
+        {
+          "from_obs": "obs_B_0006",
+          "to_obs": "obs_A_0003",
+          "prob": 0.9804958701133728,
+          "feasible_motion": true,
+          "required_speed_mps": 15.298
+        }
+      ],
+      "rationale": {
+        "sim_sem": 0.9907,
+        "b_time": 0.0,
+        "b_motion": -0.0,
+        "b_state": 0.0168,
+        "b_rel": 1.8404,
+        "b_src": 0.3108
+      },
+      "fused_representative": {
+        "type": "T-72",
+        "easting": 322293.7,
+        "northing": 4158171.36,
+        "last_state": "Moving",
+        "last_time": "2025-06-06T00:04:52Z"
+      },
+      "conflicts": []
+    },
+    {
+      "global_id": "G-scn_0001-08",
+      "type": "T-72",
+      "type_confidence": 0.549,
+      "match_confidence": 1.0,
+      "local_entity_ids": {
+        "A": "ent_A_003",
+        "B": "ent_B_003"
+      },
+      "members": [
+        {
+          "obs_id": "obs_A_0011",
+          "assign_prob": 0.773
+        },
+        {
+          "obs_id": "obs_B_0014",
+          "assign_prob": 0.9055
+        },
+        {
+          "obs_id": "obs_A_0012",
+          "assign_prob": 0.9943
+        },
+        {
+          "obs_id": "obs_B_0015",
+          "assign_prob": 0.9874
+        },
+        {
+          "obs_id": "obs_A_0013",
+          "assign_prob": 0.6152
+        }
+      ],
+      "trajectory": [
+        {
+          "obs_id": "obs_A_0011",
+          "time": "2025-06-06T00:00:13Z",
+          "easting": 321852.85,
+          "northing": 4157932.65,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "EO_IR"
+        },
+        {
+          "obs_id": "obs_B_0014",
+          "time": "2025-06-06T00:00:48Z",
+          "easting": 321939.59,
+          "northing": 4157883.89,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "ACOUSTIC"
+        },
+        {
+          "obs_id": "obs_A_0012",
+          "time": "2025-06-06T00:02:34Z",
+          "easting": 322116.67,
+          "northing": 4158063.45,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "EO_IR"
+        },
+        {
+          "obs_id": "obs_B_0015",
+          "time": "2025-06-06T00:04:13Z",
+          "easting": 322332.82,
+          "northing": 4158148.96,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "RADAR"
+        },
+        {
+          "obs_id": "obs_A_0013",
+          "time": "2025-06-06T00:04:55Z",
+          "easting": 322376.41,
+          "northing": 4158166.32,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "RADAR"
+        }
+      ],
+      "transitions": [
+        {
+          "from_obs": "obs_A_0011",
+          "to_obs": "obs_B_0014",
+          "prob": 0.9884318709373474,
+          "feasible_motion": true,
+          "required_speed_mps": 2.843
+        },
+        {
+          "from_obs": "obs_B_0014",
+          "to_obs": "obs_A_0012",
+          "prob": 0.9881855249404907,
+          "feasible_motion": true,
+          "required_speed_mps": 2.379
+        },
+        {
+          "from_obs": "obs_A_0012",
+          "to_obs": "obs_B_0015",
+          "prob": 0.9830033779144287,
+          "feasible_motion": true,
+          "required_speed_mps": 2.348
+        },
+        {
+          "from_obs": "obs_B_0015",
+          "to_obs": "obs_A_0013",
+          "prob": 0.9838613867759705,
+          "feasible_motion": true,
+          "required_speed_mps": 1.117
+        }
+      ],
+      "rationale": {
+        "sim_sem": 0.937,
+        "b_time": 0.0,
+        "b_motion": -0.0,
+        "b_state": 0.0168,
+        "b_rel": 1.8404,
+        "b_src": 0.3255
+      },
+      "fused_representative": {
+        "type": "T-72",
+        "easting": 322123.67,
+        "northing": 4158039.05,
+        "last_state": "Moving",
+        "last_time": "2025-06-06T00:04:55Z"
+      },
+      "conflicts": []
+    },
+    {
+      "global_id": "G-scn_0001-11",
+      "type": "2S1",
+      "type_confidence": 0.569,
+      "match_confidence": 1.0,
+      "local_entity_ids": {
+        "A": "ent_A_004",
+        "B": "ent_B_004"
+      },
+      "members": [
+        {
+          "obs_id": "obs_A_0016",
+          "assign_prob": 0.9943
+        },
+        {
+          "obs_id": "obs_B_0018",
+          "assign_prob": 0.9909
+        },
+        {
+          "obs_id": "obs_A_0017",
+          "assign_prob": 0.9832
+        },
+        {
+          "obs_id": "obs_B_0019",
+          "assign_prob": 0.9725
+        }
+      ],
+      "trajectory": [
+        {
+          "obs_id": "obs_A_0016",
+          "time": "2025-06-06T00:00:30Z",
+          "easting": 322894.21,
+          "northing": 4157609.69,
+          "state": "Moving",
+          "kg_id": "A",
+          "source": "EO_IR"
+        },
+        {
+          "obs_id": "obs_B_0018",
+          "time": "2025-06-06T00:01:11Z",
+          "easting": 322933.55,
+          "northing": 4157637.7,
+          "state": "Moving",
+          "kg_id": "B",
+          "source": "SIGINT"
+        },
+        {
+          "obs_id": "obs_A_0017",
+          "time": "2025-06-06T00:04:00Z",
+          "easting": 322921.32,
+          "northing": 4157607.73,
+          "state": "Firing",
+          "kg_id": "A",
+          "source": "RADAR"
+        },
+        {
+          "obs_id": "obs_B_0019",
+          "time": "2025-06-06T00:04:22Z",
+          "easting": 322996.76,
+          "northing": 4157587.51,
+          "state": "Firing",
+          "kg_id": "B",
+          "source": "ACOUSTIC"
+        }
+      ],
+      "transitions": [
+        {
+          "from_obs": "obs_A_0016",
+          "to_obs": "obs_B_0018",
+          "prob": 0.9909077882766724,
+          "feasible_motion": true,
+          "required_speed_mps": 1.178
+        },
+        {
+          "from_obs": "obs_B_0018",
+          "to_obs": "obs_A_0017",
+          "prob": 0.9640165567398071,
+          "feasible_motion": true,
+          "required_speed_mps": 0.192
+        },
+        {
+          "from_obs": "obs_A_0017",
+          "to_obs": "obs_B_0019",
+          "prob": 0.9899764657020569,
+          "feasible_motion": true,
+          "required_speed_mps": 3.55
+        }
+      ],
+      "rationale": {
+        "sim_sem": 0.9652,
+        "b_time": 0.0,
+        "b_motion": -0.0404,
+        "b_state": -0.3687,
+        "b_rel": 1.8404,
+        "b_src": 0.6191
+      },
+      "fused_representative": {
+        "type": "2S1",
+        "easting": 322936.46,
+        "northing": 4157610.66,
+        "last_state": "Firing",
+        "last_time": "2025-06-06T00:04:22Z"
+      },
+      "conflicts": []
+    }
+  ],
+  "dangling": [
+    {
+      "kg_id": "A",
+      "local_entity_id": "ent_A_006",
+      "obs_ids": [
+        "obs_A_0024",
+        "obs_A_0025",
+        "obs_A_0026"
+      ],
+      "dangling_prob": 1.0,
+      "nearest_candidate": {
+        "kg_id": "B",
+        "local_entity_id": "ent_B_003",
+        "pair_prob": 0.0
+      },
+      "decision": "abstain",
+      "reason": "routed to null slot"
+    },
+    {
+      "kg_id": "B",
+      "local_entity_id": "ent_B_006",
+      "obs_ids": [
+        "obs_B_0027",
+        "obs_B_0028",
+        "obs_B_0029"
+      ],
+      "dangling_prob": 1.0,
+      "nearest_candidate": null,
+      "decision": "abstain",
+      "reason": "routed to null slot"
+    }
+  ],
+  "stats": {
+    "n_identities": 5,
+    "n_dangling": 2,
+    "n_observations": 29,
+    "n_transitions": 18,
+    "n_impossible_transitions": 0
+  }
+}
