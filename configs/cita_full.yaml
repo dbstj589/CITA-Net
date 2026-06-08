@@ -1,0 +1,44 @@
+# M3 -- Full CITA-Net: CITA-G + latent identity-trajectory decoder (Sinkhorn).
+# Adds L_trajectory + L_assign. predict.py emits the Part-B output JSON.
+stage: cita_full
+seed: 20250606
+device: auto
+data_root: data/battlefield_stkg_dataset
+ontology_dir: data/battlefield_stkg_dataset/ontology
+
+blocking:
+  dt_max_s: 180.0
+  theta_text: 0.3
+
+encoder:
+  d_model: 128
+  text_encoder: learned
+  use_source_gate: true
+
+graph:
+  enabled: true
+  gnn_layers: 2
+  n_heads: 4
+  hops: 2
+
+cta:
+  enabled_terms: [sem, time, motion, state, rel, src]
+
+decoder:
+  enabled: true
+  num_slots: 12          # > max identities/scenario (7) + margin
+  sinkhorn_iters: 20
+  sinkhorn_temp: 0.5
+
+loss:
+  lambda_pair: 1.0
+  lambda_transition: 1.0
+  lambda_trajectory: 0.5
+  lambda_dangling: 1.0
+  lambda_assign: 1.0
+  pair_pos_weight: 3.0
+
+train:
+  lr: 1.0e-3
+  epochs: 200
+  log_every: 20

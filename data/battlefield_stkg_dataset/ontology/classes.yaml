@@ -1,0 +1,97 @@
+# Object-type taxonomy with state-conditioned kinematic ceilings (§4.1, §4.4).
+#
+# v_max_mps gives the maximum plausible ground speed (m/s) for an object of
+# this type while in a given state. The blocking reach-radius and the CTA
+# b_motion term both read these values. Towed weapons (ZPU-4, MO-120-RT) have
+# self-propelled speed 0 -- they cannot relocate under their own power, so an
+# Emplaced/Firing towed gun has v_max ~ 0 and inter-position "moves" are
+# strongly penalised.
+#
+# Each class: category, mobility, default_state, v_max_mps{<state>: value},
+# default_v_max_mps fallback for unlisted states.
+
+UNKNOWN:
+  category: unknown
+  mobility: unknown
+  default_state: Unknown
+  # Permissive ceiling -- UNKNOWN is type-compatible with everything (blocking)
+  # and must not be over-penalised kinematically.
+  default_v_max_mps: 25.0
+  v_max_mps:
+    Emplaced: 25.0
+    Firing: 25.0
+    Halted: 25.0
+    Moving: 25.0
+    Unknown: 25.0
+
+T-72:
+  category: tank
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 16.0          # ~60 km/h road
+  v_max_mps:
+    Moving: 16.0
+    Halted: 0.5
+    Emplaced: 0.5
+    Firing: 2.0                     # may creep while firing
+    Unknown: 16.0
+
+BMP-2:
+  category: ifv
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 18.0
+  v_max_mps:
+    Moving: 18.0
+    Halted: 0.5
+    Emplaced: 0.5
+    Firing: 2.0
+    Unknown: 18.0
+
+BTR-80:
+  category: apc
+  mobility: wheeled
+  default_state: Moving
+  default_v_max_mps: 22.0          # wheeled, fast on road
+  v_max_mps:
+    Moving: 22.0
+    Halted: 0.5
+    Emplaced: 0.5
+    Firing: 2.0
+    Unknown: 22.0
+
+2S1:
+  category: spg                     # self-propelled gun (Gvozdika)
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 16.0
+  v_max_mps:
+    Moving: 16.0
+    Halted: 0.5
+    Emplaced: 0.5                   # self-propelled but stationary when firing
+    Firing: 0.5
+    Unknown: 16.0
+
+ZPU-4:
+  category: towed_aa                # towed quad 14.5mm AA gun
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0           # no self-propulsion
+  v_max_mps:
+    Emplaced: 0.0
+    Firing: 0.0
+    Halted: 0.0
+    Moving: 0.0                     # only moves while towed by a prime mover
+    Unknown: 0.0
+
+MO-120-RT:
+  category: towed_mortar            # 120mm rifled towed mortar
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps:
+    Emplaced: 0.0
+    Firing: 0.0
+    Halted: 0.0
+    Moving: 0.0
+    Unknown: 0.0

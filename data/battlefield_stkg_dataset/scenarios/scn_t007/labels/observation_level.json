@@ -1,0 +1,1959 @@
+{
+  "scenario_id": "scn_t007",
+  "assignment": [
+    {
+      "obs_id": "obs_A_0001",
+      "gold_identity_id": "id_0001"
+    },
+    {
+      "obs_id": "obs_A_0002",
+      "gold_identity_id": "id_0001"
+    },
+    {
+      "obs_id": "obs_A_0003",
+      "gold_identity_id": "id_0001"
+    },
+    {
+      "obs_id": "obs_A_0006",
+      "gold_identity_id": "id_0002"
+    },
+    {
+      "obs_id": "obs_A_0007",
+      "gold_identity_id": "id_0002"
+    },
+    {
+      "obs_id": "obs_A_0010",
+      "gold_identity_id": "id_0003"
+    },
+    {
+      "obs_id": "obs_A_0011",
+      "gold_identity_id": "id_0003"
+    },
+    {
+      "obs_id": "obs_A_0012",
+      "gold_identity_id": "id_0003"
+    },
+    {
+      "obs_id": "obs_A_0015",
+      "gold_identity_id": "id_0004"
+    },
+    {
+      "obs_id": "obs_A_0016",
+      "gold_identity_id": "id_0004"
+    },
+    {
+      "obs_id": "obs_A_0019",
+      "gold_identity_id": "id_0005"
+    },
+    {
+      "obs_id": "obs_A_0020",
+      "gold_identity_id": "id_0005"
+    },
+    {
+      "obs_id": "obs_A_0024",
+      "gold_identity_id": "id_0006"
+    },
+    {
+      "obs_id": "obs_A_0025",
+      "gold_identity_id": "id_0006"
+    },
+    {
+      "obs_id": "obs_A_0028",
+      "gold_identity_id": "id_0007"
+    },
+    {
+      "obs_id": "obs_A_0029",
+      "gold_identity_id": "id_0007"
+    },
+    {
+      "obs_id": "obs_A_0030",
+      "gold_identity_id": "id_0007"
+    },
+    {
+      "obs_id": "obs_A_0033",
+      "gold_identity_id": "dang_A_zpu4_0"
+    },
+    {
+      "obs_id": "obs_A_0034",
+      "gold_identity_id": "dang_A_zpu4_0"
+    },
+    {
+      "obs_id": "obs_A_0035",
+      "gold_identity_id": "dang_A_zpu4_0"
+    },
+    {
+      "obs_id": "obs_B_0004",
+      "gold_identity_id": "id_0001"
+    },
+    {
+      "obs_id": "obs_B_0005",
+      "gold_identity_id": "id_0001"
+    },
+    {
+      "obs_id": "obs_B_0008",
+      "gold_identity_id": "id_0002"
+    },
+    {
+      "obs_id": "obs_B_0009",
+      "gold_identity_id": "id_0002"
+    },
+    {
+      "obs_id": "obs_B_0013",
+      "gold_identity_id": "id_0003"
+    },
+    {
+      "obs_id": "obs_B_0014",
+      "gold_identity_id": "id_0003"
+    },
+    {
+      "obs_id": "obs_B_0017",
+      "gold_identity_id": "id_0004"
+    },
+    {
+      "obs_id": "obs_B_0018",
+      "gold_identity_id": "id_0004"
+    },
+    {
+      "obs_id": "obs_B_0021",
+      "gold_identity_id": "id_0005"
+    },
+    {
+      "obs_id": "obs_B_0022",
+      "gold_identity_id": "id_0005"
+    },
+    {
+      "obs_id": "obs_B_0023",
+      "gold_identity_id": "id_0005"
+    },
+    {
+      "obs_id": "obs_B_0026",
+      "gold_identity_id": "id_0006"
+    },
+    {
+      "obs_id": "obs_B_0027",
+      "gold_identity_id": "id_0006"
+    },
+    {
+      "obs_id": "obs_B_0031",
+      "gold_identity_id": "id_0007"
+    },
+    {
+      "obs_id": "obs_B_0032",
+      "gold_identity_id": "id_0007"
+    },
+    {
+      "obs_id": "obs_B_0036",
+      "gold_identity_id": "dang_B_zpu4_1"
+    },
+    {
+      "obs_id": "obs_B_0037",
+      "gold_identity_id": "dang_B_zpu4_1"
+    },
+    {
+      "obs_id": "obs_B_0038",
+      "gold_identity_id": "dang_B_zpu4_1"
+    }
+  ],
+  "cross_kg_pairs": [
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0021",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0022",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0023",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0019",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0004",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0005",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0001",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0033",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0004",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0005",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0002",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0021",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0022",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0023",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0020",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0026",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0027",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0024",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0013",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0014",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0010",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0017",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0018",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0015",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0008",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0009",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0006",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0031",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0028",
+      "obs_b": "obs_B_0032",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0031",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0029",
+      "obs_b": "obs_B_0032",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0008",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0009",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0007",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0017",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0018",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0016",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0026",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0027",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0025",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0013",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0014",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0011",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0034",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0031",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0030",
+      "obs_b": "obs_B_0032",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0035",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0013",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0004",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0014",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0005",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0003",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0036",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0031",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0021",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0026",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0017",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0013",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0037",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0004",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0014",
+      "label": "same"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0022",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0027",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0018",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0008",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0038",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0005",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0009",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0023",
+      "label": "diff"
+    },
+    {
+      "obs_a": "obs_A_0012",
+      "obs_b": "obs_B_0032",
+      "label": "diff"
+    }
+  ]
+}

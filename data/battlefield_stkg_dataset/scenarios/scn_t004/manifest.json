@@ -1,0 +1,21 @@
+{
+  "scenario_id": "scn_t004",
+  "seed": 104,
+  "split": "train",
+  "crs": "UTM52N",
+  "epoch": "2025-06-06T00:00:00Z",
+  "n_observations": 27,
+  "n_entities_A": 5,
+  "n_entities_B": 5,
+  "n_matched_identities": 4,
+  "n_dangling_entities": 2,
+  "n_dangling_observations": 4,
+  "files": [
+    "kg_A.jsonld",
+    "kg_B.jsonld",
+    "commons.jsonld",
+    "observations.jsonl",
+    "manifest.json",
+    "labels/"
+  ]
+}

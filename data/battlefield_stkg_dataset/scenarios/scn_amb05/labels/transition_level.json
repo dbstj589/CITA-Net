@@ -1,0 +1,175 @@
+{
+  "scenario_id": "scn_amb05",
+  "positives": [
+    {
+      "src": "obs_A_0001",
+      "dst": "obs_A_0002"
+    },
+    {
+      "src": "obs_A_0002",
+      "dst": "obs_B_0004"
+    },
+    {
+      "src": "obs_B_0004",
+      "dst": "obs_A_0003"
+    },
+    {
+      "src": "obs_A_0003",
+      "dst": "obs_B_0005"
+    },
+    {
+      "src": "obs_B_0005",
+      "dst": "obs_B_0006"
+    },
+    {
+      "src": "obs_A_0007",
+      "dst": "obs_B_0009"
+    },
+    {
+      "src": "obs_B_0009",
+      "dst": "obs_A_0008"
+    },
+    {
+      "src": "obs_A_0008",
+      "dst": "obs_B_0010"
+    },
+    {
+      "src": "obs_A_0011",
+      "dst": "obs_B_0014"
+    },
+    {
+      "src": "obs_B_0014",
+      "dst": "obs_A_0012"
+    },
+    {
+      "src": "obs_A_0012",
+      "dst": "obs_B_0015"
+    },
+    {
+      "src": "obs_B_0015",
+      "dst": "obs_A_0013"
+    },
+    {
+      "src": "obs_A_0016",
+      "dst": "obs_B_0018"
+    },
+    {
+      "src": "obs_B_0018",
+      "dst": "obs_A_0017"
+    },
+    {
+      "src": "obs_A_0017",
+      "dst": "obs_B_0019"
+    },
+    {
+      "src": "obs_A_0020",
+      "dst": "obs_B_0022"
+    },
+    {
+      "src": "obs_B_0022",
+      "dst": "obs_A_0021"
+    },
+    {
+      "src": "obs_A_0021",
+      "dst": "obs_B_0023"
+    },
+    {
+      "src": "obs_A_0024",
+      "dst": "obs_A_0025"
+    },
+    {
+      "src": "obs_B_0026",
+      "dst": "obs_B_0027"
+    },
+    {
+      "src": "obs_B_0027",
+      "dst": "obs_B_0028"
+    }
+  ],
+  "hard_negatives": [
+    {
+      "src": "obs_A_0001",
+      "dst": "obs_A_0007"
+    },
+    {
+      "src": "obs_A_0007",
+      "dst": "obs_A_0020"
+    },
+    {
+      "src": "obs_A_0020",
+      "dst": "obs_A_0016"
+    },
+    {
+      "src": "obs_A_0016",
+      "dst": "obs_A_0002"
+    },
+    {
+      "src": "obs_A_0002",
+      "dst": "obs_B_0026"
+    },
+    {
+      "src": "obs_B_0026",
+      "dst": "obs_B_0009"
+    },
+    {
+      "src": "obs_B_0009",
+      "dst": "obs_B_0022"
+    },
+    {
+      "src": "obs_B_0022",
+      "dst": "obs_B_0004"
+    },
+    {
+      "src": "obs_B_0004",
+      "dst": "obs_B_0018"
+    },
+    {
+      "src": "obs_B_0018",
+      "dst": "obs_A_0003"
+    },
+    {
+      "src": "obs_A_0003",
+      "dst": "obs_A_0011"
+    },
+    {
+      "src": "obs_A_0011",
+      "dst": "obs_A_0024"
+    },
+    {
+      "src": "obs_A_0024",
+      "dst": "obs_B_0005"
+    },
+    {
+      "src": "obs_B_0005",
+      "dst": "obs_B_0014"
+    },
+    {
+      "src": "obs_B_0014",
+      "dst": "obs_B_0027"
+    },
+    {
+      "src": "obs_B_0027",
+      "dst": "obs_A_0008"
+    },
+    {
+      "src": "obs_A_0008",
+      "dst": "obs_A_0012"
+    },
+    {
+      "src": "obs_A_0012",
+      "dst": "obs_B_0010"
+    },
+    {
+      "src": "obs_B_0010",
+      "dst": "obs_A_0025"
+    },
+    {
+      "src": "obs_A_0025",
+      "dst": "obs_A_0021"
+    },
+    {
+      "src": "obs_A_0021",
+      "dst": "obs_A_0017"
+    }
+  ]
+}

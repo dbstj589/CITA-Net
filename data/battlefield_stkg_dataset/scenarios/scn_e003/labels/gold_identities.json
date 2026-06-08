@@ -1,0 +1,333 @@
+{
+  "scenario_id": "scn_e003",
+  "identities": [
+    {
+      "gold_identity_id": "id_0001",
+      "true_type": "T-72",
+      "member_observations": [
+        "obs_A_0001",
+        "obs_A_0002",
+        "obs_B_0003",
+        "obs_B_0004",
+        "obs_B_0005"
+      ],
+      "member_local_entities": {
+        "A": "ent_A_001",
+        "B": "ent_B_001"
+      },
+      "true_trajectory": [
+        {
+          "time": "2025-06-06T00:00:11Z",
+          "easting": 322909.19,
+          "northing": 4158323.63
+        },
+        {
+          "time": "2025-06-06T00:01:18Z",
+          "easting": 323116.37,
+          "northing": 4158312.8
+        },
+        {
+          "time": "2025-06-06T00:01:52Z",
+          "easting": 323175.36,
+          "northing": 4158312.88
+        },
+        {
+          "time": "2025-06-06T00:03:04Z",
+          "easting": 323407.7,
+          "northing": 4158372.89
+        },
+        {
+          "time": "2025-06-06T00:04:13Z",
+          "easting": 323612.07,
+          "northing": 4158202.56
+        }
+      ]
+    },
+    {
+      "gold_identity_id": "id_0002",
+      "true_type": "T-72",
+      "member_observations": [
+        "obs_A_0006",
+        "obs_A_0007",
+        "obs_B_0008",
+        "obs_B_0009",
+        "obs_B_0010"
+      ],
+      "member_local_entities": {
+        "A": "ent_A_002",
+        "B": "ent_B_002"
+      },
+      "true_trajectory": [
+        {
+          "time": "2025-06-06T00:00:44Z",
+          "easting": 322457.02,
+          "northing": 4158202.44
+        },
+        {
+          "time": "2025-06-06T00:01:53Z",
+          "easting": 322339.05,
+          "northing": 4158319.49
+        },
+        {
+          "time": "2025-06-06T00:02:29Z",
+          "easting": 322289.7,
+          "northing": 4158256.22
+        },
+        {
+          "time": "2025-06-06T00:03:04Z",
+          "easting": 322159.56,
+          "northing": 4158282.24
+        },
+        {
+          "time": "2025-06-06T00:03:42Z",
+          "easting": 322081.88,
+          "northing": 4158243.92
+        }
+      ]
+    },
+    {
+      "gold_identity_id": "id_0003",
+      "true_type": "BMP-2",
+      "member_observations": [
+        "obs_A_0011",
+        "obs_A_0012",
+        "obs_A_0013",
+        "obs_B_0014",
+        "obs_B_0015"
+      ],
+      "member_local_entities": {
+        "A": "ent_A_003",
+        "B": "ent_B_003"
+      },
+      "true_trajectory": [
+        {
+          "time": "2025-06-06T00:00:10Z",
+          "easting": 323227.38,
+          "northing": 4157924.77
+        },
+        {
+          "time": "2025-06-06T00:00:43Z",
+          "easting": 323333.62,
+          "northing": 4157883.18
+        },
+        {
+          "time": "2025-06-06T00:02:31Z",
+          "easting": 323516.4,
+          "northing": 4157739.12
+        },
+        {
+          "time": "2025-06-06T00:03:06Z",
+          "easting": 323545.85,
+          "northing": 4157698.15
+        },
+        {
+          "time": "2025-06-06T00:03:38Z",
+          "easting": 323672.07,
+          "northing": 4157660.67
+        }
+      ]
+    },
+    {
+      "gold_identity_id": "id_0004",
+      "true_type": "2S1",
+      "member_observations": [
+        "obs_A_0016",
+        "obs_A_0017",
+        "obs_B_0018",
+        "obs_B_0019",
+        "obs_B_0020"
+      ],
+      "member_local_entities": {
+        "A": "ent_A_004",
+        "B": "ent_B_004"
+      },
+      "true_trajectory": [
+        {
+          "time": "2025-06-06T00:01:53Z",
+          "easting": 323019.2,
+          "northing": 4157725.9
+        },
+        {
+          "time": "2025-06-06T00:03:03Z",
+          "easting": 323132.74,
+          "northing": 4157841.28
+        },
+        {
+          "time": "2025-06-06T00:03:39Z",
+          "easting": 323172.39,
+          "northing": 4157845.64
+        },
+        {
+          "time": "2025-06-06T00:04:14Z",
+          "easting": 323272.45,
+          "northing": 4158120.96
+        },
+        {
+          "time": "2025-06-06T00:04:49Z",
+          "easting": 323317.19,
+          "northing": 4157900.4
+        }
+      ]
+    },
+    {
+      "gold_identity_id": "id_0005",
+      "true_type": "BTR-80",
+      "member_observations": [
+        "obs_A_0021",
+        "obs_A_0022",
+        "obs_A_0023",
+        "obs_B_0024",
+        "obs_B_0025",
+        "obs_B_0026"
+      ],
+      "member_local_entities": {
+        "A": "ent_A_005",
+        "B": "ent_B_005"
+      },
+      "true_trajectory": [
+        {
+          "time": "2025-06-06T00:00:08Z",
+          "easting": 322182.23,
+          "northing": 4157346.44
+        },
+        {
+          "time": "2025-06-06T00:00:42Z",
+          "easting": 322059.93,
+          "northing": 4157391.89
+        },
+        {
+          "time": "2025-06-06T00:01:19Z",
+          "easting": 321999.87,
+          "northing": 4157344.78
+        },
+        {
+          "time": "2025-06-06T00:01:53Z",
+          "easting": 321916.88,
+          "northing": 4157389.66
+        },
+        {
+          "time": "2025-06-06T00:03:39Z",
+          "easting": 321624.67,
+          "northing": 4157331.82
+        },
+        {
+          "time": "2025-06-06T00:04:14Z",
+          "easting": 321605.54,
+          "northing": 4157325.95
+        }
+      ]
+    },
+    {
+      "gold_identity_id": "id_0006",
+      "true_type": "T-72",
+      "member_observations": [
+        "obs_A_0027",
+        "obs_A_0028",
+        "obs_B_0029",
+        "obs_B_0030"
+      ],
+      "member_local_entities": {
+        "A": "ent_A_006",
+        "B": "ent_B_006"
+      },
+      "true_trajectory": [
+        {
+          "time": "2025-06-06T00:03:04Z",
+          "easting": 321910.22,
+          "northing": 4158005.7
+        },
+        {
+          "time": "2025-06-06T00:03:41Z",
+          "easting": 321854.74,
+          "northing": 4158007.14
+        },
+        {
+          "time": "2025-06-06T00:04:14Z",
+          "easting": 321786.55,
+          "northing": 4157994.52
+        },
+        {
+          "time": "2025-06-06T00:04:49Z",
+          "easting": 321767.01,
+          "northing": 4157973.2
+        }
+      ]
+    },
+    {
+      "gold_identity_id": "id_0007",
+      "true_type": "2S1",
+      "member_observations": [
+        "obs_A_0031",
+        "obs_A_0032",
+        "obs_A_0033",
+        "obs_B_0034",
+        "obs_B_0035",
+        "obs_B_0036"
+      ],
+      "member_local_entities": {
+        "A": "ent_A_007",
+        "B": "ent_B_007"
+      },
+      "true_trajectory": [
+        {
+          "time": "2025-06-06T00:00:44Z",
+          "easting": 322166.0,
+          "northing": 4158819.57
+        },
+        {
+          "time": "2025-06-06T00:01:54Z",
+          "easting": 322321.7,
+          "northing": 4158791.04
+        },
+        {
+          "time": "2025-06-06T00:02:30Z",
+          "easting": 322350.16,
+          "northing": 4158723.49
+        },
+        {
+          "time": "2025-06-06T00:03:41Z",
+          "easting": 322520.03,
+          "northing": 4158656.16
+        },
+        {
+          "time": "2025-06-06T00:04:14Z",
+          "easting": 322568.08,
+          "northing": 4158618.45
+        },
+        {
+          "time": "2025-06-06T00:04:50Z",
+          "easting": 322614.39,
+          "northing": 4158562.57
+        }
+      ]
+    }
+  ],
+  "dangling_observations": [
+    "obs_A_0037",
+    "obs_A_0038",
+    "obs_B_0039",
+    "obs_B_0040",
+    "obs_B_0041"
+  ],
+  "dangling_local_entities": [
+    {
+      "kg_id": "A",
+      "local_entity_id": "ent_A_008",
+      "true_type": "ZPU-4",
+      "obs_ids": [
+        "obs_A_0037",
+        "obs_A_0038"
+      ]
+    },
+    {
+      "kg_id": "B",
+      "local_entity_id": "ent_B_008",
+      "true_type": "ZPU-4",
+      "obs_ids": [
+        "obs_B_0039",
+        "obs_B_0040",
+        "obs_B_0041"
+      ]
+    }
+  ]
+}

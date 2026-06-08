@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "citanet"
+version = "0.1.0"
+description = "CITA-Net: Constraint-aware Identity-Trajectory Alignment Network for battlefield STKG entity alignment"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "numpy",
+    "PyYAML",
+]
+
+[project.optional-dependencies]
+sbert = ["sentence-transformers"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "slow: end-to-end tests that train a model (deselect with -m 'not slow')",
+]

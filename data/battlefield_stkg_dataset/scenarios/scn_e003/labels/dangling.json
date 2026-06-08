@@ -1,0 +1,31 @@
+{
+  "scenario_id": "scn_e003",
+  "dangling_observations": [
+    "obs_A_0037",
+    "obs_A_0038",
+    "obs_B_0039",
+    "obs_B_0040",
+    "obs_B_0041"
+  ],
+  "dangling_entities": [
+    {
+      "kg_id": "A",
+      "local_entity_id": "ent_A_008",
+      "true_type": "ZPU-4",
+      "obs_ids": [
+        "obs_A_0037",
+        "obs_A_0038"
+      ]
+    },
+    {
+      "kg_id": "B",
+      "local_entity_id": "ent_B_008",
+      "true_type": "ZPU-4",
+      "obs_ids": [
+        "obs_B_0039",
+        "obs_B_0040",
+        "obs_B_0041"
+      ]
+    }
+  ]
+}

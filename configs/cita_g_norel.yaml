@@ -1,0 +1,41 @@
+# M2 ablation -- CITA-G with the RELATION ENCODER REMOVED (GNN off + CTA b_rel
+# dropped). Identical to cita_g.yaml in every other respect (same data, same
+# losses incl. L_transition, same encoder/decoder/training) so the only
+# difference is relational context. Used to show the relation encoder recovers
+# the id_0003 hard positive on scn_amb01.
+stage: cita_g_norel
+seed: 20250606
+device: auto
+data_root: data/battlefield_stkg_dataset
+ontology_dir: data/battlefield_stkg_dataset/ontology
+
+blocking:
+  dt_max_s: 180.0
+  theta_text: 0.3
+
+encoder:
+  d_model: 128
+  text_encoder: learned
+  use_source_gate: true
+
+graph:
+  enabled: false              # <-- relation-context GNN OFF (ablation)
+
+cta:
+  enabled_terms: [sem, time, motion, state, src]   # <-- b_rel OFF (ablation)
+
+decoder:
+  enabled: false
+
+loss:
+  lambda_pair: 1.0
+  lambda_transition: 1.0
+  lambda_trajectory: 0.0
+  lambda_dangling: 1.0
+  lambda_assign: 0.0
+  pair_pos_weight: 3.0
+
+train:
+  lr: 1.0e-3
+  epochs: 200
+  log_every: 50

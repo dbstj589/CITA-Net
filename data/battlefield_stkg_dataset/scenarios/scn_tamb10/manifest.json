@@ -1,0 +1,21 @@
+{
+  "scenario_id": "scn_tamb10",
+  "seed": 510,
+  "split": "train",
+  "crs": "UTM52N",
+  "epoch": "2025-06-06T00:00:00Z",
+  "n_observations": 28,
+  "n_entities_A": 6,
+  "n_entities_B": 6,
+  "n_matched_identities": 5,
+  "n_dangling_entities": 2,
+  "n_dangling_observations": 5,
+  "files": [
+    "kg_A.jsonld",
+    "kg_B.jsonld",
+    "commons.jsonld",
+    "observations.jsonl",
+    "manifest.json",
+    "labels/"
+  ]
+}

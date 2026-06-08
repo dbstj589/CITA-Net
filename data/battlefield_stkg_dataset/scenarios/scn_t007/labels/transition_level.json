@@ -1,0 +1,239 @@
+{
+  "scenario_id": "scn_t007",
+  "positives": [
+    {
+      "src": "obs_A_0001",
+      "dst": "obs_A_0002"
+    },
+    {
+      "src": "obs_A_0002",
+      "dst": "obs_B_0004"
+    },
+    {
+      "src": "obs_B_0004",
+      "dst": "obs_B_0005"
+    },
+    {
+      "src": "obs_B_0005",
+      "dst": "obs_A_0003"
+    },
+    {
+      "src": "obs_A_0006",
+      "dst": "obs_B_0008"
+    },
+    {
+      "src": "obs_B_0008",
+      "dst": "obs_A_0007"
+    },
+    {
+      "src": "obs_A_0007",
+      "dst": "obs_B_0009"
+    },
+    {
+      "src": "obs_B_0013",
+      "dst": "obs_A_0010"
+    },
+    {
+      "src": "obs_A_0010",
+      "dst": "obs_B_0014"
+    },
+    {
+      "src": "obs_B_0014",
+      "dst": "obs_A_0011"
+    },
+    {
+      "src": "obs_A_0011",
+      "dst": "obs_A_0012"
+    },
+    {
+      "src": "obs_B_0017",
+      "dst": "obs_A_0015"
+    },
+    {
+      "src": "obs_A_0015",
+      "dst": "obs_B_0018"
+    },
+    {
+      "src": "obs_B_0018",
+      "dst": "obs_A_0016"
+    },
+    {
+      "src": "obs_A_0019",
+      "dst": "obs_B_0021"
+    },
+    {
+      "src": "obs_B_0021",
+      "dst": "obs_A_0020"
+    },
+    {
+      "src": "obs_A_0020",
+      "dst": "obs_B_0022"
+    },
+    {
+      "src": "obs_B_0022",
+      "dst": "obs_B_0023"
+    },
+    {
+      "src": "obs_B_0026",
+      "dst": "obs_A_0024"
+    },
+    {
+      "src": "obs_A_0024",
+      "dst": "obs_B_0027"
+    },
+    {
+      "src": "obs_B_0027",
+      "dst": "obs_A_0025"
+    },
+    {
+      "src": "obs_B_0031",
+      "dst": "obs_A_0028"
+    },
+    {
+      "src": "obs_A_0028",
+      "dst": "obs_A_0029"
+    },
+    {
+      "src": "obs_A_0029",
+      "dst": "obs_B_0032"
+    },
+    {
+      "src": "obs_B_0032",
+      "dst": "obs_A_0030"
+    },
+    {
+      "src": "obs_A_0033",
+      "dst": "obs_A_0034"
+    },
+    {
+      "src": "obs_A_0034",
+      "dst": "obs_A_0035"
+    },
+    {
+      "src": "obs_B_0036",
+      "dst": "obs_B_0037"
+    },
+    {
+      "src": "obs_B_0037",
+      "dst": "obs_B_0038"
+    }
+  ],
+  "hard_negatives": [
+    {
+      "src": "obs_A_0019",
+      "dst": "obs_A_0001"
+    },
+    {
+      "src": "obs_A_0001",
+      "dst": "obs_A_0033"
+    },
+    {
+      "src": "obs_A_0033",
+      "dst": "obs_B_0036"
+    },
+    {
+      "src": "obs_B_0036",
+      "dst": "obs_B_0031"
+    },
+    {
+      "src": "obs_B_0031",
+      "dst": "obs_B_0021"
+    },
+    {
+      "src": "obs_B_0021",
+      "dst": "obs_B_0026"
+    },
+    {
+      "src": "obs_B_0026",
+      "dst": "obs_B_0017"
+    },
+    {
+      "src": "obs_B_0017",
+      "dst": "obs_B_0013"
+    },
+    {
+      "src": "obs_B_0013",
+      "dst": "obs_A_0002"
+    },
+    {
+      "src": "obs_A_0002",
+      "dst": "obs_A_0020"
+    },
+    {
+      "src": "obs_A_0020",
+      "dst": "obs_A_0024"
+    },
+    {
+      "src": "obs_A_0024",
+      "dst": "obs_A_0010"
+    },
+    {
+      "src": "obs_A_0010",
+      "dst": "obs_A_0015"
+    },
+    {
+      "src": "obs_A_0015",
+      "dst": "obs_A_0006"
+    },
+    {
+      "src": "obs_A_0006",
+      "dst": "obs_A_0028"
+    },
+    {
+      "src": "obs_A_0028",
+      "dst": "obs_B_0037"
+    },
+    {
+      "src": "obs_B_0037",
+      "dst": "obs_B_0004"
+    },
+    {
+      "src": "obs_B_0004",
+      "dst": "obs_B_0014"
+    },
+    {
+      "src": "obs_B_0014",
+      "dst": "obs_B_0022"
+    },
+    {
+      "src": "obs_B_0022",
+      "dst": "obs_B_0027"
+    },
+    {
+      "src": "obs_B_0027",
+      "dst": "obs_A_0029"
+    },
+    {
+      "src": "obs_A_0029",
+      "dst": "obs_B_0018"
+    },
+    {
+      "src": "obs_B_0018",
+      "dst": "obs_B_0008"
+    },
+    {
+      "src": "obs_A_0007",
+      "dst": "obs_A_0016"
+    },
+    {
+      "src": "obs_A_0016",
+      "dst": "obs_A_0025"
+    },
+    {
+      "src": "obs_A_0025",
+      "dst": "obs_A_0011"
+    },
+    {
+      "src": "obs_A_0011",
+      "dst": "obs_A_0034"
+    },
+    {
+      "src": "obs_A_0034",
+      "dst": "obs_B_0038"
+    },
+    {
+      "src": "obs_B_0038",
+      "dst": "obs_B_0005"
+    }
+  ]
+}

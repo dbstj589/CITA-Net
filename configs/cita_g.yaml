@@ -1,0 +1,42 @@
+# M2 -- CITA-G: CITA-lite + relation-context GNN (1-/2-hop message passing).
+# Adds L_transition. The relation encoder + CTA b_rel term help recover the
+# id_0003 hard positive (KG_B UNKNOWN) via relational context.
+stage: cita_g
+seed: 20250606
+device: auto
+data_root: data/battlefield_stkg_dataset
+ontology_dir: data/battlefield_stkg_dataset/ontology
+
+blocking:
+  dt_max_s: 180.0
+  theta_text: 0.3
+
+encoder:
+  d_model: 128
+  text_encoder: learned
+  use_source_gate: true
+
+graph:
+  enabled: true
+  gnn_layers: 2
+  n_heads: 4
+  hops: 2
+
+cta:
+  enabled_terms: [sem, time, motion, state, rel, src]   # full constraint set
+
+decoder:
+  enabled: false
+
+loss:
+  lambda_pair: 1.0
+  lambda_transition: 1.0
+  lambda_trajectory: 0.0
+  lambda_dangling: 1.0
+  lambda_assign: 0.0
+  pair_pos_weight: 3.0
+
+train:
+  lr: 1.0e-3
+  epochs: 200
+  log_every: 20

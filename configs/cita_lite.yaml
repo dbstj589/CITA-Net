@@ -1,0 +1,39 @@
+# M1 -- CITA-lite: blocking + source-aware encoder + pairwise CTA + dangling head.
+# Trains L_pair + L_dangling only (graph & decoder disabled).
+stage: cita_lite
+seed: 20250606
+device: auto
+data_root: data/battlefield_stkg_dataset
+ontology_dir: data/battlefield_stkg_dataset/ontology
+
+blocking:
+  dt_max_s: 180.0
+  theta_text: 0.3
+  r_err_floor_m: 5.0
+
+encoder:
+  d_model: 128
+  text_encoder: learned      # offline learned token embeddings (default)
+  use_source_gate: true
+
+graph:
+  enabled: false
+
+cta:
+  enabled_terms: [sem, time, motion, state, src]   # no rel term until M2
+
+decoder:
+  enabled: false
+
+loss:
+  lambda_pair: 1.0
+  lambda_transition: 0.0
+  lambda_trajectory: 0.0
+  lambda_dangling: 1.0
+  lambda_assign: 0.0
+  pair_pos_weight: 3.0
+
+train:
+  lr: 1.0e-3
+  epochs: 200
+  log_every: 20

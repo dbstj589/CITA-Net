@@ -1,0 +1,42 @@
+# Observation states and their pairwise co-reference compatibility matrix C
+# (§4.4 b_state = gamma * log(C[state_i, state_j] + eps)).
+#
+# C[i, j] in (0, 1] is the plausibility that two observations of the SAME
+# real object carry states i (earlier) and j (later). It is intentionally
+# slightly asymmetric: e.g. Emplaced -> Moving is implausible for a freshly
+# dug-in unit, while Moving -> Emplaced (a unit halting and digging in) is
+# more plausible. Values near 1.0 mean fully compatible; small values mean a
+# state transition that should be discouraged but never hard-forbidden (soft).
+
+states:
+  - Moving
+  - Halted
+  - Emplaced
+  - Firing
+  - Unknown
+  - Destroyed
+
+# Per-type overrides may be applied on top of the base matrix (see overrides).
+# A Destroyed object cannot subsequently move/fire -- Destroyed -> {Moving,
+# Halted, Emplaced, Firing} is essentially impossible (~0), so merging a
+# Destroyed observation with a later active one is strongly penalised by b_state.
+compatibility:
+  #            Moving  Halted  Emplaced Firing  Unknown Destroyed
+  Moving:    {Moving: 1.0,  Halted: 0.9, Emplaced: 0.6, Firing: 0.5, Unknown: 0.8, Destroyed: 0.6}
+  Halted:    {Moving: 0.9,  Halted: 1.0, Emplaced: 0.9, Firing: 0.7, Unknown: 0.8, Destroyed: 0.6}
+  Emplaced:  {Moving: 0.3,  Halted: 0.8, Emplaced: 1.0, Firing: 1.0, Unknown: 0.8, Destroyed: 0.6}
+  Firing:    {Moving: 0.4,  Halted: 0.8, Emplaced: 1.0, Firing: 1.0, Unknown: 0.8, Destroyed: 0.7}
+  Unknown:   {Moving: 0.8,  Halted: 0.8, Emplaced: 0.8, Firing: 0.8, Unknown: 1.0, Destroyed: 0.6}
+  Destroyed: {Moving: 0.01, Halted: 0.02, Emplaced: 0.02, Firing: 0.01, Unknown: 0.3, Destroyed: 1.0}
+
+# Type-specific overrides. For towed weapons an Emplaced->Moving transition is
+# essentially impossible (they cannot self-relocate), so push it very low.
+overrides:
+  ZPU-4:
+    Emplaced: {Moving: 0.02}
+    Firing:   {Moving: 0.02}
+  MO-120-RT:
+    Emplaced: {Moving: 0.02}
+    Firing:   {Moving: 0.02}
+
+eps: 0.01

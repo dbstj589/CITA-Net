@@ -1,0 +1,221 @@
+{
+  "scenario_id": "scn_amb03",
+  "pairs": [
+    {
+      "kg_a_entity": "ent_A_001",
+      "kg_b_entity": "ent_B_001",
+      "label": "same",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_001",
+      "kg_b_entity": "ent_B_002",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_001",
+      "kg_b_entity": "ent_B_003",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_001",
+      "kg_b_entity": "ent_B_004",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_001",
+      "kg_b_entity": "ent_B_005",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_001",
+      "kg_b_entity": "ent_B_006",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_002",
+      "kg_b_entity": "ent_B_001",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_002",
+      "kg_b_entity": "ent_B_002",
+      "label": "same",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_002",
+      "kg_b_entity": "ent_B_003",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_002",
+      "kg_b_entity": "ent_B_004",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_002",
+      "kg_b_entity": "ent_B_005",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_002",
+      "kg_b_entity": "ent_B_006",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_003",
+      "kg_b_entity": "ent_B_001",
+      "label": "diff",
+      "hard_negative_same_type": true
+    },
+    {
+      "kg_a_entity": "ent_A_003",
+      "kg_b_entity": "ent_B_002",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_003",
+      "kg_b_entity": "ent_B_003",
+      "label": "same",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_003",
+      "kg_b_entity": "ent_B_004",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_003",
+      "kg_b_entity": "ent_B_005",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_003",
+      "kg_b_entity": "ent_B_006",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_004",
+      "kg_b_entity": "ent_B_001",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_004",
+      "kg_b_entity": "ent_B_002",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_004",
+      "kg_b_entity": "ent_B_003",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_004",
+      "kg_b_entity": "ent_B_004",
+      "label": "same",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_004",
+      "kg_b_entity": "ent_B_005",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_004",
+      "kg_b_entity": "ent_B_006",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_005",
+      "kg_b_entity": "ent_B_001",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_005",
+      "kg_b_entity": "ent_B_002",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_005",
+      "kg_b_entity": "ent_B_003",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_005",
+      "kg_b_entity": "ent_B_004",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_005",
+      "kg_b_entity": "ent_B_005",
+      "label": "same",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_005",
+      "kg_b_entity": "ent_B_006",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_006",
+      "kg_b_entity": "ent_B_001",
+      "label": "diff",
+      "hard_negative_same_type": true
+    },
+    {
+      "kg_a_entity": "ent_A_006",
+      "kg_b_entity": "ent_B_002",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_006",
+      "kg_b_entity": "ent_B_003",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_006",
+      "kg_b_entity": "ent_B_004",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_006",
+      "kg_b_entity": "ent_B_005",
+      "label": "diff",
+      "hard_negative_same_type": false
+    },
+    {
+      "kg_a_entity": "ent_A_006",
+      "kg_b_entity": "ent_B_006",
+      "label": "diff",
+      "hard_negative_same_type": false
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/foxes/LYS/cybermarine/STKG/**)",
+      "Bash(python -c \"import torch; print\\('torch', torch.__version__\\)\")",
+      "Bash(python -m venv .venv)",
+      "Bash(.venv/Scripts/python.exe -m pip install --upgrade pip --quiet)",
+      "Bash(.venv/Scripts/python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cpu --quiet)",
+      "Bash(.venv/Scripts/python.exe -m pip install numpy PyYAML pytest --quiet)",
+      "Bash(.venv/Scripts/python.exe -c \"import torch,numpy,yaml,pytest; print\\('torch',torch.__version__,'numpy',numpy.__version__\\)\")",
+      "Bash(.venv/Scripts/python.exe -m pip install torch --quiet)",
+      "Bash(.venv/Scripts/python.exe -c \"import torch,numpy,yaml,pytest; print\\('torch',torch.__version__,'| numpy',numpy.__version__,'| cuda',torch.cuda.is_available\\(\\)\\)\")",
+      "Bash(.venv/Scripts/python.exe -m pip list)",
+      "Bash(.venv/Scripts/python.exe -c \"import platform,struct; print\\('arch bits:', struct.calcsize\\('P'\\)*8\\); print\\('machine:', platform.machine\\(\\)\\); print\\('python:', platform.python_version\\(\\)\\)\")",
+      "Bash(.venv/Scripts/python.exe -m pip debug --verbose)",
+      "Bash(py -0p)",
+      "Bash(where python *)",
+      "Read(//c/Users/foxes/LYS/cybermarine/AIMD_CODE/aimd_auto_labeling/venv/**)",
+      "Bash(\"c:/Users/foxes/LYS/cybermarine/AIMD_CODE/aimd_auto_labeling/venv/Scripts/python.exe\" -c \"import struct,torch;print\\('bits',struct.calcsize\\('P'\\)*8,'torch',torch.__version__\\)\")",
+      "Bash(rm -rf .venv)",
+      "Bash(py -3.11 -c \"import struct;print\\('bits',struct.calcsize\\('P'\\)*8\\)\")",
+      "Bash(py -3.11 -m venv .venv)",
+      "Bash(.venv/Scripts/python.exe -m pip install torch numpy PyYAML pytest --quiet)",
+      "Bash(.venv/Scripts/python.exe -c \"import struct,torch,numpy,yaml,pytest;print\\('bits',struct.calcsize\\('P'\\)*8,'torch',torch.__version__,'numpy',numpy.__version__\\)\")",
+      "Bash(.venv/Scripts/python.exe scripts/gen_dataset.py --build-suite)",
+      "Bash(.venv/Scripts/python.exe -m pip install -e . --quiet)",
+      "Bash(.venv/Scripts/python.exe -m citanet.data.inspect scn_0001)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/test_data_m0.py tests/test_blocking_m0.py -q)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/ -q)",
+      "Bash(.venv/Scripts/python.exe -m pytest -q)",
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(.venv/Scripts/python.exe scripts/train.py --config configs/cita_lite.yaml)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/test_model_m1.py -q)",
+      "Bash(.venv/Scripts/python.exe -m citanet.data.inspect scn_amb01)",
+      "Bash(.venv/Scripts/python.exe scripts/ablation_m2.py)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/test_model_m2.py -q)",
+      "Bash(.venv/Scripts/python.exe -m pytest -q -p no:warnings)",
+      "Bash(.venv/Scripts/python.exe scripts/ablation_m3.py)",
+      "Bash(.venv/Scripts/python.exe scripts/predict.py --config configs/cita_full.yaml --scenario scn_0001)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/test_model_m3.py -q -p no:warnings)"
+    ]
+  }
+}

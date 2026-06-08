@@ -1,0 +1,46 @@
+# M3 ablation -- Full CITA-Net with the b_motion (kinematic feasibility) term
+# REMOVED from the CTA. Identical to cita_full.yaml otherwise. Used to show that
+# without the motion constraint the decoder links kinematically impossible
+# transitions (and merges distant/incompatible observations) more often.
+stage: cita_full_nomotion
+seed: 20250606
+device: auto
+data_root: data/battlefield_stkg_dataset
+ontology_dir: data/battlefield_stkg_dataset/ontology
+
+blocking:
+  dt_max_s: 180.0
+  theta_text: 0.3
+
+encoder:
+  d_model: 128
+  text_encoder: learned
+  use_source_gate: true
+
+graph:
+  enabled: true
+  gnn_layers: 2
+  n_heads: 4
+  hops: 2
+
+cta:
+  enabled_terms: [sem, time, state, rel, src]   # <-- b_motion REMOVED
+
+decoder:
+  enabled: true
+  num_slots: 12
+  sinkhorn_iters: 20
+  sinkhorn_temp: 0.5
+
+loss:
+  lambda_pair: 1.0
+  lambda_transition: 1.0
+  lambda_trajectory: 0.0      # also drop the trajectory kinematic loss for a
+  lambda_dangling: 1.0        # clean "no kinematic constraint" ablation
+  lambda_assign: 1.0
+  pair_pos_weight: 3.0
+
+train:
+  lr: 1.0e-3
+  epochs: 200
+  log_every: 50

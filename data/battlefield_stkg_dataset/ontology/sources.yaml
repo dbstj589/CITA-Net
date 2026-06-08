@@ -1,0 +1,46 @@
+# Observation sources (sensors / reporters) with reliability priors (§4.2).
+#
+# The source-aware encoder gate g(src) is initialised from `reliability`
+# (overall trust, used as the channel-gate bias prior) and the per-channel
+# reliabilities below. cep_m is the nominal circular-error-probable (m) the
+# generator uses for position noise from this source.
+#
+# reliability        : overall trust prior in (0,1) -> gate bias init
+# type_reliability   : trust in the reported object type/label
+# pos_reliability    : trust in the reported position
+# cep_m              : nominal positional CEP in metres
+
+EO_IR:
+  description: Electro-optical / infrared imaging tracker
+  reliability: 0.90
+  type_reliability: 0.90
+  pos_reliability: 0.80
+  cep_m: 15.0
+
+RADAR:
+  description: Ground surveillance / counter-battery radar
+  reliability: 0.80
+  type_reliability: 0.40          # good kinematics, weak classification
+  pos_reliability: 0.90
+  cep_m: 30.0
+
+SIGINT:
+  description: Signals-intelligence emitter geolocation
+  reliability: 0.65
+  type_reliability: 0.60
+  pos_reliability: 0.55
+  cep_m: 50.0
+
+ACOUSTIC:
+  description: Acoustic gunfire / vehicle localisation
+  reliability: 0.55
+  type_reliability: 0.30
+  pos_reliability: 0.50
+  cep_m: 60.0
+
+HUMINT:
+  description: Human report / scout observation
+  reliability: 0.55
+  type_reliability: 0.70          # humans classify well, localise poorly
+  pos_reliability: 0.40
+  cep_m: 90.0

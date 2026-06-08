@@ -1,0 +1,47 @@
+{
+  "@context": "ontology/context.jsonld",
+  "@graph": [
+    {
+      "@id": "commons:lm_hill205",
+      "@type": "Landmark",
+      "rdfs:label": "Hill 205",
+      "easting": 323200.0,
+      "northing": 4158200.0,
+      "crs": "UTM52N"
+    },
+    {
+      "@id": "commons:lm_cross7",
+      "@type": "Landmark",
+      "rdfs:label": "Crossroad 7",
+      "easting": 323500.0,
+      "northing": 4157400.0,
+      "crs": "UTM52N"
+    },
+    {
+      "@id": "commons:lm_fordA",
+      "@type": "Landmark",
+      "rdfs:label": "Ford A",
+      "easting": 322700.0,
+      "northing": 4158450.0,
+      "crs": "UTM52N"
+    },
+    {
+      "@id": "commons:evt_advance",
+      "@type": "Event",
+      "rdfs:label": "River-crossing advance",
+      "stkg:eventKind": "maneuver"
+    },
+    {
+      "@id": "commons:evt_fire_support",
+      "@type": "Event",
+      "rdfs:label": "Indirect fire support",
+      "stkg:eventKind": "fires"
+    },
+    {
+      "@id": "commons:evt_air_defense",
+      "@type": "Event",
+      "rdfs:label": "Point air defense",
+      "stkg:eventKind": "air_defense"
+    }
+  ]
+}
