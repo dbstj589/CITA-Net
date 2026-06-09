@@ -116,15 +116,55 @@ def _rel_event_set(o: Observation) -> set[tuple[str, str]]:
     return s
 
 
-def featurize_scenario(scenario_dir: str | Path, fs: FeatureSpace,
-                       ontology: Ontology, cfg) -> ScenarioFeatures:
-    scenario_dir = Path(scenario_dir)
-    scn = load_scenario(scenario_dir, scenario_dir.parent.parent / "ontology")
-    obs = sorted(scn.observations, key=lambda o: (o.t, o.obs_id))
-    n = len(obs)
-    idx = {o.obs_id: k for k, o in enumerate(obs)}
+REL_NAMES = ["follows", "near", "partOf", "firesAt", "engagedWith",
+             "emplacedAt", "movesToward", "supports", "screens", "event", "sametrack"]
 
-    # --- channel tensors -------------------------------------------------
+
+def _build_edges(obs: list[Observation], max_event_group: int | None) -> list[tuple[int, int, int]]:
+    """Same-track temporal chains + relation-target edges + co-event edges.
+
+    Co-event edges are built per (kg, event) group; with ``max_event_group``
+    set, groups larger than the cap are skipped (a scenario-wide event like an
+    advance otherwise yields O(M^2) edges). ``max_event_group=None`` reproduces
+    the original (uncapped) behaviour exactly -- used by the small suite.
+    """
+    rel_id = {r: i for i, r in enumerate(REL_NAMES)}
+    edges: list[tuple[int, int, int]] = []
+    by_entity: dict[str, list[int]] = {}
+    for k, o in enumerate(obs):
+        by_entity.setdefault(f"{o.kg_id}:{o.local_entity_id}", []).append(k)
+    for members in by_entity.values():
+        members.sort(key=lambda k: obs[k].t)
+        for a, b in zip(members, members[1:]):
+            edges.append((a, b, rel_id["sametrack"]))
+            edges.append((b, a, rel_id["sametrack"]))
+    for k, o in enumerate(obs):
+        for r in o.relations:
+            for m in by_entity.get(f"{o.kg_id}:{r.target_ref}", []):
+                edges.append((k, m, rel_id.get(r.predicate, rel_id["near"])))
+    # co-event edges, grouped by (kg, event) to avoid the O(M^2) scan
+    by_event: dict[tuple[str, str], list[int]] = {}
+    for k, o in enumerate(obs):
+        for ev in o.events:
+            by_event.setdefault((o.kg_id, ev.event_id), []).append(k)
+    for members in by_event.values():
+        if max_event_group is not None and len(members) > max_event_group:
+            continue
+        for a in members:
+            for b in members:
+                if a != b:
+                    edges.append((a, b, rel_id["event"]))
+    return edges
+
+
+def assemble_features(scenario_id: str, obs: list[Observation], pairs,
+                      ontology: Ontology, fs: FeatureSpace,
+                      pair_label: torch.Tensor, dangling_label: torch.Tensor,
+                      max_event_group: int | None = None) -> ScenarioFeatures:
+    """Build the tensor bundle from a time-sorted observation list + candidate
+    pairs + precomputed labels. Shared by the small (JSON-LD) and large (JSONL)
+    featurisation paths."""
+    n = len(obs)
     L = fs.max_tokens
     token_ids = torch.zeros((n, L), dtype=torch.long)
     token_mask = torch.zeros((n, L), dtype=torch.long)
@@ -145,13 +185,6 @@ def featurize_scenario(scenario_dir: str | Path, fs: FeatureSpace,
     type_conf = torch.tensor([o.type_confidence for o in obs], dtype=torch.float32)
     source_id = torch.tensor([fs.source_id(o.source) for o in obs], dtype=torch.long)
 
-    # --- candidate pairs + constraints -----------------------------------
-    pairs = generate_candidates(obs, ontology,
-                                dt_max_s=cfg.blocking.dt_max_s,
-                                theta_text=cfg.blocking.theta_text,
-                                r_err_floor_m=cfg.blocking.r_err_floor_m,
-                                reach_vmax_mult=cfg.blocking.reach_vmax_mult,
-                                reach_extra_m=cfg.blocking.reach_extra_m)
     P = len(pairs)
     pair_i = torch.tensor([p.i for p in pairs], dtype=torch.long)
     pair_j = torch.tensor([p.j for p in pairs], dtype=torch.long)
@@ -175,54 +208,11 @@ def featurize_scenario(scenario_dir: str | Path, fs: FeatureSpace,
         p_relj[q] = (len(si & sj) / len(union)) if union else 0.0
         p_tc[q] = p.text_cos
 
-    # --- labels ----------------------------------------------------------
-    obs_level = json.loads((scenario_dir / "labels" / "observation_level.json").read_text(encoding="utf-8"))
-    same_pairs = {frozenset((p["obs_a"], p["obs_b"]))
-                  for p in obs_level["cross_kg_pairs"] if p["label"] == "same"}
-    pair_label = torch.zeros(P, dtype=torch.float32)
-    for q, p in enumerate(pairs):
-        if p.cross_kg:
-            key = frozenset((obs[p.i].obs_id, obs[p.j].obs_id))
-            pair_label[q] = 1.0 if key in same_pairs else 0.0
-
-    dangling = json.loads((scenario_dir / "labels" / "dangling.json").read_text(encoding="utf-8"))
-    dang_obs = set(dangling["dangling_observations"])
-    dangling_label = torch.tensor([1.0 if o.obs_id in dang_obs else 0.0 for o in obs],
-                                  dtype=torch.float32)
-
-    # --- GNN edges (M2): observations of the same entity are temporally
-    #     chained, and entity relation/event targets become typed edges. ---
-    rel_names = ["follows", "near", "partOf", "firesAt", "engagedWith",
-                 "emplacedAt", "movesToward", "supports", "screens", "event", "sametrack"]
-    rel_id = {r: i for i, r in enumerate(rel_names)}
-    edges: list[tuple[int, int, int]] = []
-    # chain same-entity observations in time (helps message passing along tracks)
-    by_entity: dict[str, list[int]] = {}
-    for k, o in enumerate(obs):
-        by_entity.setdefault(f"{o.kg_id}:{o.local_entity_id}", []).append(k)
-    for members in by_entity.values():
-        members.sort(key=lambda k: obs[k].t)
-        for a, b in zip(members, members[1:]):
-            edges.append((a, b, rel_id["sametrack"]))
-            edges.append((b, a, rel_id["sametrack"]))
-    # relation/event edges: connect an observation to observations of its
-    # relation target entity (same KG) and co-event observations (same KG).
-    entity_obs = by_entity
-    for k, o in enumerate(obs):
-        for r in o.relations:
-            tgt_key = f"{o.kg_id}:{r.target_ref}"
-            for m in entity_obs.get(tgt_key, []):
-                edges.append((k, m, rel_id.get(r.predicate, rel_id["near"])))
-        # co-event edges within same KG
-        for ev in o.events:
-            for m, o2 in enumerate(obs):
-                if m != k and o2.kg_id == o.kg_id and any(e.event_id == ev.event_id for e in o2.events):
-                    edges.append((k, m, rel_id["event"]))
-
+    edges = _build_edges(obs, max_event_group)
     entity_of = {o.obs_id: f"{o.kg_id}:{o.local_entity_id}" for o in obs}
 
     return ScenarioFeatures(
-        scenario_id=scn.scenario_id, obs=obs,
+        scenario_id=scenario_id, obs=obs,
         obs_ids=[o.obs_id for o in obs], kg_ids=[o.kg_id for o in obs],
         local_entity_ids=[o.local_entity_id for o in obs],
         token_ids=token_ids, token_mask=token_mask, xy=xy, t=t_norm,
@@ -231,5 +221,35 @@ def featurize_scenario(scenario_dir: str | Path, fs: FeatureSpace,
         p_dt=p_dt, p_dist=p_dist, p_req_speed=p_req, p_feas_speed=p_feas,
         p_state_compat=p_sc, p_src_i=p_si, p_src_j=p_sj, p_rel_jaccard=p_relj,
         p_text_cos=p_tc, pair_label=pair_label, dangling_label=dangling_label,
-        edges=edges, n_relations=len(rel_names), entity_of=entity_of,
+        edges=edges, n_relations=len(REL_NAMES), entity_of=entity_of,
     )
+
+
+def featurize_scenario(scenario_dir: str | Path, fs: FeatureSpace,
+                       ontology: Ontology, cfg) -> ScenarioFeatures:
+    scenario_dir = Path(scenario_dir)
+    scn = load_scenario(scenario_dir, scenario_dir.parent.parent / "ontology")
+    obs = sorted(scn.observations, key=lambda o: (o.t, o.obs_id))
+
+    pairs = generate_candidates(obs, ontology,
+                                dt_max_s=cfg.blocking.dt_max_s,
+                                theta_text=cfg.blocking.theta_text,
+                                r_err_floor_m=cfg.blocking.r_err_floor_m,
+                                reach_vmax_mult=cfg.blocking.reach_vmax_mult,
+                                reach_extra_m=cfg.blocking.reach_extra_m)
+
+    obs_level = json.loads((scenario_dir / "labels" / "observation_level.json").read_text(encoding="utf-8"))
+    same_pairs = {frozenset((p["obs_a"], p["obs_b"]))
+                  for p in obs_level["cross_kg_pairs"] if p["label"] == "same"}
+    pair_label = torch.zeros(len(pairs), dtype=torch.float32)
+    for q, p in enumerate(pairs):
+        if p.cross_kg and frozenset((obs[p.i].obs_id, obs[p.j].obs_id)) in same_pairs:
+            pair_label[q] = 1.0
+
+    dangling = json.loads((scenario_dir / "labels" / "dangling.json").read_text(encoding="utf-8"))
+    dang_obs = set(dangling["dangling_observations"])
+    dangling_label = torch.tensor([1.0 if o.obs_id in dang_obs else 0.0 for o in obs],
+                                  dtype=torch.float32)
+
+    return assemble_features(scn.scenario_id, obs, pairs, ontology, fs,
+                             pair_label, dangling_label, max_event_group=None)

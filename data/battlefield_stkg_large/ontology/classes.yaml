@@ -1,0 +1,89 @@
+# Object-type taxonomy for the LARGE suite (superset of the small-suite types).
+# Adds dismounted infantry (Soldier), formation/org nodes (Unit, no kinematics),
+# and extra armour variants so a sector can field many same-type objects
+# (hard negatives). v_max_mps is state-conditioned (§4.1/§4.4); towed weapons
+# self-propel at 0.
+
+UNKNOWN:
+  category: unknown
+  mobility: unknown
+  default_state: Unknown
+  default_v_max_mps: 25.0
+  v_max_mps: {Emplaced: 25.0, Firing: 25.0, Halted: 25.0, Moving: 25.0, Unknown: 25.0, Destroyed: 25.0}
+
+Unit:
+  category: formation        # platoon/squad/section org node -- no observations
+  mobility: na
+  default_state: Unknown
+  default_v_max_mps: 25.0
+  v_max_mps: {Unknown: 25.0}
+
+T-72:
+  category: tank
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 16.0
+  v_max_mps: {Moving: 16.0, Halted: 0.5, Emplaced: 0.5, Firing: 2.0, Unknown: 16.0, Destroyed: 16.0}
+
+T-62:
+  category: tank
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 14.0
+  v_max_mps: {Moving: 14.0, Halted: 0.5, Emplaced: 0.5, Firing: 2.0, Unknown: 14.0, Destroyed: 14.0}
+
+BMP-2:
+  category: ifv
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 18.0
+  v_max_mps: {Moving: 18.0, Halted: 0.5, Emplaced: 0.5, Firing: 2.0, Unknown: 18.0, Destroyed: 18.0}
+
+BMP-1:
+  category: ifv
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 17.0
+  v_max_mps: {Moving: 17.0, Halted: 0.5, Emplaced: 0.5, Firing: 2.0, Unknown: 17.0, Destroyed: 17.0}
+
+BTR-80:
+  category: apc
+  mobility: wheeled
+  default_state: Moving
+  default_v_max_mps: 22.0
+  v_max_mps: {Moving: 22.0, Halted: 0.5, Emplaced: 0.5, Firing: 2.0, Unknown: 22.0, Destroyed: 22.0}
+
+2S1:
+  category: spg
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 16.0
+  v_max_mps: {Moving: 16.0, Halted: 0.5, Emplaced: 0.5, Firing: 0.5, Unknown: 16.0, Destroyed: 16.0}
+
+ZSU-23-4:
+  category: spaag            # self-propelled AA
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 13.0
+  v_max_mps: {Moving: 13.0, Halted: 0.5, Emplaced: 0.5, Firing: 1.0, Unknown: 13.0, Destroyed: 13.0}
+
+Soldier:
+  category: infantry
+  mobility: foot
+  default_state: Moving
+  default_v_max_mps: 2.0     # dismounted, ~7 km/h dash
+  v_max_mps: {Moving: 2.0, Halted: 0.2, Emplaced: 0.2, Firing: 0.5, Unknown: 2.0, Destroyed: 2.0}
+
+ZPU-4:
+  category: towed_aa
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Emplaced: 0.0, Firing: 0.0, Halted: 0.0, Moving: 0.0, Unknown: 0.0, Destroyed: 0.0}
+
+MO-120-RT:
+  category: towed_mortar
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Emplaced: 0.0, Firing: 0.0, Halted: 0.0, Moving: 0.0, Unknown: 0.0, Destroyed: 0.0}

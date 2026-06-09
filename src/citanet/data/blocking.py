@@ -50,6 +50,8 @@ def generate_candidates(
     cross_kg_only: bool = False,
     reach_vmax_mult: float = 1.0,
     reach_extra_m: float = 0.0,
+    use_text_gate: bool = True,
+    type_by_category: bool = False,
 ) -> list[CandidatePair]:
     """Return surviving candidate pairs (ordered so observation i precedes j)."""
     obs = sorted(observations, key=lambda o: (o.t, o.obs_id))
@@ -69,7 +71,7 @@ def generate_candidates(
             if cross_kg_only and oi.kg_id == oj.kg_id:
                 continue
             # (1) type compatibility
-            if not ontology.types_compatible(oi.type, oj.type):
+            if not ontology.types_compatible(oi.type, oj.type, type_by_category):
                 continue
             # (3) reach radius (use the more permissive of the two endpoints'
             # kinematic ceilings; UNKNOWN/Moving is already permissive)
@@ -83,7 +85,7 @@ def generate_candidates(
             # (4) semantic threshold, bypassed for UNKNOWN-typed endpoints
             tcos = text_cosine(oi.label_text, oj.label_text)
             unknown = (oi.type == UNKNOWN_TYPE or oj.type == UNKNOWN_TYPE)
-            if not unknown and tcos < theta_text:
+            if use_text_gate and not unknown and tcos < theta_text:
                 continue
             pairs.append(CandidatePair(
                 i=idx[oi.obs_id], j=idx[oj.obs_id],
