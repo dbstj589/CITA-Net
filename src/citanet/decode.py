@@ -198,6 +198,24 @@ def decode_full(out: ModelOutput, feats: ScenarioFeatures, ontology: Ontology,
         else:
             slot_entities.setdefault(s, []).append(key)
 
+    # Precompute (once, O(pairs)) the cross-KG candidate pairs grouped by the
+    # (A-entity, B-entity) pair, and each entity's best cross candidate. This
+    # avoids an O(identities * pairs) scan inside the loop, which is the decode
+    # bottleneck at sector scale.
+    ent_of = feats.entity_of
+    cross_by_entpair: dict[tuple[str, str], list[int]] = {}
+    ent_best_cross: dict[str, tuple[float, str]] = {}   # entity_key -> (prob, other_key)
+    for q, p in enumerate(feats.pairs):
+        if not feats.pair_cross[q]:
+            continue
+        ka, kb = ent_of[obs[p.i].obs_id], ent_of[obs[p.j].obs_id]
+        a_key, b_key = (ka, kb) if ka.startswith("A:") else (kb, ka)
+        cross_by_entpair.setdefault((a_key, b_key), []).append(q)
+        pv = float(p_same[q])
+        for me, other in ((ka, kb), (kb, ka)):
+            if pv > ent_best_cross.get(me, (-1.0, ""))[0]:
+                ent_best_cross[me] = (pv, other)
+
     identities: list[FullIdentity] = []
     for slot, keys in sorted(slot_entities.items()):
         a_keys = [k for k in keys if k.startswith("A:")]
@@ -246,12 +264,8 @@ def decode_full(out: ModelOutput, feats: ScenarioFeatures, ontology: Ontology,
                 feasible_motion=bool(feas.feasible),
                 required_speed_mps=round(feas.required_speed_mps, 3)))
 
-        # rationale: mean CTA contributions over cross-KG candidate pairs of this id
-        cross_qs = []
-        member_ids = {obs[m].obs_id for m in member_idx}
-        for q, p in enumerate(feats.pairs):
-            if feats.pair_cross[q] and obs[p.i].obs_id in member_ids and obs[p.j].obs_id in member_ids:
-                cross_qs.append(q)
+        # rationale: mean CTA contributions over the canonical match's cross pairs
+        cross_qs = cross_by_entpair.get((a_best, b_best), []) if (a_best and b_best) else []
         def cmean(t):
             return float(t.detach()[cross_qs].mean()) if cross_qs else 0.0
         rationale = {"sim_sem": cmean(cta.sim_sem), "b_time": cmean(cta.b_time),
@@ -283,20 +297,12 @@ def decode_full(out: ModelOutput, feats: ScenarioFeatures, ontology: Ontology,
         kg, local = key.split(":", 1)
         members = groups[key]
         d_prob = max(ent_nullmass[key], float(p_dang[members].mean()))
-        # nearest cross-KG candidate (highest pair prob) for the report
+        # nearest cross-KG candidate (highest pair prob), from the precomputed map
         nearest = None
-        best_p = -1.0
-        for q, p in enumerate(feats.pairs):
-            if not feats.pair_cross[q]:
-                continue
-            ids = (obs[p.i], obs[p.j])
-            if any(o.local_entity_id == local and o.kg_id == kg for o in ids):
-                other = ids[1] if ids[0].local_entity_id == local else ids[0]
-                if float(p_same[q]) > best_p:
-                    best_p = float(p_same[q])
-                    nearest = {"kg_id": other.kg_id,
-                               "local_entity_id": other.local_entity_id,
-                               "pair_prob": round(float(p_same[q]), 3)}
+        if key in ent_best_cross:
+            bp, other_key = ent_best_cross[key]
+            okg, olocal = other_key.split(":", 1)
+            nearest = {"kg_id": okg, "local_entity_id": olocal, "pair_prob": round(bp, 3)}
         dangling.append({
             "kg_id": kg, "local_entity_id": local,
             "obs_ids": [obs[m].obs_id for m in members],

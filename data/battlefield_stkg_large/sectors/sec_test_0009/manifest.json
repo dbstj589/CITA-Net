@@ -1,0 +1,19 @@
+{
+  "scenario_id": "sec_test_0009",
+  "split": "test",
+  "seed": 3000009,
+  "crs": "UTM52N",
+  "epoch": "2025-06-06T00:00:00Z",
+  "n_observations": 580,
+  "n_entities_A": 29,
+  "n_entities_B": 29,
+  "n_matched_identities": 26,
+  "n_dangling_entities": 6,
+  "n_triples": 11302,
+  "files": [
+    "stkg.nt",
+    "observations.jsonl",
+    "manifest.json",
+    "labels/"
+  ]
+}

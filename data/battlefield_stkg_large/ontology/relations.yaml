@@ -1,0 +1,41 @@
+# Relation predicates linking entities/events in the STKG (§3.2, §4.3, §4.4).
+#
+# These edges feed the relation-context GNN (1-/2-hop neighbourhood) and the
+# CTA b_rel overlap term. `symmetric` predicates are treated as undirected when
+# computing neighbourhood overlap; `event` marks participation-style links.
+#
+# predicate: {symmetric, domain, range, description}
+
+partOf:
+  symmetric: false
+  description: Entity is a sub-unit / component of another entity (org structure)
+follows:
+  symmetric: false
+  description: Entity moves behind / trails another entity (column order)
+near:
+  symmetric: true
+  description: Entities are spatially proximate
+firesAt:
+  symmetric: false
+  description: Entity is engaging another entity / location by fire
+engagedWith:
+  symmetric: true
+  description: Two entities are in mutual engagement
+emplacedAt:
+  symmetric: false
+  description: Entity is dug-in / positioned at a landmark
+movesToward:
+  symmetric: false
+  description: Entity is moving in the direction of another entity / landmark
+supports:
+  symmetric: false
+  description: Entity provides fire / logistic support to another entity
+screens:
+  symmetric: false
+  description: Entity screens / covers another entity's flank or advance
+
+# Event participation predicate (entity -> event).
+participatesIn:
+  symmetric: false
+  event: true
+  description: Entity takes part in an event (with a role)

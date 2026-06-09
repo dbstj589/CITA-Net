@@ -133,6 +133,14 @@ preserve this difficulty pattern.
   raises the transition probability on kinematically-infeasible pairs ~2.5×
   (mean 0.16→0.40 dev) and increases the end-to-end Impossible-Transition and
   Wrong-Merge rates.
+- **Large-scale suite (>= 1M triples): complete.** 1,001,133 triples / 95
+  sectors (train 70 / dev 12 / test 13); grid+time blocking (recall 1.0, ~5x
+  reduction, grid ⊆ brute force); streaming sector loader (eval peak ~20 MB vs a
+  176 MB suite); gold-derived training pairs (no O(M²) lists). cita_full trains
+  to completion and reports dev/test full metrics (F1 ~0.52, precision ~0.80,
+  recall ~0.40 — intentionally **not 1.0**: many same-type objects, mis-IDs,
+  paraphrases, and FOV occlusion make this far harder and more meaningful than
+  the small probe). See *Large-scale suite*.
 
 ### Ablation (M3 — b_motion)
 
@@ -150,6 +158,40 @@ them. b_motion-off then admits ~2× more impossible transitions.
 The two T-72s share type, label, mean path, time distribution, and source
 distribution — only "follows id_0001" vs "near the BMP" differs — so a
 relation-off model can only guess.
+
+## Large-scale suite (>= 1,000,000 triples)
+
+A separate, procedurally-generated suite under `data/battlefield_stkg_large/`
+(its own extended ontology; the frozen small suite is untouched). Each **sector**
+is a 5 km tile with several formations: a tank platoon of many same-type T-72s
+and multiple infantry squads (mass same-type hard negatives), long tracks with
+crossing trajectories, a unit hierarchy (`partOf`/`follows`/`supports`), per-robot
+FOV/occlusion (`dangling_ratio` seen by one robot only), label paraphrases +
+UNKNOWN/mis-ID + per-source type-confidence, Destroyed wrecks and Emplaced towed
+guns. The canonical STKG is **N-Triples** (one triple per line → exact, streamable
+counting); `gold_identities.json` stores only the assignment (no O(M²) pair lists).
+
+```bash
+# generate (deterministic; grows sectors until >= target, records actual total)
+.venv/Scripts/python scripts/gen_dataset_large.py --build-suite --target-triples 1000000
+#   knobs: --n-sectors --identities-per-sector --obs-per-track --dangling-ratio
+#          --n-robots --seed --split
+
+# train (sector-streamed; subsample sectors/epoch by default, or --full-sectors)
+.venv/Scripts/python scripts/train_large.py                 # CPU-friendly
+.venv/Scripts/python scripts/train_large.py --full-sectors  # all train sectors/epoch
+```
+
+Scale adaptations (so the pipeline doesn't break at size): **grid + time-bucket
+blocking** ([blocking_grid.py](src/citanet/data/blocking_grid.py)) instead of
+per-sector all-pairs (reports candidate count, reduction, and recall);
+**gold-assignment-derived training pairs** + hard negatives instead of stored
+exhaustive pairs; a **streaming sector loader** ([stream.py](src/citanet/data/stream.py))
+that holds one sector in memory at a time; and **sector-batched training** with
+optional subsampling. At the large suite's paraphrase diversity the bag-of-tokens
+text gate is disabled and within-category mis-IDs are blocked by **category**
+(not exact type), so blocking relies on type-category + kinematics with semantics
+deferred to the learned encoder/CTA.
 
 ## Limitations (한계)
 

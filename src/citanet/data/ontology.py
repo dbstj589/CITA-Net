@@ -34,11 +34,24 @@ class Ontology:
             return float(table[state])
         return float(cls.get("default_v_max_mps", 25.0))
 
-    def types_compatible(self, t1: str, t2: str) -> bool:
-        """Type compatibility for blocking: equal, or one side UNKNOWN."""
+    def category(self, obj_type: str) -> str:
+        cls = self.classes.get(obj_type) or {}
+        return str(cls.get("category", "unknown"))
+
+    def types_compatible(self, t1: str, t2: str, by_category: bool = False) -> bool:
+        """Type compatibility for blocking: equal, or one side UNKNOWN. With
+        ``by_category`` (large suite), same-category types are also compatible
+        so a within-category mis-ID (e.g. BMP-2 vs BMP-1, T-72 vs T-62) survives
+        blocking."""
         if t1 == t2:
             return True
-        return UNKNOWN_TYPE in (t1, t2)
+        if UNKNOWN_TYPE in (t1, t2):
+            return True
+        if by_category:
+            c1, c2 = self.category(t1), self.category(t2)
+            if c1 == c2 and c1 not in ("unknown", "na", "formation"):
+                return True
+        return False
 
     # ---- states ---------------------------------------------------------
     @property

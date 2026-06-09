@@ -28,6 +28,13 @@ class BlockingConfig:
     # gate) do the rejecting -- used by the M3 b_motion ablation.
     reach_vmax_mult: float = 1.0
     reach_extra_m: float = 0.0
+    grid_cell_m: float = 400.0       # spatial hash cell size for grid blocking
+    # Hard text-cosine gate. Reliable only when matched observations share a
+    # surface form (small suite). Under the large suite's paraphrase diversity a
+    # bag-of-tokens gate filters true matches, so it is disabled there and
+    # blocking relies on type + kinematics (semantics -> learned encoder/CTA).
+    use_text_gate: bool = True
+    type_by_category: bool = False   # same-category types compatible (mis-ID, large)
 
 
 @dataclass

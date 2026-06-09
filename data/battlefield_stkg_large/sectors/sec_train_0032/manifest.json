@@ -1,0 +1,19 @@
+{
+  "scenario_id": "sec_train_0032",
+  "split": "train",
+  "seed": 1000032,
+  "crs": "UTM52N",
+  "epoch": "2025-06-06T00:00:00Z",
+  "n_observations": 520,
+  "n_entities_A": 26,
+  "n_entities_B": 26,
+  "n_matched_identities": 20,
+  "n_dangling_entities": 12,
+  "n_triples": 10133,
+  "files": [
+    "stkg.nt",
+    "observations.jsonl",
+    "manifest.json",
+    "labels/"
+  ]
+}
