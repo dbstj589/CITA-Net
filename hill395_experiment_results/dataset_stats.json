@@ -1,0 +1,57 @@
+{
+  "total_triples": 1005101,
+  "sectors": {
+    "dev": 12,
+    "test": 13,
+    "train": 50
+  },
+  "triples_per_split": {
+    "dev": 161012,
+    "test": 174723,
+    "train": 669366
+  },
+  "knobs": {
+    "identities_per_sector": 40,
+    "obs_per_track": 10,
+    "dangling_ratio": 0.2,
+    "n_robots": 2
+  },
+  "total_observations": 51310,
+  "type_distribution": {
+    "CCF_Infantry": 14830,
+    "ROK_Infantry": 13060,
+    "UNKNOWN": 6020,
+    "VehicleColumn": 2840,
+    "US_Tank": 2660,
+    "ROK_Tank": 2550,
+    "Mortar": 1350,
+    "Engineer": 1330,
+    "US_Artillery": 1270,
+    "CCF_AA": 1200,
+    "CCF_Artillery": 1190,
+    "QuadFifty": 1190,
+    "ROK_Artillery": 1150,
+    "Searchlight": 670
+  },
+  "state_distribution": {
+    "Engaging": 12609,
+    "Firing": 8335,
+    "Holding": 7657,
+    "Moving": 6365,
+    "Approaching": 4718,
+    "Occupying": 3763,
+    "Emplaced": 3038,
+    "Withdrawing": 2333,
+    "Destroyed": 1500,
+    "Halted": 992
+  },
+  "source_distribution": {
+    "ARTILLERY_OBS": 8611,
+    "VISUAL_OBS": 8605,
+    "RADAR": 8484,
+    "AERIAL": 6489,
+    "SIGINT": 6471,
+    "ACOUSTIC": 6331,
+    "HUMINT": 6319
+  }
+}

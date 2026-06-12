@@ -1,0 +1,50 @@
+# Hill 395 (White Horse / 백마고지) large suite. Same Full CITA-Net model as
+# cita_full_large, pointed at the Hill 395 data root with its own (Hill-395-
+# grounded) ontology. Trained/evaluated by scripts/train_large.py.
+stage: cita_full_hill395
+seed: 19521006
+device: auto
+data_root: data/battlefield_hill395_large
+ontology_dir: data/battlefield_hill395_large/ontology
+
+blocking:
+  dt_max_s: 180.0
+  theta_text: 0.3
+  grid_cell_m: 400.0
+  r_err_floor_m: 80.0    # absorb position-noise tails so true matches survive reach
+  use_text_gate: false   # Korean paraphrase diversity makes a bag-of-tokens gate drop true matches
+  type_by_category: true # within-category mis-ID (M46<->ROK tank, ROK<->US arty) stays a candidate
+
+encoder:
+  d_model: 128
+  text_encoder: learned
+  use_source_gate: true
+
+graph:
+  enabled: true
+  gnn_layers: 2
+  n_heads: 4
+  hops: 2
+
+cta:
+  enabled_terms: [sem, time, motion, state, rel, src]
+
+decoder:
+  enabled: true
+  num_slots: 48          # sectors hold many identities (~30); K > max + margin
+  sinkhorn_iters: 20
+  sinkhorn_temp: 0.5
+  sinkhorn_col_strength: 0.1
+
+loss:
+  lambda_pair: 2.0
+  lambda_transition: 0.3
+  lambda_trajectory: 0.5
+  lambda_dangling: 1.0
+  lambda_assign: 2.0
+  pair_pos_weight: 5.0   # cross-KG positives rarer at this scale
+
+train:
+  lr: 1.0e-3
+  epochs: 60             # bounded for CPU; sector subsampling per epoch
+  log_every: 10

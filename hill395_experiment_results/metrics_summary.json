@@ -1,0 +1,41 @@
+{
+  "dev": {
+    "n_gold_matches": 27.5,
+    "n_pred_matches": 17.166666666666668,
+    "precision": 0.8710921266842319,
+    "recall": 0.5477702742265219,
+    "f1": 0.6694047068005835,
+    "wrong_merge_rate": 0.13165943744535324,
+    "fragmentation_rate": 0.7301839786711867,
+    "trajectory_consistency_rate": 0.7566562841130082,
+    "impossible_transition_rate": 0.24334371588699164,
+    "n_transitions": 532.75,
+    "n_impossible_transitions": 129.83333333333334,
+    "dangling_precision": 0.6819978632478634,
+    "dangling_recall": 0.5822927072927073,
+    "n_gold_dangling": 13.5,
+    "n_pred_dangling": 11.833333333333334
+  },
+  "test": {
+    "n_gold_matches": 27.615384615384617,
+    "n_pred_matches": 17.153846153846153,
+    "precision": 0.8948133022859667,
+    "recall": 0.5611424132191865,
+    "f1": 0.6858095780011744,
+    "wrong_merge_rate": 0.1214351846704788,
+    "fragmentation_rate": 0.6849604590676936,
+    "trajectory_consistency_rate": 0.7537731874314146,
+    "impossible_transition_rate": 0.2462268125685853,
+    "n_transitions": 529.7692307692307,
+    "n_impossible_transitions": 131.07692307692307,
+    "dangling_precision": 0.6204906204906204,
+    "dangling_recall": 0.5712037271426412,
+    "n_gold_dangling": 13.384615384615385,
+    "n_pred_dangling": 12.307692307692308
+  },
+  "baseline_large": {
+    "precision": 0.8,
+    "recall": 0.4,
+    "f1": 0.52
+  }
+}

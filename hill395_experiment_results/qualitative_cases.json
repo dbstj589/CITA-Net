@@ -1,0 +1,2775 @@
+{
+  "correct_merges": [
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0003",
+        "type": "CCF_Infantry",
+        "label": "중공군 침투조",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0006",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 1.0,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0030",
+        "type": "VehicleColumn",
+        "label": "UN 차량대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0032",
+        "type": "VehicleColumn",
+        "label": "중공군 차량대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.995,
+      "pred_type": "VehicleColumn"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0021",
+        "type": "US_Tank",
+        "label": "미군 전차",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0022",
+        "type": "US_Tank",
+        "label": "73d Tank Bn 전차",
+        "sources": [
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.862,
+      "pred_type": "US_Tank"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0002",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0004",
+        "type": "UNKNOWN",
+        "label": "미상 보병",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.919,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0023",
+        "type": "ROK_Tank",
+        "label": "국군 53전차중대 전차",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0024",
+        "type": "ROK_Tank",
+        "label": "ROK tank",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.962,
+      "pred_type": "ROK_Tank"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0020",
+        "type": "ROK_Tank",
+        "label": "국군 전차",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0021",
+        "type": "ROK_Tank",
+        "label": "국군 53전차중대 전차",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.957,
+      "pred_type": "ROK_Tank"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0027",
+        "type": "QuadFifty",
+        "label": "quad-50 대공포",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0029",
+        "type": "QuadFifty",
+        "label": "quad-.50",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 1.0,
+      "pred_type": "QuadFifty"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0014",
+        "type": "UNKNOWN",
+        "label": "미상 표적",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0016",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.997,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0016",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0018",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.982,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0015",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0017",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.988,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0013",
+        "type": "ROK_Infantry",
+        "label": "국군 소총소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0015",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 소대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.988,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0028",
+        "type": "QuadFifty",
+        "label": "quad-50 대공포",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0030",
+        "type": "QuadFifty",
+        "label": "quad-.50",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 1.0,
+      "pred_type": "QuadFifty"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0019",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0020",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.997,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0004",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대",
+        "sources": [
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0007",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대",
+        "sources": [
+          "ACOUSTIC",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 1.0,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0005",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0008",
+        "type": "CCF_Infantry",
+        "label": "적 보병",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.999,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0000",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0006",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0009",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.98,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0006",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0006",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.979,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0011",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0013",
+        "type": "ROK_Infantry",
+        "label": "국군 소총소대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.957,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0013",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0015",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 소대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.989,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0035",
+        "type": "VehicleColumn",
+        "label": "UN 차량대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0032",
+        "type": "VehicleColumn",
+        "label": "적 보급차량",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.992,
+      "pred_type": "VehicleColumn"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0004",
+        "type": "UNKNOWN",
+        "label": "정체불명 부대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0004",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.999,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0012",
+        "type": "ROK_Infantry",
+        "label": "아군 보병",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0014",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.96,
+      "pred_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0008",
+        "type": "UNKNOWN",
+        "label": "미상 표적",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0009",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "ACOUSTIC",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 1.0,
+      "pred_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0023",
+        "type": "ROK_Tank",
+        "label": "ROK tank",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0022",
+        "type": "ROK_Tank",
+        "label": "ROK tank",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.991,
+      "pred_type": "ROK_Tank"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0031",
+        "type": "UNKNOWN",
+        "label": "미상 보병",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0030",
+        "type": "CCF_AA",
+        "label": "ZPU 견인대공포",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 1.0,
+      "pred_type": "CCF_AA"
+    }
+  ],
+  "wrong_merges": [
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0026",
+        "type": "US_Artillery",
+        "label": "미군 포병대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0026",
+        "type": "US_Artillery",
+        "label": "미군 155mm 곡사포",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.831,
+      "pred_type": "US_Artillery",
+      "gold_A_true_type": "ROK_Artillery"
+    },
+    {
+      "sector": "sec_dev_0001",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0019",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0017",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.045,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0002",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0025",
+        "type": "UNKNOWN",
+        "label": "정체불명 부대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0027",
+        "type": "US_Artillery",
+        "label": "미군 포병대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.487,
+      "pred_type": "US_Artillery",
+      "gold_A_true_type": "?"
+    },
+    {
+      "sector": "sec_dev_0002",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0017",
+        "type": "ROK_Infantry",
+        "label": "아군 보병",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0014",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 소대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.27,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0002",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0007",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0009",
+        "type": "CCF_Infantry",
+        "label": "적 보병",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.678,
+      "pred_type": "CCF_Infantry",
+      "gold_A_true_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0003",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0009",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0010",
+        "type": "CCF_Infantry",
+        "label": "중공군 침투조",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.721,
+      "pred_type": "CCF_Infantry",
+      "gold_A_true_type": "?"
+    },
+    {
+      "sector": "sec_dev_0004",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0005",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0008",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.194,
+      "pred_type": "CCF_Infantry",
+      "gold_A_true_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0004",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0027",
+        "type": "ROK_Artillery",
+        "label": "국군 105mm 곡사포",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0027",
+        "type": "ROK_Artillery",
+        "label": "아군 포병",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.647,
+      "pred_type": "ROK_Artillery",
+      "gold_A_true_type": "ROK_Artillery"
+    },
+    {
+      "sector": "sec_dev_0004",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0021",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0014",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.961,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0004",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0013",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0020",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.327,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0005",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0006",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0004",
+        "type": "CCF_Infantry",
+        "label": "중공군 침투조",
+        "sources": [
+          "ACOUSTIC",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.201,
+      "pred_type": "CCF_Infantry",
+      "gold_A_true_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0006",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0004",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0005",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.406,
+      "pred_type": "CCF_Infantry",
+      "gold_A_true_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0006",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0018",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0015",
+        "type": "ROK_Infantry",
+        "label": "국군 전초분대",
+        "sources": [
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.92,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0006",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0013",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0020",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.985,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0007",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0029",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0024",
+        "type": "CCF_Artillery",
+        "label": "중공군 122mm 곡사포",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.799,
+      "pred_type": "CCF_Artillery",
+      "gold_A_true_type": "?"
+    },
+    {
+      "sector": "sec_dev_0007",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0014",
+        "type": "UNKNOWN",
+        "label": "미상 차량",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0013",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.479,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0009",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0005",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0003",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.408,
+      "pred_type": "CCF_Infantry",
+      "gold_A_true_type": "?"
+    },
+    {
+      "sector": "sec_dev_0009",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0026",
+        "type": "ROK_Artillery",
+        "label": "국군 포병 대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0025",
+        "type": "ROK_Artillery",
+        "label": "아군 포병",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.877,
+      "pred_type": "ROK_Artillery",
+      "gold_A_true_type": "US_Artillery"
+    },
+    {
+      "sector": "sec_dev_0009",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0017",
+        "type": "UNKNOWN",
+        "label": "미상 차량",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0014",
+        "type": "ROK_Infantry",
+        "label": "국군 전초분대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.454,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0009",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0002",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0001",
+        "type": "CCF_Infantry",
+        "label": "중공군 증원대",
+        "sources": [
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.009,
+      "pred_type": "CCF_Infantry",
+      "gold_A_true_type": "CCF_Infantry"
+    },
+    {
+      "sector": "sec_dev_0010",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0026",
+        "type": "ROK_Artillery",
+        "label": "아군 포병",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0029",
+        "type": "US_Artillery",
+        "label": "미군 포병대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.442,
+      "pred_type": "US_Artillery",
+      "gold_A_true_type": "US_Artillery"
+    },
+    {
+      "sector": "sec_dev_0010",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0014",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0023",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.416,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0010",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0013",
+        "type": "ROK_Infantry",
+        "label": "국군 전초분대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0018",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "ACOUSTIC",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.0,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0010",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0021",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0017",
+        "type": "ROK_Infantry",
+        "label": "국군 소총소대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.965,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "ROK_Infantry"
+    },
+    {
+      "sector": "sec_dev_0011",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0014",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0019",
+        "type": "ROK_Infantry",
+        "label": "국군 전초분대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      },
+      "match_confidence": 0.359,
+      "pred_type": "ROK_Infantry",
+      "gold_A_true_type": "?"
+    }
+  ],
+  "fragments": [
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "CCF_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0008",
+        "type": "CCF_Infantry",
+        "label": "중공군 침투조",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0011",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "US_Tank",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0022",
+        "type": "US_Tank",
+        "label": "73d Tank Bn 전차",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0023",
+        "type": "UNKNOWN",
+        "label": "미상 차량",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "ROK_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0010",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0012",
+        "type": "ROK_Infantry",
+        "label": "아군 보병",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "CCF_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0007",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0010",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "US_Artillery",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0024",
+        "type": "US_Artillery",
+        "label": "미군 155mm 곡사포",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0025",
+        "type": "US_Artillery",
+        "label": "미군 8인치 곡사포",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "US_Artillery",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0026",
+        "type": "ROK_Artillery",
+        "label": "아군 포병",
+        "sources": [
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0026",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "ROK_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0011",
+        "type": "ROK_Infantry",
+        "label": "국군 소총소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0014",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 소대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "ROK_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0017",
+        "type": "ROK_Infantry",
+        "label": "아군 보병",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0019",
+        "type": "ROK_Infantry",
+        "label": "아군 보병",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0000",
+      "true_type": "CCF_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0001",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0001",
+        "type": "UNKNOWN",
+        "label": "미상 표적",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "US_Artillery",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0027",
+        "type": "US_Artillery",
+        "label": "미군 8인치 곡사포",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0026",
+        "type": "US_Artillery",
+        "label": "미군 155mm 곡사포",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "ROK_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0018",
+        "type": "ROK_Infantry",
+        "label": "국군 소총소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0018",
+        "type": "UNKNOWN",
+        "label": "정체불명 부대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "CCF_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0007",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0007",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "ROK_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0016",
+        "type": "UNKNOWN",
+        "label": "미상 표적",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0017",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "CCF_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0009",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0010",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "ROK_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0015",
+        "type": "ROK_Infantry",
+        "label": "국군 소총소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0016",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 대대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "VehicleColumn",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0034",
+        "type": "VehicleColumn",
+        "label": "중공군 차량대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0031",
+        "type": "VehicleColumn",
+        "label": "중공군 차량대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "CCF_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0005",
+        "type": "CCF_Infantry",
+        "label": "중공군 보병 대대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0005",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "US_Tank",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0024",
+        "type": "ROK_Tank",
+        "label": "국군 전차",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0023",
+        "type": "US_Tank",
+        "label": "M46 tank",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "US_Artillery",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0028",
+        "type": "US_Artillery",
+        "label": "미군 8인치 곡사포",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0027",
+        "type": "US_Artillery",
+        "label": "미군 155mm 곡사포",
+        "sources": [
+          "ACOUSTIC",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    },
+    {
+      "sector": "sec_dev_0001",
+      "true_type": "ROK_Infantry",
+      "A": {
+        "kg": "A",
+        "local_entity_id": "ent_A_0021",
+        "type": "ROK_Infantry",
+        "label": "국군 소총소대",
+        "sources": [
+          "ARTILLERY_OBS",
+          "RADAR",
+          "VISUAL_OBS"
+        ],
+        "n_obs": 10
+      },
+      "B": {
+        "kg": "B",
+        "local_entity_id": "ent_B_0021",
+        "type": "ROK_Infantry",
+        "label": "국군 보병 중대",
+        "sources": [
+          "ACOUSTIC",
+          "AERIAL",
+          "HUMINT",
+          "SIGINT"
+        ],
+        "n_obs": 10
+      }
+    }
+  ],
+  "dangling_correct": [
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0027",
+      "type": "Mortar",
+      "label": "중공군 박격포대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "A",
+      "local_entity_id": "ent_A_0032",
+      "type": "VehicleColumn",
+      "label": "중공군 차량대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0031",
+      "type": "Engineer",
+      "label": "적 공병조",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0028",
+      "type": "Mortar",
+      "label": "120mm 박격포",
+      "sources": [
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "A",
+      "local_entity_id": "ent_A_0029",
+      "type": "Engineer",
+      "label": "공병조",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0003",
+      "type": "CCF_Infantry",
+      "label": "적 보병",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0002",
+      "type": "CCF_Infantry",
+      "label": "중공군 보병 대대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "A",
+      "local_entity_id": "ent_A_0031",
+      "type": "Searchlight",
+      "label": "탐조등반",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0034",
+      "type": "UNKNOWN",
+      "label": "미상 표적",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "B",
+      "local_entity_id": "ent_B_0035",
+      "type": "VehicleColumn",
+      "label": "UN 차량대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "A",
+      "local_entity_id": "ent_A_0033",
+      "type": "Engineer",
+      "label": "적 공병조",
+      "sources": [
+        "ARTILLERY_OBS",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "A",
+      "local_entity_id": "ent_A_0032",
+      "type": "Engineer",
+      "label": "공병조",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "B",
+      "local_entity_id": "ent_B_0033",
+      "type": "Searchlight",
+      "label": "조명탄 분대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "B",
+      "local_entity_id": "ent_B_0028",
+      "type": "Mortar",
+      "label": "중공군 박격포대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "A",
+      "local_entity_id": "ent_A_0029",
+      "type": "Mortar",
+      "label": "화학박격포 중대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    }
+  ],
+  "dangling_missed": [
+    {
+      "sector": "sec_dev_0000",
+      "kg": "A",
+      "local_entity_id": "ent_A_0018",
+      "type": "ROK_Infantry",
+      "label": "국군 보병 소대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "A",
+      "local_entity_id": "ent_A_0025",
+      "type": "ROK_Artillery",
+      "label": "아군 포병",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0033",
+      "type": "VehicleColumn",
+      "label": "보급 차량대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "A",
+      "local_entity_id": "ent_A_0009",
+      "type": "CCF_Infantry",
+      "label": "중공군 잔존대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0005",
+      "type": "CCF_Infantry",
+      "label": "중공군 잔존대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "A",
+      "local_entity_id": "ent_A_0012",
+      "type": "ROK_Infantry",
+      "label": "국군 전초분대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0000",
+      "kg": "B",
+      "local_entity_id": "ent_B_0013",
+      "type": "ROK_Infantry",
+      "label": "국군 방어중대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "B",
+      "local_entity_id": "ent_B_0008",
+      "type": "UNKNOWN",
+      "label": "미상 차량",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "A",
+      "local_entity_id": "ent_A_0014",
+      "type": "ROK_Infantry",
+      "label": "국군 보병 중대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "A",
+      "local_entity_id": "ent_A_0022",
+      "type": "ROK_Tank",
+      "label": "국군 53전차중대 전차",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "B",
+      "local_entity_id": "ent_B_0011",
+      "type": "CCF_Infantry",
+      "label": "중공군 잔존대",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0001",
+      "kg": "A",
+      "local_entity_id": "ent_A_0017",
+      "type": "ROK_Infantry",
+      "label": "국군 보병 대대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0002",
+      "kg": "A",
+      "local_entity_id": "ent_A_0018",
+      "type": "ROK_Infantry",
+      "label": "국군 방어중대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0002",
+      "kg": "A",
+      "local_entity_id": "ent_A_0025",
+      "type": "UNKNOWN",
+      "label": "정체불명 부대",
+      "sources": [
+        "ARTILLERY_OBS",
+        "RADAR",
+        "VISUAL_OBS"
+      ],
+      "n_obs": 10
+    },
+    {
+      "sector": "sec_dev_0002",
+      "kg": "B",
+      "local_entity_id": "ent_B_0009",
+      "type": "CCF_Infantry",
+      "label": "적 보병",
+      "sources": [
+        "ACOUSTIC",
+        "AERIAL",
+        "HUMINT",
+        "SIGINT"
+      ],
+      "n_obs": 10
+    }
+  ],
+  "impossible_transitions": [
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Firing",
+        "type": "US_Tank",
+        "label": "73d Tank Bn 전차"
+      },
+      "to": {
+        "state": "Firing",
+        "type": "US_Tank",
+        "label": "73d Tank Bn 전차"
+      },
+      "required_speed_mps": 1.51
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Approaching",
+        "type": "CCF_Infantry",
+        "label": "중공군 침투조"
+      },
+      "to": {
+        "state": "Approaching",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대"
+      },
+      "required_speed_mps": 95.54
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Engaging",
+        "type": "CCF_Infantry",
+        "label": "중공군 침투조"
+      },
+      "to": {
+        "state": "Engaging",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대"
+      },
+      "required_speed_mps": 29.71
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Engaging",
+        "type": "CCF_Infantry",
+        "label": "중공군 침투조"
+      },
+      "to": {
+        "state": "Engaging",
+        "type": "CCF_Infantry",
+        "label": "중공군 잔존대"
+      },
+      "required_speed_mps": 58.37
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "아군 보병"
+      },
+      "to": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "아군 보병"
+      },
+      "required_speed_mps": 1.97
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "아군 보병"
+      },
+      "to": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "아군 보병"
+      },
+      "required_speed_mps": 2.12
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Emplaced",
+        "type": "US_Artillery",
+        "label": "미군 155mm 곡사포"
+      },
+      "to": {
+        "state": "Firing",
+        "type": "US_Artillery",
+        "label": "미군 155mm 곡사포"
+      },
+      "required_speed_mps": 0.74
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "to": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "required_speed_mps": 1.47
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "to": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "required_speed_mps": 1.37
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "to": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "required_speed_mps": 1.68
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "to": {
+        "state": "Firing",
+        "type": "ROK_Artillery",
+        "label": "아군 포병"
+      },
+      "required_speed_mps": 0.98
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Firing",
+        "type": "US_Tank",
+        "label": "미군 전차"
+      },
+      "to": {
+        "state": "Firing",
+        "type": "US_Tank",
+        "label": "73d Tank Bn 전차"
+      },
+      "required_speed_mps": 19.44
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Engaging",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조"
+      },
+      "to": {
+        "state": "Engaging",
+        "type": "UNKNOWN",
+        "label": "미상 보병"
+      },
+      "required_speed_mps": 65052.3
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Engaging",
+        "type": "CCF_Infantry",
+        "label": "중공군 돌격조"
+      },
+      "to": {
+        "state": "Engaging",
+        "type": "UNKNOWN",
+        "label": "미상 보병"
+      },
+      "required_speed_mps": 87078.24
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대"
+      },
+      "to": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대"
+      },
+      "required_speed_mps": 3.21
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대"
+      },
+      "to": {
+        "state": "Holding",
+        "type": "ROK_Infantry",
+        "label": "국군 방어중대"
+      },
+      "required_speed_mps": 2.33
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Approaching",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대"
+      },
+      "to": {
+        "state": "Approaching",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적"
+      },
+      "required_speed_mps": 93.66
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Approaching",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적"
+      },
+      "to": {
+        "state": "Approaching",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대"
+      },
+      "required_speed_mps": 72.81
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Approaching",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적"
+      },
+      "to": {
+        "state": "Approaching",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대"
+      },
+      "required_speed_mps": 270.55
+    },
+    {
+      "sector": "sec_dev_0000",
+      "from": {
+        "state": "Engaging",
+        "type": "CCF_Infantry",
+        "label": "중공군 재공격대"
+      },
+      "to": {
+        "state": "Engaging",
+        "type": "UNKNOWN",
+        "label": "분류불가 기동표적"
+      },
+      "required_speed_mps": 262638.26
+    }
+  ]
+}

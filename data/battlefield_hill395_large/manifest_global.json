@@ -1,0 +1,27 @@
+{
+  "data_root": "data\\battlefield_hill395_large",
+  "domain": "hill395_white_horse_1952",
+  "total_triples": 1005101,
+  "target_triples": 1000000,
+  "sectors": {
+    "dev": 12,
+    "test": 13,
+    "train": 50
+  },
+  "triples_per_split": {
+    "dev": 161012,
+    "test": 174723,
+    "train": 669366
+  },
+  "knobs": {
+    "identities_per_sector": 40,
+    "obs_per_track": 10,
+    "dangling_ratio": 0.2,
+    "n_robots": 2
+  },
+  "seed_bases": {
+    "train": 1000000,
+    "dev": 2000000,
+    "test": 3000000
+  }
+}

@@ -47,8 +47,9 @@ class CITANet(nn.Module):
         self.graph = None
         if cfg.graph.enabled:
             from .graph_encoder import RelationContextGNN
-            # n_relations is fixed by featurize (11 relation buckets)
-            self.graph = RelationContextGNN(d, n_relations=11, cfg=cfg)
+            from .featurize import REL_NAMES
+            # n_relations must match the edge-type buckets featurize emits
+            self.graph = RelationContextGNN(d, n_relations=len(REL_NAMES), cfg=cfg)
 
         self.cta = CTA(n_sources=len(fs.sources), cfg=cfg, state_eps=ontology.state_eps)
         self.pair_head = PairHead(d)

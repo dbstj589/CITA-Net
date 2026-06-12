@@ -116,8 +116,13 @@ def _rel_event_set(o: Observation) -> set[tuple[str, str]]:
     return s
 
 
+# Battle-specific predicates (occupies/withdrawsFrom/reinforces) are appended for
+# the Hill 395 suite so they get their own GNN edge-type embeddings. They are
+# additive: datasets that never emit them are unaffected, and any predicate not
+# in this list still falls back to the "near" edge id in _build_edges below.
 REL_NAMES = ["follows", "near", "partOf", "firesAt", "engagedWith",
-             "emplacedAt", "movesToward", "supports", "screens", "event", "sametrack"]
+             "emplacedAt", "movesToward", "supports", "screens",
+             "occupies", "withdrawsFrom", "reinforces", "event", "sametrack"]
 
 
 def _build_edges(obs: list[Observation], max_event_group: int | None) -> list[tuple[int, int, int]]:

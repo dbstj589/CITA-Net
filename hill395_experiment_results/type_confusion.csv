@@ -1,0 +1,13 @@
+type_pair,wrong_merge_count
+ROK_Infantry + ROK_Infantry,14
+CCF_Infantry + CCF_Infantry,12
+ROK_Infantry + UNKNOWN,8
+UNKNOWN + US_Artillery,2
+ROK_Artillery + ROK_Artillery,2
+VehicleColumn + VehicleColumn,2
+UNKNOWN + US_Tank,2
+ROK_Tank + ROK_Tank,2
+US_Artillery + US_Artillery,1
+CCF_Artillery + UNKNOWN,1
+ROK_Artillery + US_Artillery,1
+US_Tank + US_Tank,1
