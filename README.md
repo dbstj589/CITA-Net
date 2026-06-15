@@ -1,220 +1,289 @@
+<div align="center">
+
 # CITA-Net
 
-**Constraint-aware Identity-Trajectory Alignment Network** — entity alignment
-over multi-robot battlefield spatio-temporal knowledge graphs (STKG).
+**Constraint-aware Identity-Trajectory Alignment Network**
 
-Given two STKGs (`kg_A.jsonld`, `kg_B.jsonld`) plus shared `commons.jsonld`,
-CITA-Net decides **which observations are the same real-world object**, produces
-per-object identity mappings / trajectories / rationale, and **abstains** on
-*dangling* observations that have no counterpart (precision-preserving).
+다중 정보망(multi-robot/multi-source) 전장 **시공간 지식그래프(STKG)** 상의 **개체정합(Entity Alignment)**
 
-This repo is built in milestones (M0 → M3). See the *Status* section for what is
-implemented.
+<sub>의미 · 시공간 · 운동학 · 상태전이 · 관계 · 출처 신뢰도 제약을 단일 모델에 통합</sub>
 
-## Scope
+`Python ≥ 3.10 (64-bit)` · `PyTorch (CPU)` · `의존성 최소(torch · numpy · PyYAML)` · `torch-geometric/rdflib 불필요`
 
-In scope: STKG **symbol-level** alignment (the methodology's 6 modules). Out of
-scope (assumed already done upstream): raw sensor/video tracking, ontology
-alignment, coordinate/time normalisation. Inputs are assumed to share a common
-vocabulary and a common UTM52N / UTC frame.
+</div>
 
-## Two correctness invariants
+---
 
-1. **Two-level matching.** observation→identity is **many-to-one**; identity↔identity
-   across the two KGs is **one-to-one**. No one-to-one constraint is placed at the
-   observation level.
-2. **No forced matching of danglings.** Unmatched observations/entities are routed
-   to the ∅ slot and **abstained**, preserving precision.
+## 📖 개요 (Overview)
 
-## Install (offline-friendly)
+서로 다른 두 정보망(**KG-A** / **KG-B**)이 같은 전장을 **비동기·부분적으로** 관측하면, "어떤 관측들이 동일한 실체인가?"를 판정해야 한다. CITA-Net은 **관측(observation) 중심 STKG**를 입력받아:
 
-The environment needs a **64-bit** Python (torch ships no 32-bit Windows wheels).
+1. 동일 실체의 관측을 **정체성(identity)으로 군집**하고,
+2. cross-KG **1:1 정합쌍** `(e^A, e^B)`을 산출하며,
+3. 한쪽 정보망에만 보인 객체(**dangling**)는 강제로 매칭하지 않고 **abstain(보류)** 한다(정밀도 보존).
+
+핵심은 의미(텍스트/타입)·시공간·**운동학(kinematics)**·**상태 전이 호환성**·**관계 이웃**·**출처 신뢰도** 제약을 하나의 **Constraint-aware Transition Attention(CTA)** 로 통합하고, **Sinkhorn 슬롯 디코더**로 군집과 dangling을 동시에 산출하는 것이다.
+
+> 📄 코드 수준의 전체 상세(모든 수식·구조·하이퍼파라미터·실험)는 **[`CITA-Net_TECHNICAL_REPORT.md`](CITA-Net_TECHNICAL_REPORT.md)** 참고.
+
+---
+
+## ✨ 주요 특징 (Key Features)
+
+- **제약 통합 CTA** — `score = w₀·sim_sem + b_time + b_motion + b_state + b_rel + b_src`. 각 항을 설정으로 on/off → ablation이 설정 변경만으로 가능.
+- **출처-인지 다중모달 인코더** — 텍스트·시공간(Fourier)·상태·타입·출처 5채널을 출처 신뢰도 게이트 `g(src)`로 가중합.
+- **관계-맥락 GNN(RGAT)** — 동일트랙·관계엣지·공통이벤트로 2-hop 메시지패싱(자체 구현, torch-geometric 불필요).
+- **Sinkhorn 슬롯 디코더** — K개 정체성 슬롯 + ∅ 슬롯, 행-확률 정규화로 군집 + dangling 흡수.
+- **두 가지 정합 불변(invariants)** — 관측→정체성 **다대일**, 정체성↔정체성 **일대일**, dangling **강제매칭 금지**.
+- **스케일** — 100만 트리플 suite에서 **그리드+시간 블로킹**(recall≥0.98, ~10× 축소)과 **섹터 스트리밍**(peak ~16 MB)으로 CPU에서 동작.
+- **완전 재현** — 결정론적 시드 기반 데이터 생성, 단일 스크립트로 온톨로지까지 emit.
+
+---
+
+## 🏗️ 모델 구조 (Architecture)
+
+```
+관측 O = O_A ∪ O_B
+        │
+        ▼
+ ① Blocking (grid+time)        후보쌍 생성 — 운동학 reach + 타입호환 + 전방 시간창
+        │
+        ▼
+ ② Encoder (5채널+출처게이트)   h(o) = LayerNorm( Σ_c g_c(src)·f_c(o) )
+        │
+        ▼
+ ③ Relation GNN (RGAT, 2-hop)  관계맥락 주입
+        │
+        ▼
+ ④ CTA  score = w₀·sim_sem + b_time + b_motion + b_state + b_rel + b_src ; p = σ(score)
+        │
+        ├──► PairHead     (cross-KG same?)        ── L_pair / L_transition
+        ├──► DanglingHead (abstain?)              ── L_dangling
+        ▼
+ ⑤ Sinkhorn Decoder           K 슬롯 + ∅ ; A = sinkhorn_row(Z/τ)
+        │
+        ▼
+ 정체성 군집 + 궤적 + 전이 + dangling          ── L_assign / L_trajectory
+```
+
+**CTA 항(요약)** — 전체 유도는 기술문서 §5 참고.
+
+| 항 | 수식 | 의미 |
+|---|---|---|
+| `sim_sem` | `cos(h_i, h_j)` | 의미 유사도(인코더+GNN) |
+| `b_time` | `−BIG if t_j<t_i−ε else 0` | 역방향 전이 금지(하드, 비학습) |
+| `b_motion` | `−α·softplus((req−feas)/β)` | 운동학 위반 소프트 벌점 |
+| `b_state` | `γ·log(C[s_i,s_j]+ε)` | 상태 전이 호환행렬(비대칭) |
+| `b_rel` | `δ·jaccard(이웃_i, 이웃_j)` | 관계 이웃 중첩 |
+| `b_src` | `SrcBias[src_i, src_j]` | 출처쌍 학습 바이어스 |
+
+**운동학 feasibility**: `required = dist/Δt`, `feasible = max(v_max(type,state)) + (cep_i+cep_j)/Δt`, `feasible ⇔ required ≤ feasible`.
+
+---
+
+## 📁 폴더 구조 (Repository Structure)
+
+```
+CITA-Net/
+├── src/citanet/
+│   ├── config.py               # 하이퍼파라미터 dataclass + YAML 로더
+│   ├── engine.py / engine_large.py   # 학습/평가 (소형 / 대형 스트리밍)
+│   ├── decode.py               # 디코드 (greedy + M3 Sinkhorn full)
+│   ├── eval.py                 # 평가 지표
+│   ├── losses.py               # 5개 손실항 + total_loss
+│   ├── serialize.py / output_schema.py   # Part-B 출력 + 스키마 검증
+│   ├── model/
+│   │   ├── citanet.py          # 최상위 모델 CITANet
+│   │   ├── encoder.py          # 5채널 출처-게이트 인코더
+│   │   ├── graph_encoder.py    # RGAT (관계-맥락 GNN)
+│   │   ├── cta.py              # Constraint-aware Transition Attention
+│   │   ├── decoder.py          # Sinkhorn 슬롯 디코더
+│   │   ├── heads.py            # PairHead / DanglingHead
+│   │   ├── featurize.py        # FeatureSpace / ScenarioFeatures / REL_NAMES
+│   │   └── text.py             # Vocab / LearnedTextEncoder
+│   └── data/
+│       ├── schema.py           # Observation/Entity/Landmark/Event/Relation
+│       ├── ontology.py         # 온톨로지 접근 API
+│       ├── loader.py / stream.py     # 로더 (JSON-LD / 섹터 스트리밍)
+│       ├── blocking.py / blocking_grid.py   # 후보 생성 (brute / grid+time)
+│       └── kinematics.py       # 운동학 feasibility
+├── scripts/
+│   ├── gen_dataset.py              # 소형 suite 생성기
+│   ├── gen_dataset_large.py        # 대형 suite 생성기 [동결]
+│   ├── gen_dataset_hill395.py      # ★ 백마고지 suite 생성기
+│   ├── train.py / evaluate.py / predict.py   # 소형 파이프라인
+│   ├── train_large.py              # 대형 학습/평가
+│   ├── extract_hill395_results.py  # ★ 정량/정성 결과 추출
+│   ├── plot_hill395_results.py     # ★ 결과 그래프(PNG)
+│   └── make_hill395_deck.py        # ★ 발표자료(PPTX)
+├── configs/
+│   ├── cita_full.yaml / cita_full_large.yaml
+│   └── cita_full_hill395.yaml      # ★ 백마고지 학습 설정
+├── data/
+│   ├── battlefield_stkg_dataset/   # 소형 suite (JSON-LD scenarios) [동결]
+│   ├── battlefield_stkg_large/     # 대형 suite (N-Triples sectors) [동결]
+│   └── battlefield_hill395_large/  # ★ 백마고지 suite
+├── tests/                          # pytest (data / model / pipeline)
+├── hill395_experiment_results/     # ★ 실험 산출물(지표·그림·정성·PPTX)
+├── CITA-Net_TECHNICAL_REPORT.md    # ★ 코드 기반 전체 기술 문서
+└── README.md
+```
+
+> `[동결]` = 기존 동결 데이터(변경 금지). 백마고지 작업은 **새 형제 디렉토리/스크립트로만** 추가했다.
+
+---
+
+## ⚙️ 설치 (Installation)
+
+**64-bit Python**이 필요하다(torch는 32-bit Windows 휠을 제공하지 않음).
 
 ```bash
-# from the repo root
-python -m venv .venv                 # use a 64-bit interpreter (e.g. py -3.11)
-.venv/Scripts/python -m pip install -e .        # Windows
-# .venv/bin/python -m pip install -e .          # POSIX
+# 리포 루트에서
+python -m venv .venv                          # 64-bit 인터프리터 사용 (예: py -3.11)
+.venv/Scripts/python -m pip install -e .       # Windows
+# .venv/bin/python  -m pip install -e .         # POSIX
 ```
 
-Dependencies: `torch`, `numpy`, `PyYAML` (+ `pytest` for tests). No
-`torch-geometric`, no `rdflib`. Everything runs on CPU in minutes.
-
-### Text encoder (offline by default)
-
-`encoder.text_encoder: learned` (default) tokenises `labelText` and learns token
-embeddings with mean-pooling — fully deterministic and **offline**. Optionally
-`encoder.text_encoder: sbert` uses `paraphrase-multilingual-MiniLM`; if it cannot
-be downloaded it **auto-falls-back** to `learned`. For KO/EN military-term
-semantic similarity, SBERT (online) is preferable; the offline default trades
-that for reproducibility and zero network dependency.
-
-## Quickstart
+- **필수 의존성**: `torch`, `numpy`, `PyYAML` (+ 테스트 `pytest`).
+- **선택 의존성**: 결과 그래프/발표자료 산출 시 `matplotlib`, `python-pptx`.
 
 ```bash
-# 1. (re)generate the dataset suite (deterministic, seed-based)
-.venv/Scripts/python scripts/gen_dataset.py --build-suite
-
-# 2. inspect the fixed dev probe -> obs 29, entities A6/B6, match 5 / dangling 2
-.venv/Scripts/python -m citanet.data.inspect scn_0001
-
-# 3. train a stage (cita_lite | cita_g | cita_full)
-.venv/Scripts/python scripts/train.py    --config configs/cita_full.yaml
-# 4. evaluate (entity-level; use the full decoder via predict for M3 output)
-.venv/Scripts/python scripts/evaluate.py --config configs/cita_full.yaml --split dev
-# 5. emit the Part-B output JSON for one scenario (schema-validated)
-.venv/Scripts/python scripts/predict.py  --config configs/cita_full.yaml --scenario scn_0001
-
-# ablations
-.venv/Scripts/python scripts/ablation_m2.py   # relation encoder on/off (id_0003)
-.venv/Scripts/python scripts/ablation_m3.py   # b_motion on/off (impossible transitions)
+.venv/Scripts/python -m pip install matplotlib python-pptx   # 그래프/PPTX 생성용(선택)
 ```
 
-Run the tests:
+---
 
-```bash
-.venv/Scripts/python -m pytest -q
+## 📦 데이터셋 (Datasets)
+
+세 개의 절차적(procedural)·결정론적 suite를 제공한다. **train/dev/test는 분리 시드베이스**로 누수가 없다.
+
+### ★ 백마고지 (Hill 395) — `data/battlefield_hill395_large/`
+
+한국전쟁 백마고지 전투(1952-10-06~15)를 도메인으로 한 **관측형 대형 suite**. 실제 사료(부대 편제·지형·관계 술어·일자별 타임라인)를 **시드**로, 동일 유형 부대를 대량 등장시키고(소부대 분해 → hard negative) 한쪽 정보망만 본 부대는 dangling, 한국어 라벨 패러프레이즈·오식별 노이즈를 주입해 **100만 트리플 규모**로 절차적 확장한다.
+
 ```
-
-## Dataset
-
-`data/battlefield_stkg_dataset/` (generated by `scripts/gen_dataset.py`):
-
-```
-ontology/{classes,states,sources,relations}.yaml, context.jsonld
-scenarios/<scn>/
-  kg_A.jsonld, kg_B.jsonld, commons.jsonld   # canonical STKG input
-  observations.jsonl                          # flattened cache (consistency-checked)
+ontology/{classes,states,sources,relations}.yaml, context.jsonld   # 생성기가 emit
+sectors/sec_{train|dev|test}_####/
+  stkg.nt                # 정규 STKG (N-Triples, 1줄=1트리플)
+  observations.jsonl     # 평탄화 관측 캐시 (학습 fast-path)
   manifest.json
-  labels/{gold_identities,entity_level,observation_level,transition_level,dangling}.json
+  labels/{gold_identities,dangling}.json
 splits/{train,dev,test}.txt
+manifest_global.json
 ```
 
-`scn_0001` is the **fixed dev probe**: 29 observations, 6 entities in A / 6 in B,
-5 matched identities (incl. two T-72s `id_0001` & `id_0003`, the latter a *hard
-positive* whose KG_B side is typed `UNKNOWN`), and 2 dangling entities (ZPU-4 in
-A, MO-120-RT in B). The generator is parameterised (`--seed`, `--scenario-id`,
-`--n-objects`, `--split`) to produce disjoint-seed train/dev/test scenarios that
-preserve this difficulty pattern.
+- **규모**: 1,005,101 트리플 / 75 섹터(train 50 · dev 12 · test 13) / 51,310 관측.
+- **타입(진영-기능)**: ROK/CCF_Infantry, US/ROK_Tank, ROK/US/CCF_Artillery, Mortar, CCF_AA, QuadFifty, Engineer, VehicleColumn, Searchlight, Unit, UNKNOWN (진영을 타입에 내장 → 진영 간 오병합 구조적 차단).
+- **상태(11)**: Moving, Halted, Approaching, Engaging, Occupying, Holding, Emplaced, Firing, Withdrawing, Unknown, Destroyed.
+- **출처(7)**: KG-A(VISUAL_OBS·RADAR·ARTILLERY_OBS) / KG-B(AERIAL·SIGINT·ACOUSTIC·HUMINT).
 
-> **Generalisation caveat.** This is a small synthetic suite. It validates
-> *pipeline correctness* and *ablation behaviour* (e.g. relation encoder recovers
-> the hard positive; `b_motion` suppresses impossible transitions), **not**
-> generalisation to real battlefield data. Reported metrics are real run values
-> from this suite only.
+### 소형 / 대형 suite (참고, 동결)
 
-## Status
+- `data/battlefield_stkg_dataset/` — JSON-LD scenario 기반 소형 suite(파이프라인·ablation 검증용). `scn_0001`은 고정 dev probe(관측 29, A6/B6, 매칭 5, dangling 2).
+- `data/battlefield_stkg_large/` — N-Triples sector 기반 대형 suite(1,001,133 트리플 / 95 섹터).
 
-- **M0 — scaffold & data: complete.** Ontology, deterministic generator
-  (reproduces `scn_0001` exactly + multi-scenario suite), JSON-LD loader with
-  STKG↔cache consistency assertion, `inspect` CLI, blocking, kinematics, tests.
-- **M1 — CITA-lite: complete.** Source-aware encoder (reliability gate),
-  pairwise CTA (soft constraints), pair + dangling heads, `L_pair + L_dangling`
-  training, greedy one-to-one decode with abstain, `evaluate.py` (P/R/F1,
-  Hits@1, MRR, dangling P/R, wrong-merge). On `scn_0001`: all 5 identities
-  matched, two T-72s separated (wrong-merge 0), both danglings abstain.
-- **M2 — CITA-G: complete.** Hand-rolled multi-relation GAT (2-hop, no
-  torch-geometric) + CTA `b_rel`. Added a `Destroyed` state and a controlled
-  *ambiguity* probe family (`scn_amb*`/`scn_eamb*`) where the two T-72s are
-  exchangeable on every non-relational channel, so only the relation separates
-  them. **Ablation (relation encoder on vs off, same data):** id_0003 recovered
-  **9/9 with relations vs 2/9 without** (3 wrong-merge into the lead T-72, 4
-  fragmented); dev F1 1.00 vs 0.79, wrong-merge 0.00 vs 0.11, fragmentation 0.00
-  vs 0.17. Run `python scripts/ablation_m2.py`.
-- **M3 — Full CITA-Net: complete.** Latent identity-trajectory decoder (K
-  slots + ∅, CTA-injected, row-stochastic Sinkhorn assignment), `L_assign`
-  (greedy slot↔gold + CE) + `L_trajectory`, `decode_full` →
-  identities/trajectories/transitions/rationale/dangling, **Part-B output JSON**
-  with an offline schema validator (`predict.py`), and the full metric set
-  (Wrong-Merge, Fragmentation, Trajectory-Consistency, Impossible-Transition).
-  On `scn_0001`: **5 gold identities recovered, two T-72s not merged
-  (wrong-merge 0), both danglings → ∅ abstain, Part-B schema validates.**
-  **b_motion ablation** (`python scripts/ablation_m3.py`): removing b_motion
-  raises the transition probability on kinematically-infeasible pairs ~2.5×
-  (mean 0.16→0.40 dev) and increases the end-to-end Impossible-Transition and
-  Wrong-Merge rates.
-- **Large-scale suite (>= 1M triples): complete.** 1,001,133 triples / 95
-  sectors (train 70 / dev 12 / test 13); grid+time blocking (recall 1.0, ~5x
-  reduction, grid ⊆ brute force); streaming sector loader (eval peak ~20 MB vs a
-  176 MB suite); gold-derived training pairs (no O(M²) lists). cita_full trains
-  to completion and reports dev/test full metrics (F1 ~0.52, precision ~0.80,
-  recall ~0.40 — intentionally **not 1.0**: many same-type objects, mis-IDs,
-  paraphrases, and FOV occlusion make this far harder and more meaningful than
-  the small probe). See *Large-scale suite*.
+---
 
-### Ablation (M3 — b_motion)
-
-`python scripts/ablation_m3.py` trains the full model with and without the CTA
-`b_motion` term. Blocking's reach gate already enforces the same kinematic bound
-as b_motion, so the ablation **relaxes blocking (config only, data unchanged)**
-to let kinematically-impossible pairs — notably any pairing of a towed weapon
-(`v_max=0`) across distance — reach the CTA, where only b_motion can reject
-them. b_motion-off then admits ~2× more impossible transitions.
-
-### Ablation (M2)
-
-`python scripts/ablation_m2.py` trains `cita_g` (relation encoder ON) and
-`cita_g_norel` (OFF) on identical data and prints the id_0003 outcome per probe.
-The two T-72s share type, label, mean path, time distribution, and source
-distribution — only "follows id_0001" vs "near the BMP" differs — so a
-relation-off model can only guess.
-
-## Large-scale suite (>= 1,000,000 triples)
-
-A separate, procedurally-generated suite under `data/battlefield_stkg_large/`
-(its own extended ontology; the frozen small suite is untouched). Each **sector**
-is a 5 km tile with several formations: a tank platoon of many same-type T-72s
-and multiple infantry squads (mass same-type hard negatives), long tracks with
-crossing trajectories, a unit hierarchy (`partOf`/`follows`/`supports`), per-robot
-FOV/occlusion (`dangling_ratio` seen by one robot only), label paraphrases +
-UNKNOWN/mis-ID + per-source type-confidence, Destroyed wrecks and Emplaced towed
-guns. The canonical STKG is **N-Triples** (one triple per line → exact, streamable
-counting); `gold_identities.json` stores only the assignment (no O(M²) pair lists).
+## 🚀 사용법 (Usage)
 
 ```bash
-# generate (deterministic; grows sectors until >= target, records actual total)
-.venv/Scripts/python scripts/gen_dataset_large.py --build-suite --target-triples 1000000
-#   knobs: --n-sectors --identities-per-sector --obs-per-track --dangling-ratio
-#          --n-robots --seed --split
-
-# train (sector-streamed; subsample sectors/epoch by default, or --full-sectors)
-.venv/Scripts/python scripts/train_large.py                 # CPU-friendly
-.venv/Scripts/python scripts/train_large.py --full-sectors  # all train sectors/epoch
+PY=.venv/Scripts/python      # (POSIX는 .venv/bin/python)
 ```
 
-Scale adaptations (so the pipeline doesn't break at size): **grid + time-bucket
-blocking** ([blocking_grid.py](src/citanet/data/blocking_grid.py)) instead of
-per-sector all-pairs (reports candidate count, reduction, and recall);
-**gold-assignment-derived training pairs** + hard negatives instead of stored
-exhaustive pairs; a **streaming sector loader** ([stream.py](src/citanet/data/stream.py))
-that holds one sector in memory at a time; and **sector-batched training** with
-optional subsampling. At the large suite's paraphrase diversity the bag-of-tokens
-text gate is disabled and within-category mis-IDs are blocked by **category**
-(not exact type), so blocking relies on type-category + kinematics with semantics
-deferred to the learned encoder/CTA.
+### 1) 데이터셋 생성 (백마고지)
 
-## Limitations (한계)
+```bash
+$PY scripts/gen_dataset_hill395.py --build-suite           # ~1M 트리플
+#  부분 생성:  --split dev --n-sectors 2
+#  온톨로지만:  --emit-ontology
+#  knobs: --identities-per-sector --obs-per-track --dangling-ratio --n-robots --target-triples --seed
+```
 
-**모든 보고 수치는 통제된 합성(synthetic) suite에 대한 과적합(overfitting) 결과이며,
-일반화(generalization) 성능이 아니다.** 데이터셋은 이 프롬프트의 사양으로부터 직접
-생성한 소규모·결정론적 suite이고, gold 라벨과 STKG가 구성상 일치하도록 만들어졌으며,
-모델은 학습 손실이 사실상 0에 수렴할 만큼 이 suite에 과적합한다. 따라서
-`runs/cita_full/metrics.json`의 P/R/F1·Hits@1/MRR·Wrong-Merge·Fragmentation·
-Trajectory-Consistency·Impossible-Transition·dangling P/R 등 모든 수치는 **파이프라인의
-정확성(correctness)과 ablation 거동(behaviour)** — 관계 인코더가 하드 포지티브를 회복하고,
-`b_motion`이 불가능 전이를 억제한다는 등의 인과적 거동 — 을 검증할 뿐, 실제 전장 데이터에
-대한 일반화 성능을 의미하지 않는다. dev는 체크포인트 선택(검증)에 사용되므로 dev 수치는
-낙관적이며, test 수치가 상대적으로 더 공정한 추정치다. 실제 일반화 평가에는 더 크고
-독립적으로 수집된 데이터, 그리고 다음 작업으로 예정된 noise-robustness 곡선과
-규칙기반·로지스틱 회귀 baseline 비교가 필요하다.
+### 2) 학습 + dev/test 평가
 
-## Assumptions made (documented)
+```bash
+$PY scripts/train_large.py --config configs/cita_full_hill395.yaml --full-sectors --epochs 40
+#  CPU 친화(섹터 서브샘플): --sectors-per-epoch 12  (--full-sectors 생략)
+#  → runs/cita_full_large/metrics.json + Part-B 샘플 출력
+```
 
-- **Blocking semantic gate is bypassed for UNKNOWN-typed observations** — the
-  classifier abstained, so its label text is unreliable; spatiotemporal +
-  relational cues carry such hard positives. Without this, `id_0003` could never
-  be matched.
-- Blocking uses an offline bag-of-tokens text cosine (no trained weights) as a
-  stable pre-filter, independent of the learned encoder.
-- `mgrs` is a deterministic placeholder string (coordinate normalisation is out
-  of scope / assumed done upstream); distances use UTM easting/northing in metres.
+### 3) 결과 추출 · 그래프 · 발표자료
+
+```bash
+$PY scripts/extract_hill395_results.py     # 정량/정성 결과 → hill395_experiment_results/
+$PY scripts/plot_hill395_results.py        # 그래프 PNG → .../figures/
+$PY scripts/make_hill395_deck.py           # 발표자료 → .../CITA-Net_백마고지_발표자료.pptx
+```
+
+### 4) 테스트
+
+```bash
+$PY -m pytest tests/test_hill395_pipeline.py -q   # 백마고지 구조 무결성
+$PY -m pytest -q                                   # 전체(소형/대형 회귀 포함)
+```
+
+### (참고) 소형 suite 파이프라인
+
+```bash
+$PY scripts/gen_dataset.py --build-suite
+$PY scripts/train.py    --config configs/cita_full.yaml
+$PY scripts/evaluate.py --config configs/cita_full.yaml --split dev
+$PY scripts/predict.py  --config configs/cita_full.yaml --scenario scn_0001
+```
+
+---
+
+## 📊 실험 결과 (Results — 백마고지)
+
+Full CITA-Net, 전체 50 train 섹터 × 40 epoch (CPU). 학습 수렴: 총손실 17.63 → **1.63**, best dev-F1 **0.693**.
+
+| 지표 | dev | test |
+|---|---:|---:|
+| **Precision** | 0.871 | **0.895** |
+| **Recall** | 0.548 | 0.561 |
+| **F1** | 0.669 | **0.686** |
+| Wrong-merge rate | 0.132 | 0.121 |
+| Fragmentation rate | 0.730 | 0.685 |
+| Trajectory consistency | 0.757 | 0.754 |
+| Impossible-transition rate | 0.243 | 0.246 |
+| Dangling precision / recall | 0.682 / 0.582 | 0.621 / 0.571 |
+| Streaming peak memory | 16.2 MB | 16.5 MB |
+
+**해석**: 고정밀(P≈0.9)·중회수(R≈0.56) 프로파일. 동일 진영·동일 type 보병 소부대(hard negative)에 오병합이 집중되나 확신도가 낮고(보수적 abstain), 한쪽만 본 부대는 dangling으로 다수 정탐. 그래프·정성 사례는 [`hill395_experiment_results/`](hill395_experiment_results/) 참고.
+
+---
+
+## 🔬 Ablation (소형 suite)
+
+각 구성요소의 기여를 동일 데이터에서 분리 검증할 수 있다(설정 변경만으로). 예시:
+
+```bash
+$PY scripts/ablation_m2.py   # 관계 인코더 on/off — 하드 포지티브(id_0003) 회복 9/9 vs 2/9
+$PY scripts/ablation_m3.py   # b_motion on/off — 불가능 전이 확률 ~2.5× 증가
+```
+
+대형/백마고지 suite에서도 `cta.enabled_terms`(b_motion/b_state/b_rel/b_src)·`graph.enabled`·`encoder.use_source_gate`·`decoder.enabled`를 끄는 설정으로 동일한 ablation을 돌릴 수 있다.
+
+---
+
+## ⚠️ 한계 (Limitations)
+
+**모든 보고 수치는 통제된 합성(synthetic) suite에 대한 결과이며, 실제 전장 데이터에 대한 일반화 성능이 아니다.** 데이터셋은 사양/사료로부터 결정론적으로 생성되었고 gold 라벨과 STKG가 구성상 일치한다. 따라서 지표는 **파이프라인 정확성과 ablation 거동**(관계 인코더가 하드 포지티브를 회복하고 `b_motion`이 불가능 전이를 억제한다는 인과적 거동)을 검증한다. dev는 체크포인트 선택에 쓰이므로 낙관적이며 test가 더 공정하다. 추가로 필요한 것:
+
+- **동일 입력 형식의 기성 경쟁모델이 없으므로**, ① 인접 분야(KG-EA/ER/데이터연관) 모델을 동일 입력·동일 블로킹으로 어댑터 이식한 외부 baseline, ② 내부 ablation, ③ 단순·oracle baseline,
+- 난이도 스윕(dangling 비율·CEP·동일 type 밀도·clock skew) 강건성 곡선, 다중 시드 통계 검정.
+
+---
+
+## 📝 가정 (Documented Assumptions)
+
+- **UNKNOWN 타입 관측은 블로킹 의미 게이트를 우회**한다(분류기가 abstain → 라벨 텍스트 불신; 시공간·관계 단서로 하드 포지티브를 끌고 감).
+- 블로킹은 학습되지 않은 bag-of-tokens 텍스트 코사인을 안정적 사전필터로 사용(대형/백마고지는 텍스트 게이트 off, 카테고리 타입호환 사용).
+- `mgrs`는 결정론적 placeholder(좌표 정규화는 범위 외/상류 처리 가정); 거리는 UTM easting/northing(미터) 사용.
+
+---
+
+## 📂 추가 문서
+
+- **[`CITA-Net_TECHNICAL_REPORT.md`](CITA-Net_TECHNICAL_REPORT.md)** — 코드 기반 전체 기술 문서(구현·데이터셋·수식·실험·재현·결합/주의점·한계).
+- **[`hill395_experiment_results/`](hill395_experiment_results/)** — 정량/정성 결과, 그래프(PNG), 발표자료(PPTX).
