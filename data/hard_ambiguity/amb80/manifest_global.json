@@ -1,0 +1,28 @@
+{
+  "data_root": "data\\hard_ambiguity\\amb80",
+  "domain": "hill395_white_horse_1952",
+  "total_triples": 1949582,
+  "target_triples": 1,
+  "sectors": {
+    "dev": 12,
+    "test": 13,
+    "train": 50
+  },
+  "triples_per_split": {
+    "dev": 310104,
+    "test": 337492,
+    "train": 1301986
+  },
+  "knobs": {
+    "identities_per_sector": 80,
+    "obs_per_track": 10,
+    "dangling_ratio": 0.2,
+    "n_robots": 2
+  },
+  "noise_mult": 1.0,
+  "seed_bases": {
+    "train": 1000000,
+    "dev": 2000000,
+    "test": 3000000
+  }
+}

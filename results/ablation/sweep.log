@@ -1,0 +1,79 @@
+== ablation sweep: 8 variants x 3 seeds = 24 cells; 0 done, 24 to run ==
+   variants: ['m1', 'm2', 'm3_full', 'no_time', 'no_motion', 'no_state', 'no_rel', 'no_src']
+   seeds:    [19521006, 19521007, 19521008]   epochs: 40
+
+[1/24] m1 seed=19521006 -> runs\ablation\m1_seed19521006
+    done in 1490s  dev_f1=0.9829 test_f1=0.9791 test_P=0.9804 test_R=0.9778
+
+[2/24] m1 seed=19521007 -> runs\ablation\m1_seed19521007
+    done in 1432s  dev_f1=0.9756 test_f1=0.9620 test_P=0.9742 test_R=0.9504
+
+[3/24] m1 seed=19521008 -> runs\ablation\m1_seed19521008
+    done in 1468s  dev_f1=0.9780 test_f1=0.9691 test_P=0.9747 test_R=0.9638
+
+[4/24] m2 seed=19521006 -> runs\ablation\m2_seed19521006
+    done in 1457s  dev_f1=0.9754 test_f1=0.9786 test_P=0.9858 test_R=0.9717
+
+[5/24] m2 seed=19521007 -> runs\ablation\m2_seed19521007
+    done in 1345s  dev_f1=0.9761 test_f1=0.9705 test_P=0.9801 test_R=0.9613
+
+[6/24] m2 seed=19521008 -> runs\ablation\m2_seed19521008
+    done in 1330s  dev_f1=0.9898 test_f1=0.9887 test_P=0.9942 test_R=0.9836
+
+[7/24] m3_full seed=19521006 -> runs\ablation\m3_full_seed19521006
+    done in 1358s  dev_f1=0.6880 test_f1=0.6472 test_P=0.8822 test_R=0.5174
+    restored baseline bundle -> runs\cita_full_large
+
+[8/24] m3_full seed=19521007 -> runs\ablation\m3_full_seed19521007
+    done in 1379s  dev_f1=0.7240 test_f1=0.6563 test_P=0.8630 test_R=0.5322
+
+[9/24] m3_full seed=19521008 -> runs\ablation\m3_full_seed19521008
+    done in 1358s  dev_f1=0.6630 test_f1=0.6523 test_P=0.8781 test_R=0.5220
+
+[10/24] no_time seed=19521006 -> runs\ablation\no_time_seed19521006
+    done in 1354s  dev_f1=0.6918 test_f1=0.6778 test_P=0.8968 test_R=0.5473
+
+[11/24] no_time seed=19521007 -> runs\ablation\no_time_seed19521007
+    done in 1355s  dev_f1=0.7126 test_f1=0.7153 test_P=0.8892 test_R=0.6026
+
+[12/24] no_time seed=19521008 -> runs\ablation\no_time_seed19521008
+    done in 1354s  dev_f1=0.7186 test_f1=0.7000 test_P=0.8598 test_R=0.5925
+
+[13/24] no_motion seed=19521006 -> runs\ablation\no_motion_seed19521006
+    done in 1356s  dev_f1=0.7436 test_f1=0.7263 test_P=0.8836 test_R=0.6207
+
+[14/24] no_motion seed=19521007 -> runs\ablation\no_motion_seed19521007
+    done in 1355s  dev_f1=0.6637 test_f1=0.6796 test_P=0.8453 test_R=0.5713
+
+[15/24] no_motion seed=19521008 -> runs\ablation\no_motion_seed19521008
+    done in 1369s  dev_f1=0.6374 test_f1=0.7042 test_P=0.8944 test_R=0.5861
+
+[16/24] no_state seed=19521006 -> runs\ablation\no_state_seed19521006
+    done in 1356s  dev_f1=0.6513 test_f1=0.6971 test_P=0.8671 test_R=0.5849
+
+[17/24] no_state seed=19521007 -> runs\ablation\no_state_seed19521007
+    done in 1358s  dev_f1=0.6737 test_f1=0.6569 test_P=0.8578 test_R=0.5368
+
+[18/24] no_state seed=19521008 -> runs\ablation\no_state_seed19521008
+    done in 1358s  dev_f1=0.6636 test_f1=0.6766 test_P=0.8880 test_R=0.5511
+
+[19/24] no_rel seed=19521006 -> runs\ablation\no_rel_seed19521006
+    done in 1378s  dev_f1=0.6587 test_f1=0.7244 test_P=0.9304 test_R=0.5954
+
+[20/24] no_rel seed=19521007 -> runs\ablation\no_rel_seed19521007
+    done in 1358s  dev_f1=0.6668 test_f1=0.6584 test_P=0.8343 test_R=0.5470
+
+[21/24] no_rel seed=19521008 -> runs\ablation\no_rel_seed19521008
+    done in 1354s  dev_f1=0.6707 test_f1=0.6613 test_P=0.8702 test_R=0.5377
+
+[22/24] no_src seed=19521006 -> runs\ablation\no_src_seed19521006
+    done in 1352s  dev_f1=0.6946 test_f1=0.6737 test_P=0.8671 test_R=0.5556
+
+[23/24] no_src seed=19521007 -> runs\ablation\no_src_seed19521007
+    done in 1360s  dev_f1=0.7011 test_f1=0.7023 test_P=0.8954 test_R=0.5810
+
+[24/24] no_src seed=19521008 -> runs\ablation\no_src_seed19521008
+    done in 1353s  dev_f1=0.7440 test_f1=0.6838 test_P=0.8594 test_R=0.5724
+
+== sweep complete: 24 runs; results -> results\ablation\results.jsonl ==
+   next: python scripts/summarize_ablation.py

@@ -51,7 +51,12 @@ class CITANet(nn.Module):
             # n_relations must match the edge-type buckets featurize emits
             self.graph = RelationContextGNN(d, n_relations=len(REL_NAMES), cfg=cfg)
 
-        self.cta = CTA(n_sources=len(fs.sources), cfg=cfg, state_eps=ontology.state_eps)
+        if getattr(cfg.cta, "use_term_gating", False):
+            from .cta_gated import GatedCTA
+            self.cta = GatedCTA(n_sources=len(fs.sources), cfg=cfg,
+                                state_eps=ontology.state_eps)
+        else:
+            self.cta = CTA(n_sources=len(fs.sources), cfg=cfg, state_eps=ontology.state_eps)
         self.pair_head = PairHead(d)
         self.dangling_head = DanglingHead(d)
 

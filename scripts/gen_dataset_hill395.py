@@ -41,6 +41,10 @@ import numpy as np
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = REPO_ROOT / "data" / "battlefield_hill395_large"
 ONTOLOGY_DIR = DATA_ROOT / "ontology"
+# Difficulty knob (robustness sweep): multiplies BOTH the injected position error
+# AND the reported cep_m, keeping the data self-consistent so blocking reach grows
+# with the noise. 1.0 = the frozen baseline. Overridden by main() via --noise-mult.
+NOISE_MULT = 1.0
 
 # Battle of White Horse opened 1952-10-06 19:00; use the day as the epoch.
 EPOCH = datetime(1952, 10, 6, 0, 0, 0, tzinfo=timezone.utc)
@@ -499,7 +503,9 @@ def realise_sector(sector_id, objs, units, rng):
                 oc[0] += 1
                 oid = f"obs_{kg}_{oc[0]:05d}"
                 src = tr.sources[i % len(tr.sources)]
-                cep = SOURCE_CEP.get(src, 50.0)
+                # NOISE_MULT scales the actual position error AND the reported cep_m
+                # together (robustness sweep); 1.0 = frozen baseline.
+                cep = SOURCE_CEP.get(src, 50.0) * NOISE_MULT
                 t_obs = tt + KG_CLOCK_OFFSET.get(kg, 0.0) + float(rng.normal(0, 1.0))
                 e_t, n_t = o.pos(tt)
                 sig = cep / 1.1774
@@ -900,6 +906,7 @@ def build_suite(target_triples: Optional[int], knobs: Knobs) -> None:
         "sectors": {s: len(ids) for s, ids in splits.items()},
         "triples_per_split": totals,
         "knobs": vars(knobs),
+        "noise_mult": NOISE_MULT,
         "seed_bases": SEED_BASE,
     }
     (DATA_ROOT / "manifest_global.json").write_text(
@@ -921,7 +928,27 @@ def main() -> None:
     ap.add_argument("--n-robots", type=int, default=2)
     ap.add_argument("--target-triples", type=int, default=None)
     ap.add_argument("--seed", type=int, default=None)
+    ap.add_argument("--noise-mult", type=float, default=1.0,
+                    help="scale injected position error AND reported cep_m (1.0=baseline)")
+    ap.add_argument("--out-root", default=None,
+                    help="output data root (default data/battlefield_hill395_large). "
+                         "REQUIRED to build a non-frozen suite elsewhere.")
+    ap.add_argument("--force", action="store_true",
+                    help="allow --build-suite to write into an existing non-empty dir")
     args = ap.parse_args()
+
+    global DATA_ROOT, ONTOLOGY_DIR, NOISE_MULT
+    NOISE_MULT = args.noise_mult
+    if args.out_root is not None:
+        # resolve to absolute: build_suite does DATA_ROOT.relative_to(REPO_ROOT)
+        DATA_ROOT = Path(args.out_root).resolve()
+        ONTOLOGY_DIR = DATA_ROOT / "ontology"
+
+    # Safety guard: never silently overwrite an existing (e.g. the frozen) suite.
+    if args.build_suite and DATA_ROOT.exists() and any(DATA_ROOT.iterdir()) and not args.force:
+        raise SystemExit(
+            f"refusing to --build-suite into existing non-empty dir {DATA_ROOT} "
+            f"without --force (protects the frozen suite; pass --out-root for a new dir)")
 
     knobs = Knobs(identities_per_sector=args.identities_per_sector,
                   obs_per_track=args.obs_per_track,

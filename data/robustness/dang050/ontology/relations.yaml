@@ -1,0 +1,56 @@
+# Relation predicates for the Hill 395 STKG: the 9 base CITA-Net edges +
+# 3 battle-specific predicates (occupies/withdrawsFrom/reinforces) that the
+# 78 source Korean verbs map onto. `event` marks participation links.
+
+partOf:
+  symmetric: false
+  description: Entity is a sub-unit / component of another entity
+
+follows:
+  symmetric: false
+  description: Entity trails another entity (column order)
+
+near:
+  symmetric: true
+  description: Entities are spatially proximate
+
+firesAt:
+  symmetric: false
+  description: Entity engages another entity / location by fire
+
+engagedWith:
+  symmetric: true
+  description: Two entities are in mutual engagement
+
+emplacedAt:
+  symmetric: false
+  description: Entity is dug-in / positioned at a landmark
+
+movesToward:
+  symmetric: false
+  description: Entity moves toward another entity / landmark
+
+supports:
+  symmetric: false
+  description: Entity provides fire / logistic support to another
+
+screens:
+  symmetric: false
+  description: Entity screens / covers a flank or advance
+
+occupies:
+  symmetric: false
+  description: Entity takes / holds control of a position (점령)
+
+withdrawsFrom:
+  symmetric: false
+  description: Entity pulls back from a position (철수)
+
+reinforces:
+  symmetric: false
+  description: Entity reinforces / augments another unit (증원)
+
+participatesIn:
+  symmetric: false
+  event: true
+  description: Entity takes part in an event (with a role)

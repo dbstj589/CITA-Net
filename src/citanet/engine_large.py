@@ -17,9 +17,9 @@ import numpy as np
 import torch
 
 from .config import Config
-from .decode import decode_full
+from .decode import decode_entities, decode_full
 from .engine import build_model
-from .eval import aggregate, evaluate_full
+from .eval import aggregate, evaluate_decode, evaluate_full
 from .losses import total_loss
 from .model.citanet import CITANet
 from .model.featurize import FeatureSpace
@@ -59,7 +59,14 @@ def evaluate_large(cfg: Config, model: CITANet, fs, ontology, split: str,
     for sid in ids:                       # streaming: one sector at a time
         feats = featurize_sector(_sector_dir(cfg, sid), fs, ontology, cfg)
         out = model(feats)
-        m = evaluate_full(decode_full(out, feats, ontology), feats, _sector_dir(cfg, sid))
+        sd = _sector_dir(cfg, sid)
+        # Decoder-aware: the Sinkhorn full decode requires the M3 decoder; the
+        # M1/M2 ablations (decoder off) fall back to the greedy entity decode.
+        # When the decoder is on this is byte-identical to the prior path.
+        if out.assign is not None:
+            m = evaluate_full(decode_full(out, feats, ontology), feats, sd)
+        else:
+            m = evaluate_decode(decode_entities(out, feats), sd)
         m["scenario_id"] = sid
         per.append(m)
         del feats, out

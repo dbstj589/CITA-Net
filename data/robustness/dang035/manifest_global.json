@@ -1,0 +1,28 @@
+{
+  "data_root": "data\\robustness\\dang035",
+  "domain": "hill395_white_horse_1952",
+  "total_triples": 1001699,
+  "target_triples": 1000000,
+  "sectors": {
+    "dev": 12,
+    "test": 13,
+    "train": 56
+  },
+  "triples_per_split": {
+    "dev": 147136,
+    "test": 162214,
+    "train": 692349
+  },
+  "knobs": {
+    "identities_per_sector": 40,
+    "obs_per_track": 10,
+    "dangling_ratio": 0.35,
+    "n_robots": 2
+  },
+  "noise_mult": 1.0,
+  "seed_bases": {
+    "train": 1000000,
+    "dev": 2000000,
+    "test": 3000000
+  }
+}

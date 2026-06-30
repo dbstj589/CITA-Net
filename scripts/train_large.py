@@ -29,7 +29,7 @@ from citanet.output_schema import validate_output
 from citanet.serialize import build_part_b
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RUN_DIR = REPO_ROOT / "runs" / "cita_full_large"
+DEFAULT_RUN_DIR = REPO_ROOT / "runs" / "cita_full_large"
 TABLE = ["precision", "recall", "f1", "wrong_merge_rate", "fragmentation_rate",
          "trajectory_consistency_rate", "impossible_transition_rate",
          "dangling_precision", "dangling_recall"]
@@ -42,18 +42,34 @@ def main() -> None:
     ap.add_argument("--full-sectors", action="store_true")
     ap.add_argument("--epochs", type=int, default=None)
     ap.add_argument("--eval-sectors", type=int, default=None, help="cap eval sectors")
+    ap.add_argument("--seed", type=int, default=None,
+                    help="override config seed (controls init + sector shuffle order)")
+    ap.add_argument("--run-dir", default=None,
+                    help="output dir for model bundle, metrics.json, Part-B sample "
+                         "(default runs/cita_full_large)")
+    ap.add_argument("--data-root", default=None,
+                    help="override cfg.data_root (e.g. a robustness difficulty suite)")
+    ap.add_argument("--ontology-dir", default=None,
+                    help="override cfg.ontology_dir (defaults alongside --data-root suite)")
     args = ap.parse_args()
 
     cfg = load_config(args.config)
     if args.epochs is not None:
         cfg.train.epochs = args.epochs
+    if args.seed is not None:
+        cfg.seed = args.seed
+    if args.data_root is not None:
+        cfg.data_root = args.data_root
+    if args.ontology_dir is not None:
+        cfg.ontology_dir = args.ontology_dir
+    run_dir = Path(args.run_dir) if args.run_dir else DEFAULT_RUN_DIR
 
     print(f"== training {cfg.stage}  (full_sectors={args.full_sectors}, "
           f"sectors/epoch={'all' if args.full_sectors else args.sectors_per_epoch}, "
           f"epochs={cfg.train.epochs}) ==")
     bundle = train_large(cfg, sectors_per_epoch=args.sectors_per_epoch,
                          full_sectors=args.full_sectors)
-    save_large_bundle(bundle, RUN_DIR)
+    save_large_bundle(bundle, run_dir)
 
     # streaming evaluation with peak-memory measurement
     results = {}
@@ -66,8 +82,8 @@ def main() -> None:
         agg["streaming_peak_mb"] = round(peak / 1e6, 2)
         results[split] = {"aggregate": agg, "per_scenario": per}
 
-    RUN_DIR.mkdir(parents=True, exist_ok=True)
-    (RUN_DIR / "metrics.json").write_text(json.dumps(results, ensure_ascii=False, indent=2),
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "metrics.json").write_text(json.dumps(results, ensure_ascii=False, indent=2),
                                           encoding="utf-8")
 
     print("\n" + "=" * 70)
@@ -75,22 +91,30 @@ def main() -> None:
     print("=" * 70)
     print(f"  {'metric':30} {'dev':>10} {'test':>10}")
     for k in TABLE:
-        print(f"  {k:30} {results['dev']['aggregate'][k]:>10.4f} "
-              f"{results['test']['aggregate'][k]:>10.4f}")
+        dv, tv = results['dev']['aggregate'].get(k), results['test']['aggregate'].get(k)
+        # M1/M2 (greedy decode, no trajectory) legitimately lack the trajectory
+        # metrics -> print n/a rather than KeyError.
+        ds = f"{dv:>10.4f}" if isinstance(dv, (int, float)) else f"{'n/a':>10}"
+        ts = f"{tv:>10.4f}" if isinstance(tv, (int, float)) else f"{'n/a':>10}"
+        print(f"  {k:30} {ds} {ts}")
     print(f"  {'streaming_peak_mb':30} {results['dev']['aggregate']['streaming_peak_mb']:>10.2f} "
           f"{results['test']['aggregate']['streaming_peak_mb']:>10.2f}")
 
-    # Part-B sample for one dev sector
-    sid = read_split(cfg.data_root, "dev")[0]
-    feats = featurize_sector(Path(cfg.data_root) / "sectors" / sid, bundle.fs, bundle.ontology, cfg)
-    with torch.no_grad():
-        out = bundle.model(feats)
-    doc = build_part_b(sid, cfg, decode_full(out, feats, bundle.ontology), feats)
-    validate_output(doc)
-    (RUN_DIR / f"output_{sid}.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2),
-                                                encoding="utf-8")
-    print(f"\nPart-B sample ({sid}): identities={doc['stats']['n_identities']} "
-          f"dangling={doc['stats']['n_dangling']} (schema OK) -> runs/cita_full_large/output_{sid}.json")
+    # Part-B sample for one dev sector. The serialized Part-B trajectory output is
+    # an M3 product (Sinkhorn decode); skip it cleanly when the decoder is off.
+    if bundle.model.decoder is not None:
+        sid = read_split(cfg.data_root, "dev")[0]
+        feats = featurize_sector(Path(cfg.data_root) / "sectors" / sid, bundle.fs, bundle.ontology, cfg)
+        with torch.no_grad():
+            out = bundle.model(feats)
+        doc = build_part_b(sid, cfg, decode_full(out, feats, bundle.ontology), feats)
+        validate_output(doc)
+        (run_dir / f"output_{sid}.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2),
+                                                    encoding="utf-8")
+        print(f"\nPart-B sample ({sid}): identities={doc['stats']['n_identities']} "
+              f"dangling={doc['stats']['n_dangling']} (schema OK) -> {run_dir / f'output_{sid}.json'}")
+    else:
+        print("\nPart-B sample skipped (no M3 decoder in this ablation variant).")
 
 
 if __name__ == "__main__":

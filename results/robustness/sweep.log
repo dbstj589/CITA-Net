@@ -1,0 +1,115 @@
+== robustness sweep: 4 datasets x 3 variants x 3 seeds = 36 cells; 0 done, 36 to run ==
+   datasets: ['noise2x', 'noise4x', 'dang035', 'dang050']
+   variants: ['m3_full', 'no_motion', 'no_time']
+   seeds: [19521006, 19521007, 19521008]  epochs: 40
+
+[1/36] noise2x / m3_full / seed=19521006 -> runs\robustness\noise2x_m3_full_seed19521006
+    done in 1714s  dev_f1=0.6685 test_f1=0.6709 test_R=0.5610 impossible=0.24695159929580676
+
+[2/36] noise2x / m3_full / seed=19521007 -> runs\robustness\noise2x_m3_full_seed19521007
+    done in 1676s  dev_f1=0.6559 test_f1=0.6574 test_R=0.5396 impossible=0.2521322782339514
+
+[3/36] noise2x / m3_full / seed=19521008 -> runs\robustness\noise2x_m3_full_seed19521008
+    done in 1662s  dev_f1=0.6405 test_f1=0.6332 test_R=0.5077 impossible=0.2411472233236768
+
+[4/36] noise2x / no_motion / seed=19521006 -> runs\robustness\noise2x_no_motion_seed19521006
+    done in 1658s  dev_f1=0.6102 test_f1=0.6122 test_R=0.4918 impossible=0.26072523469847114
+
+[5/36] noise2x / no_motion / seed=19521007 -> runs\robustness\noise2x_no_motion_seed19521007
+    done in 1679s  dev_f1=0.6293 test_f1=0.6183 test_R=0.4869 impossible=0.23018950022445306
+
+[6/36] noise2x / no_motion / seed=19521008 -> runs\robustness\noise2x_no_motion_seed19521008
+    done in 1693s  dev_f1=0.6279 test_f1=0.6054 test_R=0.4687 impossible=0.23305379171640664
+
+[7/36] noise2x / no_time / seed=19521006 -> runs\robustness\noise2x_no_time_seed19521006
+    done in 1699s  dev_f1=0.5888 test_f1=0.5622 test_R=0.4317 impossible=0.2291223344743722
+
+[8/36] noise2x / no_time / seed=19521007 -> runs\robustness\noise2x_no_time_seed19521007
+    done in 1636s  dev_f1=0.6727 test_f1=0.6363 test_R=0.5239 impossible=0.23645434730494738
+
+[9/36] noise2x / no_time / seed=19521008 -> runs\robustness\noise2x_no_time_seed19521008
+    done in 1730s  dev_f1=0.6145 test_f1=0.6295 test_R=0.5157 impossible=0.2580229037560788
+
+[10/36] noise4x / m3_full / seed=19521006 -> runs\robustness\noise4x_m3_full_seed19521006
+    done in 2089s  dev_f1=0.5206 test_f1=0.5116 test_R=0.4092 impossible=0.28127485216058645
+
+[11/36] noise4x / m3_full / seed=19521007 -> runs\robustness\noise4x_m3_full_seed19521007
+    done in 2145s  dev_f1=0.6254 test_f1=0.5914 test_R=0.4650 impossible=0.24575083947411486
+
+[12/36] noise4x / m3_full / seed=19521008 -> runs\robustness\noise4x_m3_full_seed19521008
+    done in 2142s  dev_f1=0.5557 test_f1=0.5989 test_R=0.4803 impossible=0.27297183113708934
+
+[13/36] noise4x / no_motion / seed=19521006 -> runs\robustness\noise4x_no_motion_seed19521006
+    done in 2141s  dev_f1=0.5758 test_f1=0.5542 test_R=0.4431 impossible=0.25957040626271244
+
+[14/36] noise4x / no_motion / seed=19521007 -> runs\robustness\noise4x_no_motion_seed19521007
+    done in 2145s  dev_f1=0.5252 test_f1=0.5616 test_R=0.4420 impossible=0.2503007350580443
+
+[15/36] noise4x / no_motion / seed=19521008 -> runs\robustness\noise4x_no_motion_seed19521008
+    done in 2200s  dev_f1=0.5895 test_f1=0.5840 test_R=0.4734 impossible=0.252217425612415
+
+[16/36] noise4x / no_time / seed=19521006 -> runs\robustness\noise4x_no_time_seed19521006
+    done in 2178s  dev_f1=0.5757 test_f1=0.5775 test_R=0.4495 impossible=0.23965661314882689
+
+[17/36] noise4x / no_time / seed=19521007 -> runs\robustness\noise4x_no_time_seed19521007
+    done in 2038s  dev_f1=0.5547 test_f1=0.5151 test_R=0.3908 impossible=0.24815721869207824
+
+[18/36] noise4x / no_time / seed=19521008 -> runs\robustness\noise4x_no_time_seed19521008
+    done in 1943s  dev_f1=0.5488 test_f1=0.5740 test_R=0.4646 impossible=0.27280412632215784
+
+[19/36] dang035 / m3_full / seed=19521006 -> runs\robustness\dang035_m3_full_seed19521006
+    done in 1282s  dev_f1=0.3213 test_f1=0.2476 test_R=0.1467 impossible=0.1414512816329965
+
+[20/36] dang035 / m3_full / seed=19521007 -> runs\robustness\dang035_m3_full_seed19521007
+    done in 1283s  dev_f1=0.4340 test_f1=0.3805 test_R=0.2596 impossible=0.27986178963254643
+
+[21/36] dang035 / m3_full / seed=19521008 -> runs\robustness\dang035_m3_full_seed19521008
+    done in 1279s  dev_f1=0.5375 test_f1=0.4512 test_R=0.3153 impossible=0.2232518694011956
+
+[22/36] dang035 / no_motion / seed=19521006 -> runs\robustness\dang035_no_motion_seed19521006
+    done in 1285s  dev_f1=0.3315 test_f1=0.2880 test_R=0.1769 impossible=0.17058144788389354
+
+[23/36] dang035 / no_motion / seed=19521007 -> runs\robustness\dang035_no_motion_seed19521007
+    done in 1285s  dev_f1=0.3541 test_f1=0.3645 test_R=0.2363 impossible=0.19119041612110696
+
+[24/36] dang035 / no_motion / seed=19521008 -> runs\robustness\dang035_no_motion_seed19521008
+    done in 1285s  dev_f1=0.4948 test_f1=0.4290 test_R=0.3025 impossible=0.23327527952163105
+
+[25/36] dang035 / no_time / seed=19521006 -> runs\robustness\dang035_no_time_seed19521006
+    done in 1301s  dev_f1=0.2837 test_f1=0.2232 test_R=0.1304 impossible=0.1291173258059179
+
+[26/36] dang035 / no_time / seed=19521007 -> runs\robustness\dang035_no_time_seed19521007
+    done in 1281s  dev_f1=0.3210 test_f1=0.2824 test_R=0.1721 impossible=0.14683064200615947
+
+[27/36] dang035 / no_time / seed=19521008 -> runs\robustness\dang035_no_time_seed19521008
+    done in 1291s  dev_f1=0.5001 test_f1=0.4504 test_R=0.3170 impossible=0.24147505086138207
+
+[28/36] dang050 / m3_full / seed=19521006 -> runs\robustness\dang050_m3_full_seed19521006
+    done in 1194s  dev_f1=0.0349 test_f1=0.0077 test_R=0.0040 impossible=0.11785874943769681
+
+[29/36] dang050 / m3_full / seed=19521007 -> runs\robustness\dang050_m3_full_seed19521007
+    done in 1194s  dev_f1=0.0299 test_f1=0.0158 test_R=0.0083 impossible=0.2541085041085041
+
+[30/36] dang050 / m3_full / seed=19521008 -> runs\robustness\dang050_m3_full_seed19521008
+    done in 1193s  dev_f1=0.0098 test_f1=0.0103 test_R=0.0055 impossible=0.13692886061307113
+
+[31/36] dang050 / no_motion / seed=19521006 -> runs\robustness\dang050_no_motion_seed19521006
+    done in 1192s  dev_f1=0.0543 test_f1=0.0368 test_R=0.0205 impossible=0.156798233972147
+
+[32/36] dang050 / no_motion / seed=19521007 -> runs\robustness\dang050_no_motion_seed19521007
+    done in 1191s  dev_f1=0.1333 test_f1=0.1452 test_R=0.0831 impossible=0.1312353498931578
+
+[33/36] dang050 / no_motion / seed=19521008 -> runs\robustness\dang050_no_motion_seed19521008
+    done in 1195s  dev_f1=0.1097 test_f1=0.0700 test_R=0.0379 impossible=0.18073687887947473
+
+[34/36] dang050 / no_time / seed=19521006 -> runs\robustness\dang050_no_time_seed19521006
+    done in 1188s  dev_f1=0.0388 test_f1=0.0000 test_R=0.0000 impossible=0.24363634889950678
+
+[35/36] dang050 / no_time / seed=19521007 -> runs\robustness\dang050_no_time_seed19521007
+    done in 1195s  dev_f1=0.0088 test_f1=0.0000 test_R=0.0000 impossible=0.08974358974358973
+
+[36/36] dang050 / no_time / seed=19521008 -> runs\robustness\dang050_no_time_seed19521008
+    done in 1195s  dev_f1=0.1061 test_f1=0.1457 test_R=0.0840 impossible=0.17494683835882327
+
+== robustness sweep complete: 36 runs; results -> results\robustness\results.jsonl ==
+   next: python scripts/summarize_robustness.py

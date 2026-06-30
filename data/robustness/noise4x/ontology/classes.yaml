@@ -1,0 +1,109 @@
+# Hill 395 object-type taxonomy (faction-functional). Faction is baked
+# into the type so cross-faction merges are structurally avoided; same
+# category across factions yields hard negatives. v_max is state-
+# conditioned; towed weapons / org nodes self-propel at 0.
+
+UNKNOWN:
+  category: unknown
+  mobility: unknown
+  default_state: Unknown
+  default_v_max_mps: 25.0
+  v_max_mps: {Moving: 25.0, Halted: 0.5, Approaching: 25.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 25.0, Unknown: 25.0, Destroyed: 25.0}
+
+Unit:
+  category: formation
+  mobility: na
+  default_state: Unknown
+  default_v_max_mps: 0.0
+  v_max_mps: {Moving: 0.0, Halted: 0.0, Approaching: 0.0, Engaging: 0.0, Occupying: 0.0, Holding: 0.0, Emplaced: 0.0, Firing: 0.0, Withdrawing: 0.0, Unknown: 0.0, Destroyed: 0.0}
+
+ROK_Infantry:
+  category: infantry
+  mobility: foot
+  default_state: Holding
+  default_v_max_mps: 2.0
+  v_max_mps: {Moving: 2.0, Halted: 0.5, Approaching: 2.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 2.0, Unknown: 2.0, Destroyed: 2.0}
+
+CCF_Infantry:
+  category: infantry
+  mobility: foot
+  default_state: Approaching
+  default_v_max_mps: 2.0
+  v_max_mps: {Moving: 2.0, Halted: 0.5, Approaching: 2.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 2.0, Unknown: 2.0, Destroyed: 2.0}
+
+US_Tank:
+  category: tank
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 12.0
+  v_max_mps: {Moving: 12.0, Halted: 0.5, Approaching: 12.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 12.0, Unknown: 12.0, Destroyed: 12.0}
+
+ROK_Tank:
+  category: tank
+  mobility: tracked
+  default_state: Moving
+  default_v_max_mps: 11.0
+  v_max_mps: {Moving: 11.0, Halted: 0.5, Approaching: 11.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 11.0, Unknown: 11.0, Destroyed: 11.0}
+
+ROK_Artillery:
+  category: artillery
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Moving: 0.0, Halted: 0.0, Approaching: 0.0, Engaging: 0.0, Occupying: 0.0, Holding: 0.0, Emplaced: 0.0, Firing: 0.0, Withdrawing: 0.0, Unknown: 0.0, Destroyed: 0.0}
+
+US_Artillery:
+  category: artillery
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Moving: 0.0, Halted: 0.0, Approaching: 0.0, Engaging: 0.0, Occupying: 0.0, Holding: 0.0, Emplaced: 0.0, Firing: 0.0, Withdrawing: 0.0, Unknown: 0.0, Destroyed: 0.0}
+
+CCF_Artillery:
+  category: artillery
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Moving: 0.0, Halted: 0.0, Approaching: 0.0, Engaging: 0.0, Occupying: 0.0, Holding: 0.0, Emplaced: 0.0, Firing: 0.0, Withdrawing: 0.0, Unknown: 0.0, Destroyed: 0.0}
+
+Mortar:
+  category: mortar
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Moving: 0.0, Halted: 0.0, Approaching: 0.0, Engaging: 0.0, Occupying: 0.0, Holding: 0.0, Emplaced: 0.0, Firing: 0.0, Withdrawing: 0.0, Unknown: 0.0, Destroyed: 0.0}
+
+CCF_AA:
+  category: aa
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Moving: 0.0, Halted: 0.0, Approaching: 0.0, Engaging: 0.0, Occupying: 0.0, Holding: 0.0, Emplaced: 0.0, Firing: 0.0, Withdrawing: 0.0, Unknown: 0.0, Destroyed: 0.0}
+
+QuadFifty:
+  category: aa
+  mobility: wheeled
+  default_state: Halted
+  default_v_max_mps: 6.0
+  v_max_mps: {Moving: 6.0, Halted: 0.5, Approaching: 6.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 6.0, Unknown: 6.0, Destroyed: 6.0}
+
+Engineer:
+  category: engineer
+  mobility: foot
+  default_state: Moving
+  default_v_max_mps: 2.0
+  v_max_mps: {Moving: 2.0, Halted: 0.5, Approaching: 2.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 2.0, Unknown: 2.0, Destroyed: 2.0}
+
+VehicleColumn:
+  category: vehicle
+  mobility: wheeled
+  default_state: Moving
+  default_v_max_mps: 14.0
+  v_max_mps: {Moving: 14.0, Halted: 0.5, Approaching: 14.0, Engaging: 2.0, Occupying: 0.5, Holding: 0.5, Emplaced: 0.5, Firing: 0.5, Withdrawing: 14.0, Unknown: 14.0, Destroyed: 14.0}
+
+Searchlight:
+  category: support
+  mobility: towed
+  default_state: Emplaced
+  default_v_max_mps: 0.0
+  v_max_mps: {Moving: 0.0, Halted: 0.0, Approaching: 0.0, Engaging: 0.0, Occupying: 0.0, Holding: 0.0, Emplaced: 0.0, Firing: 0.0, Withdrawing: 0.0, Unknown: 0.0, Destroyed: 0.0}

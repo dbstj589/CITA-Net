@@ -1,0 +1,52 @@
+# Hill 395 observation states + pairwise co-reference compatibility C
+# (b_state = gamma * log(C[s_i, s_j] + eps)). Asymmetric: e.g.
+# Withdrawing->Occupying is implausible for the same object; Destroyed->
+# {active} ~ 0. Per-type overrides push towed Emplaced->Moving very low.
+
+states:
+  - Moving
+  - Halted
+  - Approaching
+  - Engaging
+  - Occupying
+  - Holding
+  - Emplaced
+  - Firing
+  - Withdrawing
+  - Unknown
+  - Destroyed
+
+compatibility:
+  Moving: {Moving: 1.0, Halted: 0.85, Approaching: 0.85, Engaging: 0.85, Occupying: 0.85, Holding: 0.85, Emplaced: 0.85, Firing: 0.85, Withdrawing: 0.85, Unknown: 0.8, Destroyed: 0.6}
+  Halted: {Moving: 0.85, Halted: 1.0, Approaching: 0.85, Engaging: 0.85, Occupying: 0.85, Holding: 0.85, Emplaced: 0.85, Firing: 0.85, Withdrawing: 0.85, Unknown: 0.8, Destroyed: 0.6}
+  Approaching: {Moving: 0.85, Halted: 0.85, Approaching: 1.0, Engaging: 0.85, Occupying: 0.85, Holding: 0.85, Emplaced: 0.85, Firing: 0.85, Withdrawing: 0.85, Unknown: 0.8, Destroyed: 0.6}
+  Engaging: {Moving: 0.85, Halted: 0.85, Approaching: 0.85, Engaging: 1.0, Occupying: 0.85, Holding: 0.85, Emplaced: 0.85, Firing: 0.85, Withdrawing: 0.85, Unknown: 0.8, Destroyed: 0.6}
+  Occupying: {Moving: 0.85, Halted: 0.85, Approaching: 0.4, Engaging: 0.85, Occupying: 1.0, Holding: 0.85, Emplaced: 0.85, Firing: 0.85, Withdrawing: 0.85, Unknown: 0.8, Destroyed: 0.6}
+  Holding: {Moving: 0.85, Halted: 0.85, Approaching: 0.85, Engaging: 0.85, Occupying: 0.85, Holding: 1.0, Emplaced: 0.85, Firing: 0.85, Withdrawing: 0.85, Unknown: 0.8, Destroyed: 0.6}
+  Emplaced: {Moving: 0.3, Halted: 0.85, Approaching: 0.3, Engaging: 0.85, Occupying: 0.85, Holding: 0.85, Emplaced: 1.0, Firing: 0.85, Withdrawing: 0.4, Unknown: 0.8, Destroyed: 0.6}
+  Firing: {Moving: 0.4, Halted: 0.85, Approaching: 0.4, Engaging: 0.85, Occupying: 0.85, Holding: 0.85, Emplaced: 0.85, Firing: 1.0, Withdrawing: 0.85, Unknown: 0.8, Destroyed: 0.6}
+  Withdrawing: {Moving: 0.85, Halted: 0.85, Approaching: 0.3, Engaging: 0.85, Occupying: 0.2, Holding: 0.25, Emplaced: 0.85, Firing: 0.85, Withdrawing: 1.0, Unknown: 0.8, Destroyed: 0.6}
+  Unknown: {Moving: 0.8, Halted: 0.8, Approaching: 0.8, Engaging: 0.8, Occupying: 0.8, Holding: 0.8, Emplaced: 0.8, Firing: 0.8, Withdrawing: 0.8, Unknown: 1.0, Destroyed: 0.6}
+  Destroyed: {Moving: 0.01, Halted: 0.01, Approaching: 0.01, Engaging: 0.01, Occupying: 0.01, Holding: 0.01, Emplaced: 0.01, Firing: 0.01, Withdrawing: 0.01, Unknown: 0.3, Destroyed: 1.0}
+
+overrides:
+  ROK_Artillery:
+    Emplaced: {Moving: 0.02, Approaching: 0.02}
+    Firing: {Moving: 0.02, Approaching: 0.02}
+  US_Artillery:
+    Emplaced: {Moving: 0.02, Approaching: 0.02}
+    Firing: {Moving: 0.02, Approaching: 0.02}
+  CCF_Artillery:
+    Emplaced: {Moving: 0.02, Approaching: 0.02}
+    Firing: {Moving: 0.02, Approaching: 0.02}
+  Mortar:
+    Emplaced: {Moving: 0.02, Approaching: 0.02}
+    Firing: {Moving: 0.02, Approaching: 0.02}
+  CCF_AA:
+    Emplaced: {Moving: 0.02, Approaching: 0.02}
+    Firing: {Moving: 0.02, Approaching: 0.02}
+  Searchlight:
+    Emplaced: {Moving: 0.02, Approaching: 0.02}
+    Firing: {Moving: 0.02, Approaching: 0.02}
+
+eps: 0.01

@@ -17,6 +17,7 @@ decode over dev+test sectors, and writes a self-contained results folder:
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
@@ -33,10 +34,12 @@ from citanet.data.stream import featurize_sector, read_split
 from citanet.serialize import build_part_b
 
 REPO = Path(__file__).resolve().parents[1]
-CFG = REPO / "configs" / "cita_full_hill395.yaml"
-RUN = REPO / "runs" / "cita_full_large"          # train_large.py RUN_DIR
-LOG = REPO / "runs" / "hill395_train.log"
-OUT = REPO / "hill395_experiment_results"
+# Defaults reproduce the original single-run behaviour; override via CLI to point
+# the extractor at any trained run directory (e.g. an ablation variant).
+DEFAULT_CFG = REPO / "configs" / "cita_full_hill395.yaml"
+DEFAULT_RUN = REPO / "runs" / "cita_full_large"  # train_large.py default run dir
+DEFAULT_LOG = REPO / "runs" / "hill395_train.log"
+DEFAULT_OUT = REPO / "hill395_experiment_results"
 DATA = REPO / "data" / "battlefield_hill395_large"
 
 # original large-suite baseline (README-quoted) for context
@@ -74,23 +77,42 @@ def member_oids(idn):
 
 
 def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--config", default=str(DEFAULT_CFG))
+    ap.add_argument("--run-dir", default=str(DEFAULT_RUN),
+                    help="trained bundle directory to reload (train_large.py --run-dir)")
+    ap.add_argument("--out-dir", default=str(DEFAULT_OUT),
+                    help="where to write the results (metrics_summary etc.)")
+    ap.add_argument("--log", default=str(DEFAULT_LOG),
+                    help="training log to parse for the loss/dev-F1 curve")
+    ap.add_argument("--metrics-only", action="store_true",
+                    help="write only metrics_summary + per_sector_metrics; skip the "
+                         "qualitative cases, samples, dataset_stats, type_confusion, "
+                         "README and training curve (for ablation sweeps)")
+    args = ap.parse_args()
+
+    CFG, RUN, OUT, LOG = Path(args.config), Path(args.run_dir), Path(args.out_dir), Path(args.log)
+    metrics_only = args.metrics_only
+
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "samples").mkdir(exist_ok=True)
+    if not metrics_only:
+        (OUT / "samples").mkdir(exist_ok=True)
     cfg = load_config(CFG)
     model, fs, ont = load_large_bundle(cfg, RUN)
 
     # ---------------- training curve ----------------
     curve = []
-    if LOG.exists():
+    if not metrics_only and LOG.exists():
         for ln in LOG.read_text(encoding="utf-8").splitlines():
             m = re.match(r"epoch\s+(\d+)/(\d+)\s+loss=([\d.]+)\s+best_dev_f1=([-\d.]+)", ln)
             if m:
                 curve.append({"epoch": int(m.group(1)), "loss": float(m.group(3)),
                               "best_dev_f1": float(m.group(4))})
         ps = {k: [] for k in ("pair", "dangling", "transition", "trajectory", "assign")}
-    with open(OUT / "training_curve.csv", "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=["epoch", "loss", "best_dev_f1"])
-        w.writeheader(); w.writerows(curve)
+    if not metrics_only:
+        with open(OUT / "training_curve.csv", "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=["epoch", "loss", "best_dev_f1"])
+            w.writeheader(); w.writerows(curve)
 
     # ---------------- evaluate + collect qualitative ----------------
     per_all, splits_agg = [], {}
@@ -110,6 +132,10 @@ def main():
             res = decode_full(out, feats, ont)
             m = evaluate_full(res, feats, sd); m["scenario_id"] = sid; m["split"] = split
             per.append(m); per_all.append(m)
+
+            if metrics_only:
+                del feats, out
+                continue
 
             gold = json.loads((sd / "labels" / "gold_identities.json").read_text(encoding="utf-8"))
             gold_pairs = {(i["member_local_entities"]["A"], i["member_local_entities"]["B"])
@@ -192,7 +218,7 @@ def main():
     summary = {"dev": splits_agg["dev"], "test": splits_agg["test"], "baseline_large": BASELINE}
     (OUT / "metrics_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     md = ["# 백마고지(Hill 395) 실험 — 정량 결과\n",
-          f"학습: `{cfg.stage}`, 전체 50 train 섹터 × 40 epoch, 최종 loss 1.63, best dev-F1 0.693.\n",
+          f"학습 설정: `{cfg.stage}`  (run_dir=`{RUN.name}`).\n",
           "## dev / test 집계 지표\n",
           "| 지표 | dev | test | 기존 large suite(참고) |", "|---|---|---|---|"]
     for k in TABLE:
@@ -201,6 +227,12 @@ def main():
                   f"{base if base is not None else '-'} |")
     md.append("\n*기존 large suite 참고치는 README 인용(F1~0.52 / P~0.80 / R~0.40).*\n")
     (OUT / "metrics_summary.md").write_text("\n".join(md), encoding="utf-8")
+
+    if metrics_only:
+        print("metrics-only ->", OUT)
+        print("dev :", {k: round(splits_agg['dev'][k], 4) for k in ("precision", "recall", "f1")})
+        print("test:", {k: round(splits_agg['test'][k], 4) for k in ("precision", "recall", "f1")})
+        return
 
     # ---------------- type confusion ----------------
     with open(OUT / "type_confusion.csv", "w", newline="", encoding="utf-8") as f:

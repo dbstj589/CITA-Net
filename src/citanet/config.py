@@ -69,6 +69,11 @@ class CTAConfig:
     enabled_terms: list[str] = field(
         default_factory=lambda: ["sem", "time", "motion", "state", "rel", "src"]
     )
+    # Learned per-term gating (additive; default off => identical to fixed-weight CTA).
+    # When true, the model uses GatedCTA: each term_k is scaled by g_k(pair-context)
+    # in (0,1). See src/citanet/model/cta_gated.py.
+    use_term_gating: bool = False
+    gate_hidden: int = 32
 
 
 @dataclass

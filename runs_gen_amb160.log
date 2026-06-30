@@ -1,0 +1,8 @@
+  train sectors=10 train_triples=528695 total=1850292
+  train sectors=20 train_triples=1058564 total=2380161
+  train sectors=30 train_triples=1587058 total=2908655
+  train sectors=40 train_triples=2110279 total=3431876
+  train sectors=50 train_triples=2642505 total=3964102
+
+TOTAL TRIPLES = 3,964,102  (target 1)  sectors train/dev/test = 50/12/13
+global manifest -> C:\Users\foxes\LYS\cybermarine\STKG\CITA-Net\data\hard_ambiguity\amb160\manifest_global.json
