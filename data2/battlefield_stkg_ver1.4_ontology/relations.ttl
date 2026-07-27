@@ -1,0 +1,107 @@
+@prefix cta:  <https://example.org/stkg/cta#> .
+@prefix bf:   <https://example.org/onto/battlefield-stkg#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+#################################################################
+#  relations.ttl — 관측 간 전술 관계(13종). hill395 relations.yaml 을
+#  그대로 사용(이름·대칭성·이벤트성 불변). 각 관계에
+#   - cta:isSymmetric  (대칭 여부)
+#   - cta:isEvent      (이벤트성: 시점 종속 관계)
+#   - rdfs:domain/range (bf: 클래스로 의미 제약)
+#   - owl:equivalentProperty / skos:closeMatch (ver1.4 bf: 속성 정렬)
+#  를 부여한다. domain/range 는 ver1.4 클래스 계층에 근거해 변형.
+#################################################################
+
+cta:TacticalRelation a owl:Class ; rdfs:label "전술 관계"@ko .
+cta:isSymmetric a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "대칭 관계 여부"@ko .
+cta:isEvent     a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "이벤트 관계 여부"@ko .
+
+# 1) partOf — 편제 소속 (비대칭). ver1.4: isSubordinateTo / memberOf
+cta:partOf a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "소속"@ko , "partOf"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:MilitaryEntity ; rdfs:range bf:Unit ;
+    skos:closeMatch bf:isSubordinateTo , bf:memberOf .
+
+# 2) follows — 후속/종대 추종 (비대칭)
+cta:follows a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "추종"@ko , "follows"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:PhysicalObject ; rdfs:range bf:PhysicalObject .
+
+# 3) near — 근접 (대칭)
+cta:near a owl:ObjectProperty , cta:TacticalRelation , owl:SymmetricProperty ;
+    rdfs:label "근접"@ko , "near"@en ;
+    cta:isSymmetric true ; cta:isEvent false ;
+    rdfs:domain bf:PhysicalObject ; rdfs:range bf:PhysicalObject ;
+    skos:closeMatch bf:adjacentTo .
+
+# 4) firesAt — 사격 지향 (비대칭). ver1.4: targets
+cta:firesAt a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "사격"@ko , "firesAt"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:WeaponSystem ; rdfs:range bf:MilitaryEntity ;
+    skos:closeMatch bf:targets .
+
+# 5) engagedWith — 교전 중 (대칭). ver1.4: engages
+cta:engagedWith a owl:ObjectProperty , cta:TacticalRelation , owl:SymmetricProperty ;
+    rdfs:label "교전"@ko , "engagedWith"@en ;
+    cta:isSymmetric true ; cta:isEvent false ;
+    rdfs:domain bf:MilitaryEntity ; rdfs:range bf:MilitaryEntity ;
+    owl:equivalentProperty bf:engages .
+
+# 6) emplacedAt — 진지 거치 (비대칭). ver1.4: occupies (진지)
+cta:emplacedAt a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "진지거치"@ko , "emplacedAt"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:WeaponSystem ; rdfs:range bf:MilitaryPosition ;
+    skos:closeMatch bf:occupies , bf:deployedTo .
+
+# 7) movesToward — 지향 이동 (비대칭)
+cta:movesToward a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "지향이동"@ko , "movesToward"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:PhysicalObject ; rdfs:range bf:MilitaryEntity .
+
+# 8) supports — 지원 (비대칭)
+cta:supports a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "지원"@ko , "supports"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:MilitaryEntity ; rdfs:range bf:MilitaryEntity .
+
+# 9) screens — 경계/차장 (비대칭)
+cta:screens a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "경계차장"@ko , "screens"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:MilitaryEntity ; rdfs:range bf:MilitaryEntity .
+
+# 10) occupies — 점령 (비대칭). ver1.4: occupies
+cta:occupies a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "점령"@ko , "occupies"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:MilitaryEntity ; rdfs:range bf:GeographicFeature ;
+    owl:equivalentProperty bf:occupies .
+
+# 11) withdrawsFrom — 철수 (비대칭)
+cta:withdrawsFrom a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "철수"@ko , "withdrawsFrom"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:MilitaryEntity ; rdfs:range bf:GeographicFeature .
+
+# 12) reinforces — 증원 (비대칭)
+cta:reinforces a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "증원"@ko , "reinforces"@en ;
+    cta:isSymmetric false ; cta:isEvent false ;
+    rdfs:domain bf:Unit ; rdfs:range bf:MilitaryEntity ;
+    skos:closeMatch bf:supports .
+
+# 13) participatesIn — 작전/교전 참가 (비대칭, 이벤트성). ver1.4: participatesIn
+cta:participatesIn a owl:ObjectProperty , cta:TacticalRelation ;
+    rdfs:label "참가"@ko , "participatesIn"@en ;
+    cta:isSymmetric false ; cta:isEvent true ;
+    rdfs:domain bf:MilitaryEntity ; rdfs:range bf:Action ;
+    owl:equivalentProperty bf:participatesIn .

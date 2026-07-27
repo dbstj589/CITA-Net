@@ -1,0 +1,26 @@
+{
+  "origin_e": 299000.0,
+  "origin_n": 4236000.0,
+  "res_m": 50.0,
+  "nx": 81,
+  "ny": 91,
+  "base_elevation_m": 50.0,
+  "ridge_amplitude_m": 120.0,
+  "ridge_sigma_m": 700.0,
+  "concealment_layers": [
+    "canopy",
+    "trench",
+    "reverse_slope"
+  ],
+  "elevation_min": 44.516776526016095,
+  "elevation_max": 170.16609265989257,
+  "mode": "tile",
+  "tiled": true,
+  "sector_pitch_m": 6000.0,
+  "tile_base_e": 300000.0,
+  "tile_base_n": 4238000.0,
+  "full_grid_cols": 8,
+  "full_grid_rows": 197,
+  "n_sectors": 1575,
+  "note": "terrain is a single representative sector tile reused for every sector (periodic); fold global coords by pitch. Procedural approximation."
+}

@@ -1,0 +1,106 @@
+{
+  "p4_and_checks": {
+    "time_monotonic": {
+      "pass": true,
+      "violations": 0
+    },
+    "feasible_motion": {
+      "pass": true,
+      "violations": 0
+    },
+    "static_speed_zero": {
+      "pass": true,
+      "violations": 0
+    },
+    "vocabulary": {
+      "pass": true,
+      "violations": 0
+    },
+    "cross_reference": {
+      "pass": true,
+      "violations": 0
+    },
+    "triple_count_match": {
+      "pass": false,
+      "nt_files": 188401,
+      "sum_day": 188401,
+      "unique": 193561
+    },
+    "no_duplicate_triples": {
+      "pass": true,
+      "duplicates": 0
+    },
+    "op_trajectory_consistency": {
+      "pass": true,
+      "violations": 0
+    },
+    "daily_approaching_on_attack_days": {
+      "pass": true,
+      "zero_days": []
+    },
+    "fog_friendly_fire_overlap_sec": {
+      "pass": true,
+      "overlaps": 0
+    },
+    "withdrawn_end_off_map": {
+      "pass": true,
+      "violations": 0
+    },
+    "boundary_entry": {
+      "pass": true,
+      "ok": true
+    },
+    "coords_in_extent": {
+      "pass": true
+    },
+    "landmark_peak_match": {
+      "pass": true
+    },
+    "seam_position_continuity": {
+      "pass": true,
+      "violations": 0
+    },
+    "seam_s_continuity": {
+      "pass": true,
+      "violations": 0
+    },
+    "total_1M_hard": {
+      "pass": false,
+      "total": 188401,
+      "band": [
+        900000.0,
+        1100000.0
+      ]
+    }
+  },
+  "realism": {
+    "concurrent_alive_peak": 455,
+    "moving_ratio": 0.491,
+    "loss_ratio_ccf_to_rok": 1.45,
+    "ccf_mean_s": 0.824,
+    "rok_mean_s": 0.566,
+    "rok_destroyed": 30,
+    "ccf_destroyed": 2,
+    "merges": 0,
+    "reliefs": 0,
+    "overwatch": 0,
+    "crest_owner_changes": 0,
+    "background_fire_coverage": 0.878,
+    "night_attack_ratio": 1.0
+  },
+  "daily_triples": {
+    "0": 188401
+  },
+  "band_ok": {
+    "0": false
+  },
+  "triple_categories": {
+    "entity": 1820,
+    "unit": 53,
+    "landmark": 55,
+    "event": 310,
+    "relation": 2113,
+    "reification": 11770,
+    "trajectory": 177440
+  }
+}

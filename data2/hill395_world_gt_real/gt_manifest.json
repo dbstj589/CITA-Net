@@ -1,0 +1,159 @@
+{
+  "generator": "gen_world_gt.py (real/streaming)",
+  "scope": "P1-P4,P8 (sensor-neutral GT, real-scale fixed space)",
+  "global_seed": 19521006,
+  "config": {
+    "mode": "real",
+    "global_seed": 19521006,
+    "time": {
+      "epoch": "1952-10-06T00:00:00Z",
+      "window_seconds": 14400,
+      "dt_seconds": 600,
+      "static_baseline_seconds": 4800,
+      "phases": 6
+    },
+    "world_scope": {
+      "mode": "tiled",
+      "cols": 3,
+      "rows": 4,
+      "sector_pitch_m": 2000.0
+    },
+    "entities": {
+      "per_sector": 100,
+      "attrition_frac": 0.22,
+      "reinforce_frac": 0.5,
+      "tactical_per_phase": 4
+    },
+    "terrain": {
+      "grid_resolution_m": 50.0,
+      "area_width_m": 6000.0,
+      "area_height_m": 8000.0,
+      "base_elevation_m": 50.0,
+      "peak_elevation_m": 395.0,
+      "peak_sigma_m": 900.0,
+      "ridge_amplitude_m": 220.0,
+      "stream_north_offset_m": 5000.0,
+      "canopy_frac": 0.14
+    },
+    "reification": {
+      "predicates": [
+        "engagedWith",
+        "firesAt",
+        "movesToward",
+        "occupies",
+        "withdrawsFrom",
+        "supports",
+        "screens",
+        "reinforces"
+      ],
+      "per_sector_cap": 100000
+    },
+    "ontology_dir": "data/battlefield_hill395_large/ontology",
+    "target_triples_floor": 300000,
+    "output_dir": "data/hill395_world_gt_real"
+  },
+  "counts": {
+    "n_triples": 303535,
+    "n_entities": 1584,
+    "n_units": 960,
+    "n_landmarks": 96,
+    "n_events": 1524,
+    "n_relations": 24348,
+    "n_traj_rows": 16843,
+    "n_sectors": 12,
+    "n_dupes_removed": 16045
+  },
+  "triple_categories": {
+    "entity_identity": 6336,
+    "unit_echelon": 4776,
+    "landmark_other": 480,
+    "event": 7620,
+    "relation": 11123,
+    "trajectory_state": 134744,
+    "reification": 138456
+  },
+  "growth_means_contribution": {
+    "(a) time_density": 134744,
+    "(b) relations": 11123,
+    "(c) events": 7620,
+    "(d) reification": 138456,
+    "structural(entity/unit/landmark)": 11592
+  },
+  "grid": {
+    "cols": 3,
+    "rows": 4,
+    "sectors": 12,
+    "pitch_m": 2000.0
+  },
+  "area_km": {
+    "ew": 6.0,
+    "ns": 8.0
+  },
+  "ontology_dir": "data/battlefield_hill395_large/ontology",
+  "ontology_vocab": {
+    "types": [
+      "UNKNOWN",
+      "Unit",
+      "ROK_Infantry",
+      "CCF_Infantry",
+      "US_Tank",
+      "ROK_Tank",
+      "ROK_Artillery",
+      "US_Artillery",
+      "CCF_Artillery",
+      "Mortar",
+      "CCF_AA",
+      "QuadFifty",
+      "Engineer",
+      "VehicleColumn",
+      "Searchlight"
+    ],
+    "states": [
+      "Moving",
+      "Halted",
+      "Approaching",
+      "Engaging",
+      "Occupying",
+      "Holding",
+      "Emplaced",
+      "Firing",
+      "Withdrawing",
+      "Unknown",
+      "Destroyed"
+    ],
+    "relations": [
+      "partOf",
+      "follows",
+      "near",
+      "firesAt",
+      "engagedWith",
+      "emplacedAt",
+      "movesToward",
+      "supports",
+      "screens",
+      "occupies",
+      "withdrawsFrom",
+      "reinforces",
+      "participatesIn"
+    ],
+    "event_kinds": [
+      "Attack",
+      "Counterattack",
+      "FireSupport",
+      "Occupy",
+      "Illuminate"
+    ]
+  },
+  "content_sha256": {
+    "unified_stkg.nt": "759d2d5640d08542e6034f355aa888dd538b50a60cf191d01f7027b927995e27",
+    "entities.jsonl": "3022a848dfec4e11cc24912528f7025bd68f57e19e530023fe959065806e7e1e",
+    "trajectories.parquet": "31cfc09ca1015f197a69f1941d3e50dba3a25dd774aa48ee464f42f5acdf6162",
+    "events.jsonl": "174a29c11ee62e9cc9b7cae4fcd675cf7324d580bdc10eb8fe891260d871977e",
+    "relations.jsonl": "d46134fa36e6d3e02fc6713d7c0aef49aab09a391968e71229d3792de549e3c5",
+    "terrain/elevation.npy": "e91f797d7145e69c6323bc7fd1c4f4cd6c0d91490b0dca5bb76a7c317dac9ba1",
+    "terrain/concealment.npy": "9bac80d29aa4d0ade0fa7cc226971172f3f1e50a1b52c2f5038985f2d161c100",
+    "terrain/terrain_meta.json": "460de90c9594800c041301c3cbb3857a1bf73bfb4e874098e1d05d94b1718edc",
+    "terrain/landmarks.json": "a3ea8ec39b98bc426c8d9979f740b7c188570119321e893953e6dd98faf316e9"
+  },
+  "validation_pass": true
+}

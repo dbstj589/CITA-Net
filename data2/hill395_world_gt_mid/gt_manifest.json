@@ -1,0 +1,117 @@
+{
+  "generator": "gen_world_gt.py (full/streaming)",
+  "scope": "P1-P4,P8 (sensor-neutral GT, multi-phase, streaming)",
+  "global_seed": 19521006,
+  "config": {
+    "global_seed": 19521006,
+    "time": {
+      "epoch": "1952-10-06T00:00:00Z",
+      "window_seconds": 14400,
+      "dt_seconds": 120,
+      "phases": 6
+    },
+    "world_scope": {
+      "mode": "tiled",
+      "sector_pitch_m": 6000.0,
+      "n_sectors": 157
+    },
+    "entities": {
+      "per_sector": 40,
+      "attrition_frac": 0.22,
+      "reinforce_frac": 0.5
+    },
+    "terrain": {
+      "mode": "tile",
+      "grid_resolution_m": 50.0,
+      "base_elevation_m": 50.0,
+      "ridge_amplitude_m": 120.0,
+      "ridge_sigma_m": 700.0,
+      "noise_amplitude_m": 12.0,
+      "canopy_frac": 0.12,
+      "trench_radius_m": 250.0
+    },
+    "ontology_dir": "data/battlefield_hill395_large/ontology",
+    "target_triples": 100000,
+    "tolerance": 0.05,
+    "output_dir": "data/hill395_world_gt_mid"
+  },
+  "counts": {
+    "n_triples": 99901,
+    "n_entities": 8478,
+    "n_units": 628,
+    "n_landmarks": 1256,
+    "n_events": 2198,
+    "n_relations": 27838,
+    "n_traj_rows": 705506,
+    "n_sectors": 157
+  },
+  "ontology_dir": "data/battlefield_hill395_large/ontology",
+  "per_sector_triples_probe": 635,
+  "n_sectors": 157,
+  "ontology_vocab": {
+    "types": [
+      "UNKNOWN",
+      "Unit",
+      "ROK_Infantry",
+      "CCF_Infantry",
+      "US_Tank",
+      "ROK_Tank",
+      "ROK_Artillery",
+      "US_Artillery",
+      "CCF_Artillery",
+      "Mortar",
+      "CCF_AA",
+      "QuadFifty",
+      "Engineer",
+      "VehicleColumn",
+      "Searchlight"
+    ],
+    "states": [
+      "Moving",
+      "Halted",
+      "Approaching",
+      "Engaging",
+      "Occupying",
+      "Holding",
+      "Emplaced",
+      "Firing",
+      "Withdrawing",
+      "Unknown",
+      "Destroyed"
+    ],
+    "relations": [
+      "partOf",
+      "follows",
+      "near",
+      "firesAt",
+      "engagedWith",
+      "emplacedAt",
+      "movesToward",
+      "supports",
+      "screens",
+      "occupies",
+      "withdrawsFrom",
+      "reinforces",
+      "participatesIn"
+    ],
+    "event_kinds": [
+      "Attack",
+      "Counterattack",
+      "FireSupport",
+      "Occupy",
+      "Illuminate"
+    ]
+  },
+  "content_sha256": {
+    "unified_stkg.nt": "71d7c248652ea284e5ad6fb01596873800cc86e588e50d6def300a4d19860337",
+    "entities.jsonl": "fe987be92dae3e7aab42d99cd22eed1bf08b5b406eb4a59995e4b7654978a42e",
+    "trajectories.parquet": "95f12f7562f56750144eda10527f19af4fb148654cb9802288b5f3fdd7bf059c",
+    "events.jsonl": "cd77047f46701126a6fbce9cc92758cd787151674d85d293c4c90b536b6efb78",
+    "relations.jsonl": "742311f5531e137079278b090505ccebae214c2dd17f81d3c4be05dbe6383a94",
+    "terrain/elevation.npy": "408f53f4596fab42428c62352aebc632988fe3b4e638e416c037a4fbd5221963",
+    "terrain/concealment.npy": "6d74d7bf2a7d68603444d18a40f866ae60553fe52ba5f98d318731c61fbd2d9e",
+    "terrain/terrain_meta.json": "4e8100ec3b231e12e7068f4200c9d2a2898da4b96652a6b0bb010cc0eab3c455",
+    "terrain/landmarks.json": "79934a7b405fc78d8a19e53e75965a2ff275737ac1cdf7e7703a93bb84f659e4"
+  },
+  "validation_pass": true
+}

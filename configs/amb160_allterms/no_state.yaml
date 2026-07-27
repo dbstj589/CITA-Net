@@ -1,0 +1,48 @@
+# GENERATED for amb160 all-terms conditional-validity run: copy of configs/ablation/no_state.yaml
+# with decoder.num_slots 48->160 and stage suffix _slots160, matching configs/amb160_main/*.yaml.
+# Originals untouched. Only these two fields differ from configs/ablation/no_state.yaml.
+stage: cita_full_hill395_no_state_slots160
+seed: 19521006
+device: auto
+data_root: data/battlefield_hill395_large
+ontology_dir: data/battlefield_hill395_large/ontology
+blocking:
+  dt_max_s: 180.0
+  theta_text: 0.3
+  grid_cell_m: 400.0
+  r_err_floor_m: 80.0
+  use_text_gate: false
+  type_by_category: true
+encoder:
+  d_model: 128
+  text_encoder: learned
+  use_source_gate: true
+graph:
+  enabled: true
+  gnn_layers: 2
+  n_heads: 4
+  hops: 2
+cta:
+  enabled_terms:
+  - sem
+  - time
+  - motion
+  - rel
+  - src
+decoder:
+  enabled: true
+  num_slots: 160
+  sinkhorn_iters: 20
+  sinkhorn_temp: 0.5
+  sinkhorn_col_strength: 0.1
+loss:
+  lambda_pair: 2.0
+  lambda_transition: 0.3
+  lambda_trajectory: 0.5
+  lambda_dangling: 1.0
+  lambda_assign: 2.0
+  pair_pos_weight: 5.0
+train:
+  lr: 0.001
+  epochs: 60
+  log_every: 10

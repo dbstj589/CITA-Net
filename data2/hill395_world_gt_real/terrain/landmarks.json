@@ -1,0 +1,674 @@
+[
+  {
+    "id": "lm_crest_0",
+    "name": "crest",
+    "easting": 301500.0,
+    "northing": 4238600.0,
+    "elevation": 50.81
+  },
+  {
+    "id": "lm_northtip_0",
+    "name": "northtip",
+    "easting": 301500.0,
+    "northing": 4239700.0,
+    "elevation": 73.71
+  },
+  {
+    "id": "lm_northslope_0",
+    "name": "northslope",
+    "easting": 301500.0,
+    "northing": 4239100.0,
+    "elevation": 57.7
+  },
+  {
+    "id": "lm_mlr_0",
+    "name": "mlr",
+    "easting": 301500.0,
+    "northing": 4237600.0,
+    "elevation": 47.7
+  },
+  {
+    "id": "lm_objA_0",
+    "name": "objA",
+    "easting": 301500.0,
+    "northing": 4239000.0,
+    "elevation": 55.88
+  },
+  {
+    "id": "lm_objB_0",
+    "name": "objB",
+    "easting": 301500.0,
+    "northing": 4239400.0,
+    "elevation": 64.67
+  },
+  {
+    "id": "lm_valley_0",
+    "name": "valley",
+    "easting": 300200.0,
+    "northing": 4238200.0,
+    "elevation": 46.05
+  },
+  {
+    "id": "lm_yokkok_0",
+    "name": "yokkok",
+    "easting": 299400.0,
+    "northing": 4238300.0,
+    "elevation": 46.09
+  },
+  {
+    "id": "lm_crest_1",
+    "name": "crest",
+    "easting": 303500.0,
+    "northing": 4238600.0,
+    "elevation": 65.7
+  },
+  {
+    "id": "lm_northtip_1",
+    "name": "northtip",
+    "easting": 303500.0,
+    "northing": 4239700.0,
+    "elevation": 210.34
+  },
+  {
+    "id": "lm_northslope_1",
+    "name": "northslope",
+    "easting": 303500.0,
+    "northing": 4239100.0,
+    "elevation": 106.1
+  },
+  {
+    "id": "lm_mlr_1",
+    "name": "mlr",
+    "easting": 303500.0,
+    "northing": 4237600.0,
+    "elevation": 51.08
+  },
+  {
+    "id": "lm_objA_1",
+    "name": "objA",
+    "easting": 303500.0,
+    "northing": 4239000.0,
+    "elevation": 94.91
+  },
+  {
+    "id": "lm_objB_1",
+    "name": "objB",
+    "easting": 303500.0,
+    "northing": 4239400.0,
+    "elevation": 150.59
+  },
+  {
+    "id": "lm_valley_1",
+    "name": "valley",
+    "easting": 302200.0,
+    "northing": 4238200.0,
+    "elevation": 51.77
+  },
+  {
+    "id": "lm_yokkok_1",
+    "name": "yokkok",
+    "easting": 301400.0,
+    "northing": 4238300.0,
+    "elevation": 48.28
+  },
+  {
+    "id": "lm_crest_2",
+    "name": "crest",
+    "easting": 305500.0,
+    "northing": 4238600.0,
+    "elevation": 53.59
+  },
+  {
+    "id": "lm_northtip_2",
+    "name": "northtip",
+    "easting": 305500.0,
+    "northing": 4239700.0,
+    "elevation": 60.02
+  },
+  {
+    "id": "lm_northslope_2",
+    "name": "northslope",
+    "easting": 305500.0,
+    "northing": 4239100.0,
+    "elevation": 56.74
+  },
+  {
+    "id": "lm_mlr_2",
+    "name": "mlr",
+    "easting": 305500.0,
+    "northing": 4237600.0,
+    "elevation": 49.88
+  },
+  {
+    "id": "lm_objA_2",
+    "name": "objA",
+    "easting": 305500.0,
+    "northing": 4239000.0,
+    "elevation": 56.13
+  },
+  {
+    "id": "lm_objB_2",
+    "name": "objB",
+    "easting": 305500.0,
+    "northing": 4239400.0,
+    "elevation": 58.5
+  },
+  {
+    "id": "lm_valley_2",
+    "name": "valley",
+    "easting": 304200.0,
+    "northing": 4238200.0,
+    "elevation": 50.58
+  },
+  {
+    "id": "lm_yokkok_2",
+    "name": "yokkok",
+    "easting": 303400.0,
+    "northing": 4238300.0,
+    "elevation": 55.92
+  },
+  {
+    "id": "lm_crest_3",
+    "name": "crest",
+    "easting": 301500.0,
+    "northing": 4240600.0,
+    "elevation": 98.89
+  },
+  {
+    "id": "lm_northtip_3",
+    "name": "northtip",
+    "easting": 301500.0,
+    "northing": 4241700.0,
+    "elevation": 80.71
+  },
+  {
+    "id": "lm_northslope_3",
+    "name": "northslope",
+    "easting": 301500.0,
+    "northing": 4241100.0,
+    "elevation": 97.6
+  },
+  {
+    "id": "lm_mlr_3",
+    "name": "mlr",
+    "easting": 301500.0,
+    "northing": 4239600.0,
+    "elevation": 70.51
+  },
+  {
+    "id": "lm_objA_3",
+    "name": "objA",
+    "easting": 301500.0,
+    "northing": 4241000.0,
+    "elevation": 99.03
+  },
+  {
+    "id": "lm_objB_3",
+    "name": "objB",
+    "easting": 301500.0,
+    "northing": 4241400.0,
+    "elevation": 90.47
+  },
+  {
+    "id": "lm_valley_3",
+    "name": "valley",
+    "easting": 300200.0,
+    "northing": 4240200.0,
+    "elevation": 50.88
+  },
+  {
+    "id": "lm_yokkok_3",
+    "name": "yokkok",
+    "easting": 299400.0,
+    "northing": 4240300.0,
+    "elevation": 50.35
+  },
+  {
+    "id": "lm_crest_4",
+    "name": "crest",
+    "easting": 303500.0,
+    "northing": 4240600.0,
+    "elevation": 380.05
+  },
+  {
+    "id": "lm_northtip_4",
+    "name": "northtip",
+    "easting": 303500.0,
+    "northing": 4241700.0,
+    "elevation": 252.81
+  },
+  {
+    "id": "lm_northslope_4",
+    "name": "northslope",
+    "easting": 303500.0,
+    "northing": 4241100.0,
+    "elevation": 369.18
+  },
+  {
+    "id": "lm_mlr_4",
+    "name": "mlr",
+    "easting": 303500.0,
+    "northing": 4239600.0,
+    "elevation": 189.02
+  },
+  {
+    "id": "lm_objA_4",
+    "name": "objA",
+    "easting": 303500.0,
+    "northing": 4241000.0,
+    "elevation": 379.42
+  },
+  {
+    "id": "lm_objB_4",
+    "name": "objB",
+    "easting": 303500.0,
+    "northing": 4241400.0,
+    "elevation": 319.33
+  },
+  {
+    "id": "lm_valley_4",
+    "name": "valley",
+    "easting": 302200.0,
+    "northing": 4240200.0,
+    "elevation": 183.38
+  },
+  {
+    "id": "lm_yokkok_4",
+    "name": "yokkok",
+    "easting": 301400.0,
+    "northing": 4240300.0,
+    "elevation": 84.73
+  },
+  {
+    "id": "lm_crest_5",
+    "name": "crest",
+    "easting": 305500.0,
+    "northing": 4240600.0,
+    "elevation": 60.63
+  },
+  {
+    "id": "lm_northtip_5",
+    "name": "northtip",
+    "easting": 305500.0,
+    "northing": 4241700.0,
+    "elevation": 51.2
+  },
+  {
+    "id": "lm_northslope_5",
+    "name": "northslope",
+    "easting": 305500.0,
+    "northing": 4241100.0,
+    "elevation": 57.02
+  },
+  {
+    "id": "lm_mlr_5",
+    "name": "mlr",
+    "easting": 305500.0,
+    "northing": 4239600.0,
+    "elevation": 59.55
+  },
+  {
+    "id": "lm_objA_5",
+    "name": "objA",
+    "easting": 305500.0,
+    "northing": 4241000.0,
+    "elevation": 57.94
+  },
+  {
+    "id": "lm_objB_5",
+    "name": "objB",
+    "easting": 305500.0,
+    "northing": 4241400.0,
+    "elevation": 54.03
+  },
+  {
+    "id": "lm_valley_5",
+    "name": "valley",
+    "easting": 304200.0,
+    "northing": 4240200.0,
+    "elevation": 220.29
+  },
+  {
+    "id": "lm_yokkok_5",
+    "name": "yokkok",
+    "easting": 303400.0,
+    "northing": 4240300.0,
+    "elevation": 345.49
+  },
+  {
+    "id": "lm_crest_6",
+    "name": "crest",
+    "easting": 301500.0,
+    "northing": 4242600.0,
+    "elevation": 54.99
+  },
+  {
+    "id": "lm_northtip_6",
+    "name": "northtip",
+    "easting": 301500.0,
+    "northing": 4243700.0,
+    "elevation": 45.32
+  },
+  {
+    "id": "lm_northslope_6",
+    "name": "northslope",
+    "easting": 301500.0,
+    "northing": 4243100.0,
+    "elevation": 48.23
+  },
+  {
+    "id": "lm_mlr_6",
+    "name": "mlr",
+    "easting": 301500.0,
+    "northing": 4241600.0,
+    "elevation": 84.11
+  },
+  {
+    "id": "lm_objA_6",
+    "name": "objA",
+    "easting": 301500.0,
+    "northing": 4243000.0,
+    "elevation": 49.2
+  },
+  {
+    "id": "lm_objB_6",
+    "name": "objB",
+    "easting": 301500.0,
+    "northing": 4243400.0,
+    "elevation": 46.22
+  },
+  {
+    "id": "lm_valley_6",
+    "name": "valley",
+    "easting": 300200.0,
+    "northing": 4242200.0,
+    "elevation": 53.39
+  },
+  {
+    "id": "lm_yokkok_6",
+    "name": "yokkok",
+    "easting": 299400.0,
+    "northing": 4242300.0,
+    "elevation": 53.11
+  },
+  {
+    "id": "lm_crest_7",
+    "name": "crest",
+    "easting": 303500.0,
+    "northing": 4242600.0,
+    "elevation": 139.68
+  },
+  {
+    "id": "lm_northtip_7",
+    "name": "northtip",
+    "easting": 303500.0,
+    "northing": 4243700.0,
+    "elevation": 86.16
+  },
+  {
+    "id": "lm_northslope_7",
+    "name": "northslope",
+    "easting": 303500.0,
+    "northing": 4243100.0,
+    "elevation": 114.38
+  },
+  {
+    "id": "lm_mlr_7",
+    "name": "mlr",
+    "easting": 303500.0,
+    "northing": 4241600.0,
+    "elevation": 275.79
+  },
+  {
+    "id": "lm_objA_7",
+    "name": "objA",
+    "easting": 303500.0,
+    "northing": 4243000.0,
+    "elevation": 119.3
+  },
+  {
+    "id": "lm_objB_7",
+    "name": "objB",
+    "easting": 303500.0,
+    "northing": 4243400.0,
+    "elevation": 100.04
+  },
+  {
+    "id": "lm_valley_7",
+    "name": "valley",
+    "easting": 302200.0,
+    "northing": 4242200.0,
+    "elevation": 97.18
+  },
+  {
+    "id": "lm_yokkok_7",
+    "name": "yokkok",
+    "easting": 301400.0,
+    "northing": 4242300.0,
+    "elevation": 59.68
+  },
+  {
+    "id": "lm_crest_8",
+    "name": "crest",
+    "easting": 305500.0,
+    "northing": 4242600.0,
+    "elevation": 48.56
+  },
+  {
+    "id": "lm_northtip_8",
+    "name": "northtip",
+    "easting": 305500.0,
+    "northing": 4243700.0,
+    "elevation": 53.73
+  },
+  {
+    "id": "lm_northslope_8",
+    "name": "northslope",
+    "easting": 305500.0,
+    "northing": 4243100.0,
+    "elevation": 50.79
+  },
+  {
+    "id": "lm_mlr_8",
+    "name": "mlr",
+    "easting": 305500.0,
+    "northing": 4241600.0,
+    "elevation": 52.09
+  },
+  {
+    "id": "lm_objA_8",
+    "name": "objA",
+    "easting": 305500.0,
+    "northing": 4243000.0,
+    "elevation": 50.25
+  },
+  {
+    "id": "lm_objB_8",
+    "name": "objB",
+    "easting": 305500.0,
+    "northing": 4243400.0,
+    "elevation": 52.43
+  },
+  {
+    "id": "lm_valley_8",
+    "name": "valley",
+    "easting": 304200.0,
+    "northing": 4242200.0,
+    "elevation": 109.24
+  },
+  {
+    "id": "lm_yokkok_8",
+    "name": "yokkok",
+    "easting": 303400.0,
+    "northing": 4242300.0,
+    "elevation": 169.87
+  },
+  {
+    "id": "lm_crest_9",
+    "name": "crest",
+    "easting": 301500.0,
+    "northing": 4244600.0,
+    "elevation": 47.49
+  },
+  {
+    "id": "lm_northtip_9",
+    "name": "northtip",
+    "easting": 301500.0,
+    "northing": 4245700.0,
+    "elevation": 34.03
+  },
+  {
+    "id": "lm_northslope_9",
+    "name": "northslope",
+    "easting": 301500.0,
+    "northing": 4245100.0,
+    "elevation": 50.61
+  },
+  {
+    "id": "lm_mlr_9",
+    "name": "mlr",
+    "easting": 301500.0,
+    "northing": 4243600.0,
+    "elevation": 45.51
+  },
+  {
+    "id": "lm_objA_9",
+    "name": "objA",
+    "easting": 301500.0,
+    "northing": 4245000.0,
+    "elevation": 49.95
+  },
+  {
+    "id": "lm_objB_9",
+    "name": "objB",
+    "easting": 301500.0,
+    "northing": 4245400.0,
+    "elevation": 51.78
+  },
+  {
+    "id": "lm_valley_9",
+    "name": "valley",
+    "easting": 300200.0,
+    "northing": 4244200.0,
+    "elevation": 46.33
+  },
+  {
+    "id": "lm_yokkok_9",
+    "name": "yokkok",
+    "easting": 299400.0,
+    "northing": 4244300.0,
+    "elevation": 46.46
+  },
+  {
+    "id": "lm_crest_10",
+    "name": "crest",
+    "easting": 303500.0,
+    "northing": 4244600.0,
+    "elevation": 55.11
+  },
+  {
+    "id": "lm_northtip_10",
+    "name": "northtip",
+    "easting": 303500.0,
+    "northing": 4245700.0,
+    "elevation": 33.83
+  },
+  {
+    "id": "lm_northslope_10",
+    "name": "northslope",
+    "easting": 303500.0,
+    "northing": 4245100.0,
+    "elevation": 55.93
+  },
+  {
+    "id": "lm_mlr_10",
+    "name": "mlr",
+    "easting": 303500.0,
+    "northing": 4243600.0,
+    "elevation": 90.75
+  },
+  {
+    "id": "lm_objA_10",
+    "name": "objA",
+    "easting": 303500.0,
+    "northing": 4245000.0,
+    "elevation": 55.95
+  },
+  {
+    "id": "lm_objB_10",
+    "name": "objB",
+    "easting": 303500.0,
+    "northing": 4245400.0,
+    "elevation": 54.58
+  },
+  {
+    "id": "lm_valley_10",
+    "name": "valley",
+    "easting": 302200.0,
+    "northing": 4244200.0,
+    "elevation": 47.82
+  },
+  {
+    "id": "lm_yokkok_10",
+    "name": "yokkok",
+    "easting": 301400.0,
+    "northing": 4244300.0,
+    "elevation": 45.92
+  },
+  {
+    "id": "lm_crest_11",
+    "name": "crest",
+    "easting": 305500.0,
+    "northing": 4244600.0,
+    "elevation": 53.18
+  },
+  {
+    "id": "lm_northtip_11",
+    "name": "northtip",
+    "easting": 305500.0,
+    "northing": 4245700.0,
+    "elevation": 26.38
+  },
+  {
+    "id": "lm_northslope_11",
+    "name": "northslope",
+    "easting": 305500.0,
+    "northing": 4245100.0,
+    "elevation": 50.21
+  },
+  {
+    "id": "lm_mlr_11",
+    "name": "mlr",
+    "easting": 305500.0,
+    "northing": 4243600.0,
+    "elevation": 53.36
+  },
+  {
+    "id": "lm_objA_11",
+    "name": "objA",
+    "easting": 305500.0,
+    "northing": 4245000.0,
+    "elevation": 50.88
+  },
+  {
+    "id": "lm_objB_11",
+    "name": "objB",
+    "easting": 305500.0,
+    "northing": 4245400.0,
+    "elevation": 47.46
+  },
+  {
+    "id": "lm_valley_11",
+    "name": "valley",
+    "easting": 304200.0,
+    "northing": 4244200.0,
+    "elevation": 54.81
+  },
+  {
+    "id": "lm_yokkok_11",
+    "name": "yokkok",
+    "easting": 303400.0,
+    "northing": 4244300.0,
+    "elevation": 59.18
+  }
+]

@@ -1,0 +1,52 @@
+# Hill 395 intelligence sources with reliability priors. KG A uses own
+# direct sensors (VISUAL_OBS/RADAR/ARTILLERY_OBS); KG B uses standoff /
+# indirect sources (AERIAL/SIGINT/ACOUSTIC/HUMINT).
+
+VISUAL_OBS:
+  description: Forward visual / EO observer (전방관측조)
+  reliability: 0.9
+  type_reliability: 0.9
+  pos_reliability: 0.88
+  cep_m: 15.0
+
+RADAR:
+  description: Ground-surveillance / counter-battery radar
+  reliability: 0.8
+  type_reliability: 0.4
+  pos_reliability: 0.88
+  cep_m: 15.0
+
+ARTILLERY_OBS:
+  description: Artillery forward observer (포병관측)
+  reliability: 0.75
+  type_reliability: 0.5
+  pos_reliability: 0.56
+  cep_m: 52.5
+
+AERIAL:
+  description: UN air reconnaissance / tac-air observer
+  reliability: 0.8
+  type_reliability: 0.7
+  pos_reliability: 0.69
+  cep_m: 37.5
+
+SIGINT:
+  description: Signals-intelligence emitter geolocation (무선감청)
+  reliability: 0.65
+  type_reliability: 0.6
+  pos_reliability: 0.0
+  cep_m: 150.0
+
+ACOUSTIC:
+  description: Acoustic gunfire / vehicle localisation (청음조)
+  reliability: 0.55
+  type_reliability: 0.3
+  pos_reliability: 0.0
+  cep_m: 300.0
+
+HUMINT:
+  description: Scout report / POW interrogation (정찰조/포로)
+  reliability: 0.55
+  type_reliability: 0.7
+  pos_reliability: 0.0
+  cep_m: 270.0

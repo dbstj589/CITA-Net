@@ -1,0 +1,143 @@
+{
+  "source_gt": "data\\hill395_world_gt",
+  "global_seed": 19521006,
+  "time": {
+    "epoch": "1952-10-06T00:00:00Z",
+    "window_seconds": 600.0,
+    "dt_seconds": 1.0,
+    "frames": 720,
+    "resample": "upsample 601 GT samples (dt=1.0s) -> 720 frames: linear interp of (easting,northing); state via floor (nearest-earlier) sample"
+  },
+  "map": {
+    "unit": "meters",
+    "base_offset": {
+      "easting": 299000.0,
+      "northing": 4236000.0,
+      "note": "subtracted from GT UTM coords to get local x,y; equals terrain grid origin so points align with terrain_elevation.npy"
+    },
+    "extent": {
+      "xmin": 0.0,
+      "xmax": 4000.0,
+      "ymin": 0.0,
+      "ymax": 4500.0
+    },
+    "extent_source": "terrain grid (origin + res*(n-1)); manifest has no explicit map range",
+    "trajectory_bbox": {
+      "xmin": 571.334,
+      "xmax": 3079.298,
+      "ymin": 889.081,
+      "ymax": 3900.0
+    },
+    "elevation_file": "terrain_elevation.npy",
+    "elevation_shape": [
+      91,
+      81
+    ],
+    "elevation_res_m": 50.0
+  },
+  "sectors": {
+    "mode": "tiled",
+    "n_sectors": 1,
+    "cols": 1,
+    "rows": 1,
+    "sector_pitch_m": 6000.0,
+    "sector_origins_local": [
+      {
+        "sector": 0,
+        "x": 1000.0,
+        "y": 2000.0
+      }
+    ]
+  },
+  "landmarks": [
+    {
+      "name": "crest",
+      "x": 2500.0,
+      "y": 2600.0
+    },
+    {
+      "name": "northtip",
+      "x": 2500.0,
+      "y": 3700.0
+    },
+    {
+      "name": "northslope",
+      "x": 2500.0,
+      "y": 3100.0
+    },
+    {
+      "name": "mlr",
+      "x": 2500.0,
+      "y": 1600.0
+    },
+    {
+      "name": "objA",
+      "x": 2500.0,
+      "y": 3000.0
+    },
+    {
+      "name": "objB",
+      "x": 2500.0,
+      "y": 3400.0
+    },
+    {
+      "name": "valley",
+      "x": 1200.0,
+      "y": 2200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 400.0,
+      "y": 2300.0
+    }
+  ],
+  "type_to_category": {
+    "UNKNOWN": "unknown",
+    "Unit": "formation",
+    "ROK_Infantry": "infantry",
+    "CCF_Infantry": "infantry",
+    "US_Tank": "tank",
+    "ROK_Tank": "tank",
+    "ROK_Artillery": "artillery",
+    "US_Artillery": "artillery",
+    "CCF_Artillery": "artillery",
+    "Mortar": "mortar",
+    "CCF_AA": "aa",
+    "QuadFifty": "aa",
+    "Engineer": "engineer",
+    "VehicleColumn": "vehicle",
+    "Searchlight": "support"
+  },
+  "affiliation_to_force": {
+    "mapping": {
+      "ROK": "friendly",
+      "US": "friendly",
+      "UN": "friendly",
+      "CCF": "enemy",
+      "NA": "other",
+      "UNK": "other"
+    },
+    "note": "viewpoint convention (ROK/UN defender): ROK,US,UN->friendly, CCF->enemy, NA/UNK->other. Not a guess; stated perspective."
+  },
+  "alive_rule": "alive = (state != 'Destroyed') at that frame (Destroyed = wreck/debris, not a live actor)",
+  "counts": {
+    "entities_total": 41,
+    "by_force": {
+      "enemy": 16,
+      "friendly": 25
+    },
+    "by_category": {
+      "infantry": 24,
+      "tank": 5,
+      "artillery": 3,
+      "mortar": 2,
+      "aa": 2,
+      "engineer": 2,
+      "vehicle": 2,
+      "support": 1
+    }
+  },
+  "notes_and_checks": [
+    "none"
+  ]
+}

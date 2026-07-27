@@ -1,0 +1,5 @@
+{"type": "Attack", "start_frame": 0, "end_frame": 360, "participants": ["e_00001", "e_00002", "e_00003", "e_00004", "e_00005", "e_00006", "e_00007", "e_00008", "e_00009", "e_00010", "e_00011", "e_00012", "e_00037", "e_00038"], "landmark": "crest"}
+{"type": "Counterattack", "start_frame": 312, "end_frame": 719, "participants": ["e_00014", "e_00015", "e_00020"], "landmark": "crest"}
+{"type": "FireSupport", "start_frame": 288, "end_frame": 719, "participants": ["e_00024", "e_00025", "e_00026", "e_00027", "e_00028", "e_00029", "e_00030", "e_00031", "e_00032", "e_00033", "e_00034"], "landmark": "valley"}
+{"type": "Occupy", "start_frame": 312, "end_frame": 719, "participants": ["e_00013", "e_00016", "e_00017", "e_00018", "e_00019", "e_00021", "e_00022", "e_00023", "e_00035", "e_00036"], "landmark": "objA"}
+{"type": "Illuminate", "start_frame": 0, "end_frame": 240, "participants": ["e_00039"], "landmark": "mlr"}

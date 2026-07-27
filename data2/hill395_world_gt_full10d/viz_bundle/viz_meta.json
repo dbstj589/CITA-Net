@@ -1,0 +1,645 @@
+{
+  "source_gt": "data\\hill395_world_gt_full10d",
+  "global_seed": 19521006,
+  "time": {
+    "epoch": "1952-10-06T00:00:00Z",
+    "window_seconds": 864000.0,
+    "window_days": 10.0,
+    "dt_seconds": 300.0,
+    "frames": 1440,
+    "resample": "per-entity resample of the GT samples -> 1440 frames within each entity's active window: linear interp of (x,y); state/alive via floor (nearest-earlier) sample; rows only for active frames. GT has more raw sample instants (~4.6k) than frames (1440) so this is a DOWNSAMPLE (interp picks the representative value at each frame time)."
+  },
+  "map": {
+    "unit": "meters",
+    "base_offset": {
+      "easting": 300000.0,
+      "northing": 4238000.0,
+      "note": "subtract from GT UTM coords for local x,y; equals terrain origin so points align with terrain_elevation.npy"
+    },
+    "extent": {
+      "xmin": 0.0,
+      "xmax": 6000.0,
+      "ymin": 0.0,
+      "ymax": 8000.0
+    },
+    "extent_source": "global terrain grid (origin + res*(n-1))",
+    "trajectory_bbox": {
+      "xmin": -599.0900000000256,
+      "xmax": 7797.875999999989,
+      "ymin": -1394.0839999997988,
+      "ymax": 9972.07600000035
+    },
+    "coord_exceeds_extent_note": "entity coords EXCEED the terrain extent (sector offsets > 2km pitch); use trajectory_bbox for the canvas. Terrain lookups clamp to edges.",
+    "terrain_peak_local": {
+      "x": 3300.0,
+      "y": 2800.0,
+      "elevation": 396.4
+    },
+    "elevation_file": "terrain_elevation.npy",
+    "elevation_shape": [
+      161,
+      121
+    ],
+    "elevation_res_m": 50.0
+  },
+  "sectors": {
+    "cols": 3,
+    "rows": 4,
+    "sector_pitch_m": 2000.0,
+    "sector_origins_local": [
+      {
+        "sector": 0,
+        "x": 0.0,
+        "y": 0.0
+      },
+      {
+        "sector": 1,
+        "x": 2000.0,
+        "y": 0.0
+      },
+      {
+        "sector": 2,
+        "x": 4000.0,
+        "y": 0.0
+      },
+      {
+        "sector": 3,
+        "x": 0.0,
+        "y": 2000.0
+      },
+      {
+        "sector": 4,
+        "x": 2000.0,
+        "y": 2000.0
+      },
+      {
+        "sector": 5,
+        "x": 4000.0,
+        "y": 2000.0
+      },
+      {
+        "sector": 6,
+        "x": 0.0,
+        "y": 4000.0
+      },
+      {
+        "sector": 7,
+        "x": 2000.0,
+        "y": 4000.0
+      },
+      {
+        "sector": 8,
+        "x": 4000.0,
+        "y": 4000.0
+      },
+      {
+        "sector": 9,
+        "x": 0.0,
+        "y": 6000.0
+      },
+      {
+        "sector": 10,
+        "x": 2000.0,
+        "y": 6000.0
+      },
+      {
+        "sector": 11,
+        "x": 4000.0,
+        "y": 6000.0
+      }
+    ],
+    "note": "sector_id from parent_unit suffix; wrecks (no unit) by position"
+  },
+  "landmarks": [
+    {
+      "name": "crest",
+      "x": 1500.0,
+      "y": 600.0
+    },
+    {
+      "name": "northtip",
+      "x": 1500.0,
+      "y": 1700.0
+    },
+    {
+      "name": "northslope",
+      "x": 1500.0,
+      "y": 1100.0
+    },
+    {
+      "name": "mlr",
+      "x": 1500.0,
+      "y": -400.0
+    },
+    {
+      "name": "objA",
+      "x": 1500.0,
+      "y": 1000.0
+    },
+    {
+      "name": "objB",
+      "x": 1500.0,
+      "y": 1400.0
+    },
+    {
+      "name": "valley",
+      "x": 200.0,
+      "y": 200.0
+    },
+    {
+      "name": "yokkok",
+      "x": -600.0,
+      "y": 300.0
+    },
+    {
+      "name": "crest",
+      "x": 3500.0,
+      "y": 600.0
+    },
+    {
+      "name": "northtip",
+      "x": 3500.0,
+      "y": 1700.0
+    },
+    {
+      "name": "northslope",
+      "x": 3500.0,
+      "y": 1100.0
+    },
+    {
+      "name": "mlr",
+      "x": 3500.0,
+      "y": -400.0
+    },
+    {
+      "name": "objA",
+      "x": 3500.0,
+      "y": 1000.0
+    },
+    {
+      "name": "objB",
+      "x": 3500.0,
+      "y": 1400.0
+    },
+    {
+      "name": "valley",
+      "x": 2200.0,
+      "y": 200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 1400.0,
+      "y": 300.0
+    },
+    {
+      "name": "crest",
+      "x": 5500.0,
+      "y": 600.0
+    },
+    {
+      "name": "northtip",
+      "x": 5500.0,
+      "y": 1700.0
+    },
+    {
+      "name": "northslope",
+      "x": 5500.0,
+      "y": 1100.0
+    },
+    {
+      "name": "mlr",
+      "x": 5500.0,
+      "y": -400.0
+    },
+    {
+      "name": "objA",
+      "x": 5500.0,
+      "y": 1000.0
+    },
+    {
+      "name": "objB",
+      "x": 5500.0,
+      "y": 1400.0
+    },
+    {
+      "name": "valley",
+      "x": 4200.0,
+      "y": 200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 3400.0,
+      "y": 300.0
+    },
+    {
+      "name": "crest",
+      "x": 1500.0,
+      "y": 2600.0
+    },
+    {
+      "name": "northtip",
+      "x": 1500.0,
+      "y": 3700.0
+    },
+    {
+      "name": "northslope",
+      "x": 1500.0,
+      "y": 3100.0
+    },
+    {
+      "name": "mlr",
+      "x": 1500.0,
+      "y": 1600.0
+    },
+    {
+      "name": "objA",
+      "x": 1500.0,
+      "y": 3000.0
+    },
+    {
+      "name": "objB",
+      "x": 1500.0,
+      "y": 3400.0
+    },
+    {
+      "name": "valley",
+      "x": 200.0,
+      "y": 2200.0
+    },
+    {
+      "name": "yokkok",
+      "x": -600.0,
+      "y": 2300.0
+    },
+    {
+      "name": "crest",
+      "x": 3500.0,
+      "y": 2600.0
+    },
+    {
+      "name": "northtip",
+      "x": 3500.0,
+      "y": 3700.0
+    },
+    {
+      "name": "northslope",
+      "x": 3500.0,
+      "y": 3100.0
+    },
+    {
+      "name": "mlr",
+      "x": 3500.0,
+      "y": 1600.0
+    },
+    {
+      "name": "objA",
+      "x": 3500.0,
+      "y": 3000.0
+    },
+    {
+      "name": "objB",
+      "x": 3500.0,
+      "y": 3400.0
+    },
+    {
+      "name": "valley",
+      "x": 2200.0,
+      "y": 2200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 1400.0,
+      "y": 2300.0
+    },
+    {
+      "name": "crest",
+      "x": 5500.0,
+      "y": 2600.0
+    },
+    {
+      "name": "northtip",
+      "x": 5500.0,
+      "y": 3700.0
+    },
+    {
+      "name": "northslope",
+      "x": 5500.0,
+      "y": 3100.0
+    },
+    {
+      "name": "mlr",
+      "x": 5500.0,
+      "y": 1600.0
+    },
+    {
+      "name": "objA",
+      "x": 5500.0,
+      "y": 3000.0
+    },
+    {
+      "name": "objB",
+      "x": 5500.0,
+      "y": 3400.0
+    },
+    {
+      "name": "valley",
+      "x": 4200.0,
+      "y": 2200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 3400.0,
+      "y": 2300.0
+    },
+    {
+      "name": "crest",
+      "x": 1500.0,
+      "y": 4600.0
+    },
+    {
+      "name": "northtip",
+      "x": 1500.0,
+      "y": 5700.0
+    },
+    {
+      "name": "northslope",
+      "x": 1500.0,
+      "y": 5100.0
+    },
+    {
+      "name": "mlr",
+      "x": 1500.0,
+      "y": 3600.0
+    },
+    {
+      "name": "objA",
+      "x": 1500.0,
+      "y": 5000.0
+    },
+    {
+      "name": "objB",
+      "x": 1500.0,
+      "y": 5400.0
+    },
+    {
+      "name": "valley",
+      "x": 200.0,
+      "y": 4200.0
+    },
+    {
+      "name": "yokkok",
+      "x": -600.0,
+      "y": 4300.0
+    },
+    {
+      "name": "crest",
+      "x": 3500.0,
+      "y": 4600.0
+    },
+    {
+      "name": "northtip",
+      "x": 3500.0,
+      "y": 5700.0
+    },
+    {
+      "name": "northslope",
+      "x": 3500.0,
+      "y": 5100.0
+    },
+    {
+      "name": "mlr",
+      "x": 3500.0,
+      "y": 3600.0
+    },
+    {
+      "name": "objA",
+      "x": 3500.0,
+      "y": 5000.0
+    },
+    {
+      "name": "objB",
+      "x": 3500.0,
+      "y": 5400.0
+    },
+    {
+      "name": "valley",
+      "x": 2200.0,
+      "y": 4200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 1400.0,
+      "y": 4300.0
+    },
+    {
+      "name": "crest",
+      "x": 5500.0,
+      "y": 4600.0
+    },
+    {
+      "name": "northtip",
+      "x": 5500.0,
+      "y": 5700.0
+    },
+    {
+      "name": "northslope",
+      "x": 5500.0,
+      "y": 5100.0
+    },
+    {
+      "name": "mlr",
+      "x": 5500.0,
+      "y": 3600.0
+    },
+    {
+      "name": "objA",
+      "x": 5500.0,
+      "y": 5000.0
+    },
+    {
+      "name": "objB",
+      "x": 5500.0,
+      "y": 5400.0
+    },
+    {
+      "name": "valley",
+      "x": 4200.0,
+      "y": 4200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 3400.0,
+      "y": 4300.0
+    },
+    {
+      "name": "crest",
+      "x": 1500.0,
+      "y": 6600.0
+    },
+    {
+      "name": "northtip",
+      "x": 1500.0,
+      "y": 7700.0
+    },
+    {
+      "name": "northslope",
+      "x": 1500.0,
+      "y": 7100.0
+    },
+    {
+      "name": "mlr",
+      "x": 1500.0,
+      "y": 5600.0
+    },
+    {
+      "name": "objA",
+      "x": 1500.0,
+      "y": 7000.0
+    },
+    {
+      "name": "objB",
+      "x": 1500.0,
+      "y": 7400.0
+    },
+    {
+      "name": "valley",
+      "x": 200.0,
+      "y": 6200.0
+    },
+    {
+      "name": "yokkok",
+      "x": -600.0,
+      "y": 6300.0
+    },
+    {
+      "name": "crest",
+      "x": 3500.0,
+      "y": 6600.0
+    },
+    {
+      "name": "northtip",
+      "x": 3500.0,
+      "y": 7700.0
+    },
+    {
+      "name": "northslope",
+      "x": 3500.0,
+      "y": 7100.0
+    },
+    {
+      "name": "mlr",
+      "x": 3500.0,
+      "y": 5600.0
+    },
+    {
+      "name": "objA",
+      "x": 3500.0,
+      "y": 7000.0
+    },
+    {
+      "name": "objB",
+      "x": 3500.0,
+      "y": 7400.0
+    },
+    {
+      "name": "valley",
+      "x": 2200.0,
+      "y": 6200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 1400.0,
+      "y": 6300.0
+    },
+    {
+      "name": "crest",
+      "x": 5500.0,
+      "y": 6600.0
+    },
+    {
+      "name": "northtip",
+      "x": 5500.0,
+      "y": 7700.0
+    },
+    {
+      "name": "northslope",
+      "x": 5500.0,
+      "y": 7100.0
+    },
+    {
+      "name": "mlr",
+      "x": 5500.0,
+      "y": 5600.0
+    },
+    {
+      "name": "objA",
+      "x": 5500.0,
+      "y": 7000.0
+    },
+    {
+      "name": "objB",
+      "x": 5500.0,
+      "y": 7400.0
+    },
+    {
+      "name": "valley",
+      "x": 4200.0,
+      "y": 6200.0
+    },
+    {
+      "name": "yokkok",
+      "x": 3400.0,
+      "y": 6300.0
+    }
+  ],
+  "landmarks_note": "landmark names are per-sector procedural labels; they do NOT coincide with the global terrain peak/ridge features (확인 필요).",
+  "type_to_category": {
+    "UNKNOWN": "unknown",
+    "Unit": "formation",
+    "ROK_Infantry": "infantry",
+    "CCF_Infantry": "infantry",
+    "US_Tank": "tank",
+    "ROK_Tank": "tank",
+    "ROK_Artillery": "artillery",
+    "US_Artillery": "artillery",
+    "CCF_Artillery": "artillery",
+    "Mortar": "mortar",
+    "CCF_AA": "aa",
+    "QuadFifty": "aa",
+    "Engineer": "engineer",
+    "VehicleColumn": "vehicle",
+    "Searchlight": "support"
+  },
+  "affiliation_to_force": {
+    "mapping": {
+      "ROK": "friendly",
+      "US": "friendly",
+      "UN": "friendly",
+      "CCF": "enemy",
+      "NA": "other",
+      "UNK": "other"
+    },
+    "note": "viewpoint convention (ROK/UN defender): ROK,US,UN->friendly, CCF->enemy, NA/UNK->other. Stated perspective, not a guess."
+  },
+  "alive_rule": "alive = (t within entity's active window) AND (state != 'Destroyed')",
+  "counts": {
+    "entities_total": 3180,
+    "by_force": {
+      "friendly": 703,
+      "enemy": 2477
+    },
+    "by_category": {
+      "infantry": 2161,
+      "tank": 139,
+      "artillery": 192,
+      "mortar": 60,
+      "aa": 60,
+      "engineer": 60,
+      "support": 12,
+      "vehicle": 496
+    }
+  },
+  "notes_and_checks": [
+    "확인 필요: entity trajectory bbox extends OUTSIDE the terrain extent (sector placement offsets exceed the 2km pitch). Terrain elevation lookups clamp to grid edges; renderer should use trajectory_bbox for the canvas."
+  ]
+}

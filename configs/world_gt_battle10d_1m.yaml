@@ -1,0 +1,38 @@
+# Scaled two-layer battle GT (~1,000,000 triples). SAME world rules as v2, only
+# bigger via legit knobs: (1) more units, (2) per-sample state serialized to the
+# graph, (3) granular fire missions. Continuous 10-day sim, DAY-split output.
+
+mode: battle_1m
+global_seed: 19521006
+
+time:
+  epoch: "1952-10-06T00:00:00Z"
+  window_seconds: 864000
+  dt_seconds: 145               # dt_move
+  static_baseline_seconds: 8400
+
+entities:
+  rok_fwd: 30                    # ROK regiment-rotation pool (30->28->29..) abstracted
+  rok_reserve: 30
+  ccf_echelons: 7                # 7 of 9 CCF regiments committed
+  squads_per_echelon: 65
+  fire_mission_minutes: 6
+
+emit_state_samples: true         # knob 2: per-sample true state -> the .nt graph
+
+terrain:
+  grid_resolution_m: 25.0
+  area_width_m: 3000.0
+  area_height_m: 3600.0
+  base_elevation_m: 50.0
+  peak_elevation_m: 395.0
+  peak_sigma_m: 500.0
+  ridge_amplitude_m: 180.0
+  stream_north_offset_m: 3000.0
+  canopy_frac: 0.14
+
+reification:
+  predicates: [engagedWith, firesAt, occupies, withdrawsFrom, reinforces, movesToward, supports]
+
+ontology_dir: data/battlefield_hill395_large/ontology
+output_dir: data/hill395_world_gt_battle10d_1m

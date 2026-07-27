@@ -1,0 +1,69 @@
+{
+  "p4": {
+    "time_monotonic": {
+      "pass": true,
+      "violations": 0
+    },
+    "feasible_motion": {
+      "pass": true,
+      "violations": 0
+    },
+    "static_speed_zero": {
+      "pass": true,
+      "violations": 0
+    },
+    "vocabulary": {
+      "pass": true,
+      "violations": 0
+    },
+    "cross_reference": {
+      "pass": true,
+      "violations": 0
+    },
+    "triple_count": {
+      "pass": true,
+      "nt_lines": 3181,
+      "manifest": 3181
+    },
+    "no_duplicate_triples": {
+      "pass": true,
+      "duplicates": 0
+    },
+    "op_trajectory_consistency": {
+      "pass": true,
+      "violations": 0,
+      "examples": []
+    },
+    "daily_approaching_on_attack_days": {
+      "pass": true,
+      "zero_days": []
+    },
+    "fog_friendly_fire_overlap": {
+      "pass": true,
+      "overlaps": 0
+    },
+    "withdrawn_end_off_map": {
+      "pass": true,
+      "on_map_at_end": []
+    }
+  },
+  "realism": {
+    "concurrent_alive_peak": 57,
+    "moving_ratio": 0.733,
+    "ccf_mean_s": 0.61,
+    "rok_mean_s": 0.702,
+    "ccf_destroyed": 6,
+    "rok_destroyed": 5,
+    "loss_ratio_ccf_to_rok": 1.89,
+    "merges": 0,
+    "reliefs": 4,
+    "overwatch": 0,
+    "crest_owner_changes": 4,
+    "background_fire_coverage": 0.772,
+    "night_attack_ratio": 1.0,
+    "fog_window_friendly_fire": 1,
+    "ccf_enter_from_boundary": true,
+    "coords_in_extent": true,
+    "landmark_peak_match": true
+  }
+}

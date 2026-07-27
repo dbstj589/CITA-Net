@@ -1,0 +1,136 @@
+{
+  "generator": "gen_world_gt.py (micro)",
+  "scope": "P1-P4,P8 (sensor-neutral GT, readable single engagement)",
+  "global_seed": 19521006,
+  "config": {
+    "mode": "micro",
+    "global_seed": 19521006,
+    "time": {
+      "epoch": "1952-10-06T00:00:00Z",
+      "window_seconds": 14400,
+      "dt_seconds": 60,
+      "static_baseline_seconds": 1800
+    },
+    "entities": {
+      "waves": 4,
+      "squads_per_wave": 5,
+      "rok_infantry": 8
+    },
+    "terrain": {
+      "grid_resolution_m": 25.0,
+      "area_width_m": 3000.0,
+      "area_height_m": 3600.0,
+      "base_elevation_m": 50.0,
+      "peak_elevation_m": 395.0,
+      "peak_sigma_m": 500.0,
+      "ridge_amplitude_m": 180.0,
+      "stream_north_offset_m": 3000.0,
+      "canopy_frac": 0.14
+    },
+    "reification": {
+      "predicates": [
+        "engagedWith",
+        "firesAt",
+        "movesToward",
+        "occupies",
+        "withdrawsFrom",
+        "supports",
+        "screens"
+      ],
+      "per_sector_cap": 100000
+    },
+    "ontology_dir": "data/battlefield_hill395_large/ontology",
+    "output_dir": "data/hill395_world_gt_micro"
+  },
+  "counts": {
+    "n_triples": 10069,
+    "n_entities": 37,
+    "n_units": 4,
+    "n_landmarks": 8,
+    "n_events": 10,
+    "n_relations": 96,
+    "n_traj_rows": 1134,
+    "n_sectors": 1,
+    "n_dupes_removed": 5
+  },
+  "triple_categories": {
+    "entity_identity": 148,
+    "unit_echelon": 18,
+    "landmark_other": 40,
+    "event": 50,
+    "relation": 129,
+    "trajectory_state": 9072,
+    "reification": 612
+  },
+  "readability": {
+    "concurrent_alive_peak": 23,
+    "moving_ratio": 0.801,
+    "landmark_peak_match": true,
+    "coords_in_extent": true
+  },
+  "ontology_dir": "data/battlefield_hill395_large/ontology",
+  "ontology_vocab": {
+    "types": [
+      "UNKNOWN",
+      "Unit",
+      "ROK_Infantry",
+      "CCF_Infantry",
+      "US_Tank",
+      "ROK_Tank",
+      "ROK_Artillery",
+      "US_Artillery",
+      "CCF_Artillery",
+      "Mortar",
+      "CCF_AA",
+      "QuadFifty",
+      "Engineer",
+      "VehicleColumn",
+      "Searchlight"
+    ],
+    "states": [
+      "Moving",
+      "Halted",
+      "Approaching",
+      "Engaging",
+      "Occupying",
+      "Holding",
+      "Emplaced",
+      "Firing",
+      "Withdrawing",
+      "Unknown",
+      "Destroyed"
+    ],
+    "relations": [
+      "partOf",
+      "follows",
+      "near",
+      "firesAt",
+      "engagedWith",
+      "emplacedAt",
+      "movesToward",
+      "supports",
+      "screens",
+      "occupies",
+      "withdrawsFrom",
+      "reinforces",
+      "participatesIn"
+    ],
+    "event_kinds": [
+      "Attack",
+      "Counterattack",
+      "FireSupport",
+      "Occupy",
+      "Illuminate"
+    ]
+  },
+  "content_sha256": {
+    "unified_stkg.nt": "294e0e9808c2ac9985b5650991e295b9b270cdc31e728eeb66a90601550b3ce0",
+    "entities.jsonl": "724f8a378be5bd98778a9712c717c5ac09afbd2dbd44fb94415d2a942c8a15e3",
+    "trajectories.parquet": "59a8f08fa5165cf6399a4846e4b8b8a39454beafb6197afd2bf0036178d200cb",
+    "events.jsonl": "0463f5f451e7a7dd493047c01e85e2584a717f7691ad9d21c9a1a9f52d9e1649",
+    "relations.jsonl": "407e5e35c66141030a2fd328d7bf005f70d75aeb0e2d605d2a5b7589c64d9ced",
+    "terrain/elevation.npy": "bd0c5a0f797429632dfc77017264bb368bf45dac25c92ad7f023f8c8dc37307e",
+    "terrain/landmarks.json": "efe22bf2c55921f2eba425182354c476967a4bc7e7d21d8af6fc118439653a57"
+  },
+  "validation_pass": true
+}

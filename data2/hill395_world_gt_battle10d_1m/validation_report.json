@@ -1,0 +1,124 @@
+{
+  "p4_and_checks": {
+    "time_monotonic": {
+      "pass": true,
+      "violations": 0
+    },
+    "feasible_motion": {
+      "pass": true,
+      "violations": 0
+    },
+    "static_speed_zero": {
+      "pass": true,
+      "violations": 0
+    },
+    "vocabulary": {
+      "pass": true,
+      "violations": 0
+    },
+    "cross_reference": {
+      "pass": true,
+      "violations": 0
+    },
+    "triple_count_match": {
+      "pass": true,
+      "nt_files": 1054636,
+      "sum_day": 1054636,
+      "unique": 1054636
+    },
+    "no_duplicate_triples": {
+      "pass": true,
+      "duplicates": 0
+    },
+    "op_trajectory_consistency": {
+      "pass": true,
+      "violations": 0
+    },
+    "daily_approaching_on_attack_days": {
+      "pass": true,
+      "zero_days": []
+    },
+    "fog_friendly_fire_overlap_sec": {
+      "pass": true,
+      "overlaps": 0
+    },
+    "withdrawn_end_off_map": {
+      "pass": true,
+      "violations": 0
+    },
+    "boundary_entry": {
+      "pass": true,
+      "ok": true
+    },
+    "coords_in_extent": {
+      "pass": true
+    },
+    "landmark_peak_match": {
+      "pass": true
+    },
+    "seam_position_continuity": {
+      "pass": true,
+      "violations": 0
+    },
+    "seam_s_continuity": {
+      "pass": true,
+      "violations": 0
+    },
+    "total_1M_hard": {
+      "pass": true,
+      "total": 1054636,
+      "band": [
+        900000.0,
+        1100000.0
+      ]
+    }
+  },
+  "realism": {
+    "concurrent_alive_peak": 525,
+    "moving_ratio": 0.508,
+    "loss_ratio_ccf_to_rok": 5.05,
+    "ccf_mean_s": 0.461,
+    "rok_mean_s": 0.54,
+    "rok_destroyed": 30,
+    "ccf_destroyed": 76,
+    "merges": 2,
+    "reliefs": 16,
+    "overwatch": 3,
+    "crest_owner_changes": 16,
+    "background_fire_coverage": 0.826,
+    "night_attack_ratio": 0.909
+  },
+  "daily_triples": {
+    "0": 157796,
+    "1": 128162,
+    "2": 124106,
+    "3": 120020,
+    "4": 142016,
+    "5": 96347,
+    "6": 91249,
+    "7": 68329,
+    "8": 69001,
+    "9": 57610
+  },
+  "band_ok": {
+    "0": false,
+    "1": false,
+    "2": false,
+    "3": false,
+    "4": false,
+    "5": true,
+    "6": true,
+    "7": false,
+    "8": false,
+    "9": false
+  },
+  "triple_categories": {
+    "entity": 2100,
+    "unit": 53,
+    "landmark": 55,
+    "event": 11680,
+    "relation": 4336,
+    "reification": 75812,
+    "trajectory": 960600
+  }
+}

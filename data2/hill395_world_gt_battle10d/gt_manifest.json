@@ -1,0 +1,593 @@
+{
+  "generator": "gen_world_gt.py (battle)",
+  "scope": "P1-P4,P8 (two-layer director+rules 10-day battle GT)",
+  "global_seed": 19521006,
+  "config": {
+    "mode": "battle",
+    "global_seed": 19521006,
+    "time": {
+      "epoch": "1952-10-06T00:00:00Z",
+      "window_seconds": 864000,
+      "dt_seconds": 120,
+      "static_baseline_seconds": 14400
+    },
+    "entities": {
+      "rok_fwd": 6,
+      "rok_reserve": 6,
+      "ccf_echelons": 7,
+      "squads_per_echelon": 5
+    },
+    "terrain": {
+      "grid_resolution_m": 25.0,
+      "area_width_m": 3000.0,
+      "area_height_m": 3600.0,
+      "base_elevation_m": 50.0,
+      "peak_elevation_m": 395.0,
+      "peak_sigma_m": 500.0,
+      "ridge_amplitude_m": 180.0,
+      "stream_north_offset_m": 3000.0,
+      "canopy_frac": 0.14
+    },
+    "reification": {
+      "predicates": [
+        "engagedWith",
+        "firesAt",
+        "occupies",
+        "withdrawsFrom",
+        "reinforces",
+        "movesToward",
+        "supports"
+      ]
+    },
+    "ontology_dir": "data/battlefield_hill395_large/ontology",
+    "output_dir": "data/hill395_world_gt_battle10d"
+  },
+  "ontology_dir": "data/battlefield_hill395_large/ontology",
+  "counts": {
+    "n_triples": 5235,
+    "n_entities": 57,
+    "n_events": 63,
+    "n_relations": 613,
+    "n_transitions": 127,
+    "n_traj_rows": 2826
+  },
+  "triple_categories": {
+    "entity": 228,
+    "unit": 53,
+    "landmark": 50,
+    "event": 315,
+    "relation": 382,
+    "reification": 4207
+  },
+  "director_ops": [
+    {
+      "kind": "prep_bombard",
+      "t0": 36000,
+      "t1": 57600,
+      "prov": "record",
+      "note": "D1 daytime preparatory fires, no infantry"
+    },
+    {
+      "kind": "attack",
+      "t0": 68400,
+      "ech": [
+        0,
+        1
+      ],
+      "axis": 0,
+      "result": "repulsed",
+      "prov": "record",
+      "note": "D1 night wave 1 (repulsed)"
+    },
+    {
+      "kind": "attack",
+      "t0": 75600,
+      "ech": [
+        1,
+        2
+      ],
+      "axis": 1,
+      "result": "repulsed",
+      "prov": "record",
+      "note": "D1 night wave 2 (repulsed)"
+    },
+    {
+      "kind": "attack",
+      "t0": 82800,
+      "ech": [
+        2,
+        3
+      ],
+      "axis": 2,
+      "result": "repulsed",
+      "prov": "record",
+      "note": "D1 night wave 3 (repulsed)"
+    },
+    {
+      "kind": "refit",
+      "t0": 115200,
+      "t1": 144000,
+      "prov": "interp-B",
+      "note": "D2 refit"
+    },
+    {
+      "kind": "attack",
+      "t0": 158400,
+      "ech": [
+        2,
+        3
+      ],
+      "axis": 0,
+      "result": "take",
+      "take_t": 162000,
+      "prov": "record",
+      "note": "D2 night: crest lost"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 167400,
+      "prep": 1800,
+      "retake_t": 171000,
+      "prov": "record",
+      "note": "D2 reserve counterattack retakes crest"
+    },
+    {
+      "kind": "attack",
+      "t0": 190800,
+      "ech": [
+        4,
+        5,
+        6
+      ],
+      "axis": 1,
+      "result": "take",
+      "take_t": 202200,
+      "prov": "record",
+      "note": "D3 dawn+fog: crest lost 08:10 (fog: no friendly fire)"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 234000,
+      "prep": 2400,
+      "retake_t": 255900,
+      "prov": "record",
+      "note": "D3 17:00 reserve committed, 23:05 retake"
+    },
+    {
+      "kind": "attack",
+      "t0": 261000,
+      "ech": [
+        0,
+        1,
+        2
+      ],
+      "axis": 2,
+      "result": "take",
+      "take_t": 266400,
+      "prov": "record",
+      "note": "D4 post-midnight: crest + right ridge lost"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 306000,
+      "prep": 3600,
+      "retake_t": 313200,
+      "prep_max": true,
+      "prov": "record",
+      "note": "D4 daytime MAX preparatory fire then counterattack retake"
+    },
+    {
+      "kind": "attack",
+      "t0": 360000,
+      "ech": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "axis": 0,
+      "result": "take",
+      "take_t": 363600,
+      "force_merge": true,
+      "prov": "record",
+      "note": "D5 dawn assault; defenders fall back, MERGE, retake"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 374400,
+      "prep": 2400,
+      "retake_t": 381600,
+      "prov": "record",
+      "note": "D5 reinforced retake"
+    },
+    {
+      "kind": "quiet",
+      "t0": 460800,
+      "t1": 489600,
+      "prov": "interp-C",
+      "note": "D6 daytime lull (artillery only)"
+    },
+    {
+      "kind": "attack",
+      "t0": 507600,
+      "ech": [
+        0,
+        1
+      ],
+      "axis": 1,
+      "result": "take",
+      "take_t": 511200,
+      "prov": "record",
+      "note": "D6 night: crest lost"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 540000,
+      "prep": 1800,
+      "retake_t": 547200,
+      "overwatch": true,
+      "prov": "record",
+      "note": "D7 morning passage-of-lines counterattack retakes"
+    },
+    {
+      "kind": "attack",
+      "t0": 568800,
+      "ech": [
+        2,
+        3
+      ],
+      "axis": 2,
+      "result": "take",
+      "take_t": 572400,
+      "prov": "record",
+      "note": "D7 enemy counter: crest lost again"
+    },
+    {
+      "kind": "attack",
+      "t0": 684000,
+      "ech": [
+        0
+      ],
+      "axis": 1,
+      "result": "take",
+      "take_t": 687600,
+      "shrink": true,
+      "prov": "interp-D",
+      "note": "D8 night small loss"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 705600,
+      "prep": 1500,
+      "retake_t": 709200,
+      "shrink": true,
+      "prov": "interp-D",
+      "note": "D8 dawn retake"
+    },
+    {
+      "kind": "attack",
+      "t0": 770400,
+      "ech": [
+        1
+      ],
+      "axis": 2,
+      "result": "take",
+      "take_t": 774000,
+      "shrink": true,
+      "prov": "interp-D",
+      "note": "D9 night small loss"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 792000,
+      "prep": 1500,
+      "retake_t": 795600,
+      "shrink": true,
+      "prov": "interp-D",
+      "note": "D9 dawn retake"
+    },
+    {
+      "kind": "counterattack",
+      "t0": 792000,
+      "prep": 1800,
+      "retake_t": 799200,
+      "final": true,
+      "prov": "record",
+      "note": "D10 dawn surprise counterattack, full recapture then pursue to ridge"
+    },
+    {
+      "kind": "withdraw_all",
+      "t0": 806400,
+      "prov": "record",
+      "note": "D10 surviving CCF withdraw north off-map"
+    }
+  ],
+  "provenance_map": {
+    "D1 daytime preparatory fires, no infantry": "record",
+    "D1 night wave 1 (repulsed)": "record",
+    "D1 night wave 2 (repulsed)": "record",
+    "D1 night wave 3 (repulsed)": "record",
+    "D2 refit": "interp-B",
+    "D2 night: crest lost": "record",
+    "D2 reserve counterattack retakes crest": "record",
+    "D3 dawn+fog: crest lost 08:10 (fog: no friendly fire)": "record",
+    "D3 17:00 reserve committed, 23:05 retake": "record",
+    "D4 post-midnight: crest + right ridge lost": "record",
+    "D4 daytime MAX preparatory fire then counterattack retake": "record",
+    "D5 dawn assault; defenders fall back, MERGE, retake": "record",
+    "D5 reinforced retake": "record",
+    "D6 daytime lull (artillery only)": "interp-C",
+    "D6 night: crest lost": "record",
+    "D7 morning passage-of-lines counterattack retakes": "record",
+    "D7 enemy counter: crest lost again": "record",
+    "D8 night small loss": "interp-D",
+    "D8 dawn retake": "interp-D",
+    "D9 night small loss": "interp-D",
+    "D9 dawn retake": "interp-D",
+    "D10 dawn surprise counterattack, full recapture then pursue to ridge": "record",
+    "D10 surviving CCF withdraw north off-map": "record"
+  },
+  "daily_summary": {
+    "0": {
+      "waves": 3,
+      "losses": 0,
+      "retakes": 0,
+      "merges": 0,
+      "reliefs": 0,
+      "overwatch": 0,
+      "ccf_loss": 7.392938304089519,
+      "rok_loss": 4.073145896984836,
+      "ccf_destroyed": 0,
+      "rok_destroyed": 2
+    },
+    "1": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 1,
+      "merges": 0,
+      "reliefs": 4,
+      "overwatch": 0,
+      "ccf_loss": 2.0555356269159293,
+      "rok_loss": 1.166981374333777,
+      "ccf_destroyed": 1,
+      "rok_destroyed": 1
+    },
+    "2": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 1,
+      "merges": 0,
+      "reliefs": 3,
+      "overwatch": 0,
+      "ccf_loss": 2.642779850863853,
+      "rok_loss": 2.280436455211887,
+      "ccf_destroyed": 0,
+      "rok_destroyed": 3
+    },
+    "3": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 1,
+      "merges": 0,
+      "reliefs": 0,
+      "overwatch": 0,
+      "ccf_loss": 3.375000000000001,
+      "rok_loss": 0.0,
+      "ccf_destroyed": 9,
+      "rok_destroyed": 0
+    },
+    "4": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 1,
+      "merges": 2,
+      "reliefs": 0,
+      "overwatch": 0,
+      "ccf_loss": 4.5,
+      "rok_loss": 0.0,
+      "ccf_destroyed": 0,
+      "rok_destroyed": 0
+    },
+    "5": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 0,
+      "merges": 0,
+      "reliefs": 0,
+      "overwatch": 0,
+      "ccf_loss": 2.2500000000000004,
+      "rok_loss": 0.0,
+      "ccf_destroyed": 9,
+      "rok_destroyed": 0
+    },
+    "6": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 1,
+      "merges": 0,
+      "reliefs": 0,
+      "overwatch": 3,
+      "ccf_loss": 2.2500000000000004,
+      "rok_loss": 0.0,
+      "ccf_destroyed": 8,
+      "rok_destroyed": 0
+    },
+    "7": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 0,
+      "merges": 0,
+      "reliefs": 0,
+      "overwatch": 0,
+      "ccf_loss": 0.675,
+      "rok_loss": 0.0,
+      "ccf_destroyed": 5,
+      "rok_destroyed": 0
+    },
+    "8": {
+      "waves": 1,
+      "losses": 1,
+      "retakes": 1,
+      "merges": 0,
+      "reliefs": 0,
+      "overwatch": 0,
+      "ccf_loss": 0.675,
+      "rok_loss": 0.0,
+      "ccf_destroyed": 5,
+      "rok_destroyed": 0
+    },
+    "9": {
+      "waves": 0,
+      "losses": 0,
+      "retakes": 2,
+      "merges": 0,
+      "reliefs": 0,
+      "overwatch": 0,
+      "ccf_loss": 0.0,
+      "rok_loss": 0.0,
+      "ccf_destroyed": 0,
+      "rok_destroyed": 0
+    }
+  },
+  "crest_owner_changes": [
+    [
+      162000,
+      "CCF"
+    ],
+    [
+      171000,
+      "ROK"
+    ],
+    [
+      202200,
+      "CCF"
+    ],
+    [
+      255900,
+      "ROK"
+    ],
+    [
+      266400,
+      "CCF"
+    ],
+    [
+      313200,
+      "ROK"
+    ],
+    [
+      363600,
+      "CCF"
+    ],
+    [
+      381600,
+      "ROK"
+    ],
+    [
+      511200,
+      "CCF"
+    ],
+    [
+      547200,
+      "ROK"
+    ],
+    [
+      572400,
+      "CCF"
+    ],
+    [
+      687600,
+      "CCF"
+    ],
+    [
+      709200,
+      "ROK"
+    ],
+    [
+      774000,
+      "CCF"
+    ],
+    [
+      795600,
+      "ROK"
+    ],
+    [
+      799200,
+      "ROK"
+    ]
+  ],
+  "realism": {
+    "concurrent_alive_peak": 31,
+    "moving_ratio": 0.409,
+    "ccf_mean_s": 0.36,
+    "rok_mean_s": 0.675,
+    "ccf_destroyed": 20,
+    "rok_destroyed": 6,
+    "loss_ratio_ccf_to_rok": 3.43,
+    "merges": 2,
+    "reliefs": 7,
+    "overwatch": 3,
+    "crest_owner_changes": 16,
+    "background_fire_coverage": 0.851,
+    "night_attack_ratio": 0.909,
+    "fog_window_friendly_fire": 0,
+    "ccf_enter_from_boundary": true,
+    "coords_in_extent": true,
+    "landmark_peak_match": true
+  },
+  "combat_power_s": "ontology EXTENSION (not in ontology) — 확인 필요",
+  "ontology_vocab": {
+    "types": [
+      "UNKNOWN",
+      "Unit",
+      "ROK_Infantry",
+      "CCF_Infantry",
+      "US_Tank",
+      "ROK_Tank",
+      "ROK_Artillery",
+      "US_Artillery",
+      "CCF_Artillery",
+      "Mortar",
+      "CCF_AA",
+      "QuadFifty",
+      "Engineer",
+      "VehicleColumn",
+      "Searchlight"
+    ],
+    "states": [
+      "Moving",
+      "Halted",
+      "Approaching",
+      "Engaging",
+      "Occupying",
+      "Holding",
+      "Emplaced",
+      "Firing",
+      "Withdrawing",
+      "Unknown",
+      "Destroyed"
+    ],
+    "relations": [
+      "partOf",
+      "follows",
+      "near",
+      "firesAt",
+      "engagedWith",
+      "emplacedAt",
+      "movesToward",
+      "supports",
+      "screens",
+      "occupies",
+      "withdrawsFrom",
+      "reinforces",
+      "participatesIn"
+    ]
+  },
+  "content_sha256": {
+    "unified_stkg.nt": "bd5c1de4b0fb6c63b26c99708062c7f63a452e8306878e0fe52865dab1b6ece8",
+    "entities.jsonl": "72a427c72aeeae6787bff69dee03640ae6ef8fa7a205e619077d67fa845aa85f",
+    "trajectories.parquet": "0e1f985c7750b42832a8026cf33dd225f6a9b82bab6618ba9f333b4a95f125b7",
+    "events.jsonl": "0d542de9ad5cbbe4cf88192d0e095f066cbbb62544c51c7031a39c6838509355",
+    "relations.jsonl": "7b813dc619f5ca53d618b38dc80a027eca0bc208186dfad15382d561e0c53408"
+  },
+  "validation_pass": true
+}

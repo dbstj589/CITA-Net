@@ -1,0 +1,131 @@
+{
+  "concurrent_alive": {
+    "peak": 1074,
+    "peak_time_s": 4800.0,
+    "median": 1044.0,
+    "mean": 1004.4,
+    "series_step_s": 600.0,
+    "series": [
+      1068,
+      1068,
+      1068,
+      1068,
+      1063,
+      1045,
+      1040,
+      846,
+      1074,
+      1074,
+      1074,
+      1062,
+      1051,
+      1036,
+      1027,
+      845,
+      1047,
+      1044,
+      1029,
+      1014,
+      983,
+      972,
+      964,
+      785,
+      764
+    ]
+  },
+  "category_distribution": {
+    "infantry": 896,
+    "tank": 140,
+    "artillery": 192,
+    "mortar": 60,
+    "aa": 60,
+    "engineer": 60,
+    "support": 12,
+    "vehicle": 164
+  },
+  "force_distribution": {
+    "friendly": 704,
+    "enemy": 880
+  },
+  "state_distribution": {
+    "Holding": 986,
+    "Engaging": 5647,
+    "Destroyed": 736,
+    "Moving": 3612,
+    "Halted": 120,
+    "Firing": 1320,
+    "Emplaced": 1572,
+    "Approaching": 1620,
+    "Withdrawing": 1230
+  },
+  "coord_bbox_local_m": {
+    "xmin": -584.7839999999851,
+    "xmax": 7843.074000000022,
+    "ymin": -1367.251000000164,
+    "ymax": 9961.382000000216
+  },
+  "map_extent_local_m": {
+    "xmin": 0.0,
+    "xmax": 6000.0,
+    "ymin": 0.0,
+    "ymax": 8000.0
+  },
+  "base_offset": {
+    "easting": 300000.0,
+    "northing": 4238000.0
+  },
+  "per_sector": {
+    "0": {
+      "entities": 133,
+      "peak_alive": 89
+    },
+    "1": {
+      "entities": 130,
+      "peak_alive": 89
+    },
+    "2": {
+      "entities": 135,
+      "peak_alive": 89
+    },
+    "3": {
+      "entities": 132,
+      "peak_alive": 89
+    },
+    "4": {
+      "entities": 134,
+      "peak_alive": 93
+    },
+    "5": {
+      "entities": 132,
+      "peak_alive": 89
+    },
+    "6": {
+      "entities": 131,
+      "peak_alive": 90
+    },
+    "7": {
+      "entities": 132,
+      "peak_alive": 89
+    },
+    "8": {
+      "entities": 133,
+      "peak_alive": 90
+    },
+    "9": {
+      "entities": 129,
+      "peak_alive": 90
+    },
+    "10": {
+      "entities": 133,
+      "peak_alive": 90
+    },
+    "11": {
+      "entities": 130,
+      "peak_alive": 89
+    }
+  },
+  "b2_overview_built": true,
+  "b2_threshold": 500,
+  "n_events": 1524,
+  "n_entities": 1584
+}

@@ -1,0 +1,33 @@
+# Omniscient ground-truth STKG — small config (generate -> validate -> eyeball
+# before scaling). All knobs live here (no code constants), so re-generation
+# needs no code edit. Coordinates/IDs/time are GLOBAL; sectors are spatial tiles
+# only. This produces a sensor-neutral true world (no source/cep/confidence).
+
+global_seed: 19521006
+
+time:
+  epoch: "1952-10-06T00:00:00Z"
+  window_seconds: 600        # 10-minute sub-engagement
+  dt_seconds: 1              # dense trajectory sampling step
+
+world_scope:
+  mode: tiled                # "tiled" | "single"; both are one global frame
+  n_sectors: 1               # start tiny; scale up after validation passes
+  sector_pitch_m: 6000.0
+
+entities:
+  per_sector: 40             # roster ratios applied to this count
+
+terrain:
+  grid_resolution_m: 50.0
+  base_elevation_m: 50.0
+  ridge_amplitude_m: 120.0   # Hill 395 crest rise (procedural approximation)
+  ridge_sigma_m: 700.0
+  noise_amplitude_m: 12.0
+  canopy_frac: 0.12
+  trench_radius_m: 250.0
+
+# ontology to validate vocabulary against (frozen suite ontology, read-only)
+ontology_dir: data/battlefield_hill395_large/ontology
+
+output_dir: data/hill395_world_gt

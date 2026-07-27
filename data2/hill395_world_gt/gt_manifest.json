@@ -1,0 +1,108 @@
+{
+  "generator": "gen_world_gt.py",
+  "scope": "P1-P4,P8 (sensor-neutral GT)",
+  "global_seed": 19521006,
+  "config": {
+    "global_seed": 19521006,
+    "time": {
+      "epoch": "1952-10-06T00:00:00Z",
+      "window_seconds": 600,
+      "dt_seconds": 1
+    },
+    "world_scope": {
+      "mode": "tiled",
+      "n_sectors": 1,
+      "sector_pitch_m": 6000.0
+    },
+    "entities": {
+      "per_sector": 40
+    },
+    "terrain": {
+      "grid_resolution_m": 50.0,
+      "base_elevation_m": 50.0,
+      "ridge_amplitude_m": 120.0,
+      "ridge_sigma_m": 700.0,
+      "noise_amplitude_m": 12.0,
+      "canopy_frac": 0.12,
+      "trench_radius_m": 250.0
+    },
+    "ontology_dir": "data/battlefield_hill395_large/ontology",
+    "output_dir": "data/hill395_world_gt"
+  },
+  "counts": {
+    "n_triples": 419,
+    "n_entities": 41,
+    "n_units": 4,
+    "n_landmarks": 8,
+    "n_events": 5,
+    "n_relations": 94,
+    "n_traj_rows": 24641
+  },
+  "ontology_dir": "data/battlefield_hill395_large/ontology",
+  "ontology_vocab": {
+    "types": [
+      "UNKNOWN",
+      "Unit",
+      "ROK_Infantry",
+      "CCF_Infantry",
+      "US_Tank",
+      "ROK_Tank",
+      "ROK_Artillery",
+      "US_Artillery",
+      "CCF_Artillery",
+      "Mortar",
+      "CCF_AA",
+      "QuadFifty",
+      "Engineer",
+      "VehicleColumn",
+      "Searchlight"
+    ],
+    "states": [
+      "Moving",
+      "Halted",
+      "Approaching",
+      "Engaging",
+      "Occupying",
+      "Holding",
+      "Emplaced",
+      "Firing",
+      "Withdrawing",
+      "Unknown",
+      "Destroyed"
+    ],
+    "relations": [
+      "partOf",
+      "follows",
+      "near",
+      "firesAt",
+      "engagedWith",
+      "emplacedAt",
+      "movesToward",
+      "supports",
+      "screens",
+      "occupies",
+      "withdrawsFrom",
+      "reinforces",
+      "participatesIn"
+    ],
+    "event_kinds": [
+      "Attack",
+      "Counterattack",
+      "FireSupport",
+      "Occupy",
+      "Illuminate"
+    ]
+  },
+  "content_sha256": {
+    "unified_stkg.nt": "ba8886a8505eab07688a5944c9a17b47effaa62b203ff24b0395c1d4d31c6800",
+    "entities.jsonl": "c9d8fd306c28c5bfe20610260825f532702942caeea0c4c96d6607dda08b7fcd",
+    "trajectories.parquet": "e5dcd3c7dea015233a842e2e3405c16baf0b009e2e32ca13568cdb635afba951",
+    "events.jsonl": "4558672f0b4e8a7c0f37fa0557ffe3300510e13b0bdd2f88281521a77e4bf4d1",
+    "relations.jsonl": "db6d16c4248677043f85fd1816bf4c931b09a37670f76d90da7a2a787a354e1e",
+    "terrain/elevation.npy": "408f53f4596fab42428c62352aebc632988fe3b4e638e416c037a4fbd5221963",
+    "terrain/concealment.npy": "6d74d7bf2a7d68603444d18a40f866ae60553fe52ba5f98d318731c61fbd2d9e",
+    "terrain/terrain_meta.json": "1c4668de57ff131286676cc71572916c675be4b728961f6f758070be48429c3c",
+    "terrain/landmarks.json": "fd7b10c8d0d93ae379c59730f1d533ee68104265590a01bec07542bc8e9528b5"
+  },
+  "validation_pass": true
+}

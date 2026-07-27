@@ -1,0 +1,38 @@
+{
+  "time_monotonic": {
+    "pass": true,
+    "violations": 0,
+    "examples": []
+  },
+  "feasible_motion": {
+    "pass": true,
+    "violations": 0,
+    "examples": []
+  },
+  "static_speed_zero": {
+    "pass": true,
+    "violations": 0,
+    "examples": []
+  },
+  "required_attributes": {
+    "pass": true,
+    "violations": 0,
+    "examples": []
+  },
+  "vocabulary": {
+    "pass": true,
+    "violations": 0,
+    "examples": []
+  },
+  "triple_count": {
+    "pass": true,
+    "nt_lines": 419,
+    "manifest_triples": 419
+  },
+  "cross_reference": {
+    "pass": true,
+    "violations": 0,
+    "examples": []
+  },
+  "_all_pass": true
+}

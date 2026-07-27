@@ -1,0 +1,58 @@
+[
+  {
+    "id": "lm_crest",
+    "name": "crest",
+    "easting": 301650.0,
+    "northing": 4239250.0,
+    "elevation": 396.6
+  },
+  {
+    "id": "lm_mlr",
+    "name": "mlr",
+    "easting": 301650.0,
+    "northing": 4238550.0,
+    "elevation": 175.9
+  },
+  {
+    "id": "lm_rear",
+    "name": "rear",
+    "easting": 301650.0,
+    "northing": 4238150.0,
+    "elevation": 78.76
+  },
+  {
+    "id": "lm_ridge",
+    "name": "ridge",
+    "easting": 301650.0,
+    "northing": 4239650.0,
+    "elevation": 305.8
+  },
+  {
+    "id": "lm_approach",
+    "name": "approach",
+    "easting": 301650.0,
+    "northing": 4240150.0,
+    "elevation": 129.5
+  },
+  {
+    "id": "lm_approach_w",
+    "name": "approach_w",
+    "easting": 301200.0,
+    "northing": 4240000.0,
+    "elevation": 127.98
+  },
+  {
+    "id": "lm_approach_e",
+    "name": "approach_e",
+    "easting": 302100.0,
+    "northing": 4240000.0,
+    "elevation": 125.9
+  },
+  {
+    "id": "lm_valley",
+    "name": "valley",
+    "easting": 300900.0,
+    "northing": 4239400.0,
+    "elevation": 160.92
+  }
+]

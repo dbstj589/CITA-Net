@@ -1,0 +1,30 @@
+@prefix cta:  <https://example.org/stkg/cta#> .
+@prefix bf:   <https://example.org/onto/battlefield-stkg#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+#################################################################
+#  battlefield_stkg_cta.ttl — 최상위 온톨로지(모듈 통합)
+#
+#  battlefield_stkg_ver1.4 (bf:) 의 객체 상하위 클래스 계층 위에
+#  CITA-Net STKG 관측 계층(cta:)을 얹는다:
+#    - states.ttl     : 관측 상태 11종 + 상태 전이 규칙
+#    - classes.ttl    : bf: 클래스별 운동 프로파일(허용상태/기본상태/v_max)
+#    - relations.ttl  : 전술 관계 13종(+대칭/이벤트/도메인·레인지)
+#
+#  상태 11종·관계 13종은 battlefield_hill395_large 데이터셋에서 쓰인 것을
+#  그대로 사용하고, 상태 전이 규칙과 객체별 허용 상태만 ver1.4 클래스에
+#  맞춰 변형하였다.
+#################################################################
+
+<https://example.org/stkg/cta> a owl:Ontology ;
+    dct:title "CITA-Net STKG 관측 온톨로지 (battlefield_stkg_ver1.4 기반)"@ko ;
+    owl:versionInfo "1.0" ;
+    rdfs:comment "ver1.4 클래스 계층 + hill395 상태(11)/관계(13) + 클래스별 상태·전이 규칙."@ko ;
+    owl:imports <https://example.org/onto/battlefield-stkg> ,
+                <https://example.org/stkg/cta/states> ,
+                <https://example.org/stkg/cta/classes> ,
+                <https://example.org/stkg/cta/relations> .

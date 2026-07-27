@@ -1,0 +1,49 @@
+# Full-battle 10-DAY omniscient GT (1952-10-06..15). Same 6x8 km space and real
+# terrain as world_gt_real; only the TIME window is extended. Sensor-neutral,
+# streaming, no duplicate triples. Battle duration is from the sources (~10 days);
+# per-instant progression / phase count / times-changed-hands are config values,
+# NOT a historical reconstruction (sources disagree, 7-24).
+
+mode: real
+global_seed: 19521006
+
+time:
+  epoch: "1952-10-06T00:00:00Z"
+  window_seconds: 86400        # 1-day partial test
+  dt_seconds: 300               # 5-min moving-object step (2880 steps over 10 days)
+  static_baseline_seconds: 21600
+  phases: 2
+  transit_seconds: 1800         # movers relocate only ~30 min per phase, then hold
+                                # (keeps trajectory bounded over a 10-day window)
+
+world_scope:
+  mode: tiled
+  cols: 3
+  rows: 4
+  sector_pitch_m: 2000.0
+
+entities:
+  per_sector: 100
+  attrition_frac: 0.22
+  reinforce_frac: 0.5
+  tactical_per_phase: 6
+
+terrain:                         # single GLOBAL real-scale field (6x8 km)
+  grid_resolution_m: 50.0
+  area_width_m: 6000.0
+  area_height_m: 8000.0
+  base_elevation_m: 50.0
+  peak_elevation_m: 395.0
+  peak_sigma_m: 900.0
+  ridge_amplitude_m: 220.0
+  stream_north_offset_m: 5000.0
+  canopy_frac: 0.14
+
+reification:
+  predicates: [engagedWith, firesAt, movesToward, occupies, withdrawsFrom, supports, screens, reinforces]
+  per_sector_cap: 100000
+
+ontology_dir: data/battlefield_hill395_large/ontology
+
+target_triples_floor: 300000
+output_dir: data/hill395_world_gt_full10d_test1d

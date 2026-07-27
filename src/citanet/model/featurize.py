@@ -105,6 +105,14 @@ class ScenarioFeatures:
     # bookkeeping
     entity_of: dict[str, str] = field(default_factory=dict)   # obs_id -> "kg:local"
 
+    def to(self, device) -> "ScenarioFeatures":
+        """Move every tensor field to `device` in place (lists/dicts untouched).
+        A no-op when device is 'cpu' -- keeps the CPU path byte-identical."""
+        for name, val in list(self.__dict__.items()):
+            if torch.is_tensor(val):
+                self.__dict__[name] = val.to(device)
+        return self
+
 
 def _rel_event_set(o: Observation) -> set[tuple[str, str]]:
     # Predicate-level (not target_ref): relation targets are KG-local entity ids

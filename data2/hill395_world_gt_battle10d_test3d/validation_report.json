@@ -1,0 +1,52 @@
+{
+  "p4": {
+    "time_monotonic": {
+      "pass": true,
+      "violations": 0
+    },
+    "feasible_motion": {
+      "pass": true,
+      "violations": 0
+    },
+    "static_speed_zero": {
+      "pass": true,
+      "violations": 0
+    },
+    "vocabulary": {
+      "pass": true,
+      "violations": 0
+    },
+    "cross_reference": {
+      "pass": true,
+      "violations": 0
+    },
+    "triple_count": {
+      "pass": true,
+      "nt_lines": 3025,
+      "manifest": 3025
+    },
+    "no_duplicate_triples": {
+      "pass": true,
+      "duplicates": 0
+    }
+  },
+  "realism": {
+    "concurrent_alive_peak": 37,
+    "moving_ratio": 0.396,
+    "ccf_mean_s": 0.528,
+    "rok_mean_s": 0.763,
+    "ccf_destroyed": 11,
+    "rok_destroyed": 3,
+    "loss_ratio_ccf_to_rok": 4.31,
+    "merges": 2,
+    "reliefs": 7,
+    "overwatch": 0,
+    "crest_owner_changes": 4,
+    "background_fire_coverage": 0.855,
+    "night_attack_ratio": 1.0,
+    "fog_window_friendly_fire": 0,
+    "ccf_enter_from_boundary": true,
+    "coords_in_extent": true,
+    "landmark_peak_match": true
+  }
+}

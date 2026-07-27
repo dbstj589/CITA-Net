@@ -1,0 +1,226 @@
+@prefix cta:  <https://example.org/stkg/cta#> .
+@prefix bf:   <https://example.org/onto/battlefield-stkg#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+#################################################################
+#  classes.ttl — battlefield_stkg_ver1.4 클래스 계층을 재사용(bf:)하고,
+#  각 클래스에 CTA 운동 프로파일(cta:KinematicProfile)을 부착한다.
+#
+#  프로파일 = { 허용 상태(cta:allowsState), 기본 상태(cta:defaultState),
+#               상태별 최대속도(cta:vMax / cta:VMaxEntry) }.
+#  hill395 classes.yaml 의 v_max 규칙을 계승하되, 허용 상태/기본 상태/
+#  전이 예외는 ver1.4 의 이동유형(mobilityType)·클래스 성격에 맞춰 변형.
+#
+#  해석 규칙(소비자): 어떤 bf: 클래스의 프로파일을 찾을 때 자기 자신에
+#  cta:hasKinematicProfile 이 없으면 rdfs:subClassOf 를 타고 올라가
+#  가장 가까운 조상의 프로파일을 상속한다.
+#################################################################
+
+cta:KinematicProfile a owl:Class ;
+    rdfs:label "운동 프로파일"@ko , "KinematicProfile"@en ;
+    rdfs:comment "한 객체 유형이 취할 수 있는 상태 집합·기본 상태·상태별 최대속도(m/s)를 묶은 것."@ko .
+cta:VMaxEntry a owl:Class ; rdfs:label "상태별 최대속도 항목"@ko .
+
+cta:hasKinematicProfile a owl:ObjectProperty ; rdfs:range cta:KinematicProfile ; rdfs:label "운동 프로파일 보유"@ko .
+cta:allowsState  a owl:ObjectProperty ; rdfs:domain cta:KinematicProfile ; rdfs:range cta:State ; rdfs:label "허용 상태"@ko .
+cta:defaultState a owl:ObjectProperty ; rdfs:domain cta:KinematicProfile ; rdfs:range cta:State ; rdfs:label "기본 상태"@ko .
+cta:baseSpeed    a owl:DatatypeProperty ; rdfs:domain cta:KinematicProfile ; rdfs:range xsd:decimal ; rdfs:label "기준 최대속도(m/s)"@ko .
+cta:vMaxEntries  a owl:ObjectProperty ; rdfs:domain cta:KinematicProfile ; rdfs:range cta:VMaxEntry ; rdfs:label "상태별 최대속도"@ko .
+cta:forState     a owl:ObjectProperty ; rdfs:domain cta:VMaxEntry ; rdfs:range cta:State .
+cta:vMax         a owl:DatatypeProperty ; rdfs:domain cta:VMaxEntry ; rdfs:range xsd:decimal ; rdfs:label "최대속도(m/s)"@ko .
+cta:profileTransitionOverride a owl:ObjectProperty ; rdfs:domain cta:KinematicProfile ; rdfs:range cta:StateTransition ;
+    rdfs:label "클래스별 전이 예외"@ko ; rdfs:comment "이 프로파일에 한해 states.ttl 전역 규칙을 덮어쓰는 전이 타당도."@ko .
+
+#################################################################
+#  v_max 규칙 (hill395 _v_max_for 계승):
+#   - towed/정적(base=0): 모든 상태 0
+#   - 그 외: 빠른 상태(Moving/Approaching/Withdrawing/Unknown/Destroyed)=base,
+#            Engaging=min(base,2.0), 나머지 정적 상태=0.5
+#  아래 프로파일은 base와 허용 상태만 다르고 이 규칙을 공유한다.
+#################################################################
+
+#############################
+# 1) 도보(FootProfile) — 보병/기갑승무원 하차/정찰조. 모든 상태 가능.
+#    ver1.4: bf:Personnel, bf:Soldier, bf:Squad(도보 분대)
+#############################
+cta:FootProfile a cta:KinematicProfile ;
+    rdfs:label "도보 프로파일"@ko ;
+    cta:baseSpeed "2.0"^^xsd:decimal ;
+    cta:defaultState cta:Holding ;
+    cta:allowsState cta:Moving , cta:Approaching , cta:Withdrawing , cta:Engaging ,
+                    cta:Halted , cta:Holding , cta:Occupying , cta:Firing , cta:Unknown , cta:Destroyed ;
+    cta:vMaxEntries
+      [ cta:forState cta:Moving ; cta:vMax "2.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Approaching ; cta:vMax "2.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Withdrawing ; cta:vMax "2.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Unknown ; cta:vMax "2.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Engaging ; cta:vMax "2.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Halted ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Holding ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Occupying ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Firing ; cta:vMax "0.5"^^xsd:decimal ] .
+
+#############################
+# 2) 궤도(TrackedProfile) — 전차/장갑차. 진지 거치(Emplaced) 없음.
+#    ver1.4: bf:Tank, bf:ArmoredVehicle (mobilityType "tracked")
+#############################
+cta:TrackedProfile a cta:KinematicProfile ;
+    rdfs:label "궤도차량 프로파일"@ko ;
+    cta:baseSpeed "12.0"^^xsd:decimal ;
+    cta:defaultState cta:Moving ;
+    cta:allowsState cta:Moving , cta:Approaching , cta:Withdrawing , cta:Engaging ,
+                    cta:Halted , cta:Holding , cta:Firing , cta:Unknown , cta:Destroyed ;
+    cta:vMaxEntries
+      [ cta:forState cta:Moving ; cta:vMax "12.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Approaching ; cta:vMax "12.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Withdrawing ; cta:vMax "12.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Unknown ; cta:vMax "12.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Engaging ; cta:vMax "2.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Halted ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Holding ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Firing ; cta:vMax "0.5"^^xsd:decimal ] .
+
+#############################
+# 3) 차륜(WheeledProfile) — 트럭/차륜 장갑. 최속.
+#    ver1.4: bf:Truck (mobilityType "wheeled")
+#############################
+cta:WheeledProfile a cta:KinematicProfile ;
+    rdfs:label "차륜차량 프로파일"@ko ;
+    cta:baseSpeed "14.0"^^xsd:decimal ;
+    cta:defaultState cta:Moving ;
+    cta:allowsState cta:Moving , cta:Approaching , cta:Withdrawing ,
+                    cta:Halted , cta:Holding , cta:Unknown , cta:Destroyed ;
+    cta:vMaxEntries
+      [ cta:forState cta:Moving ; cta:vMax "14.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Approaching ; cta:vMax "14.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Withdrawing ; cta:vMax "14.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Unknown ; cta:vMax "14.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Halted ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Holding ; cta:vMax "0.5"^^xsd:decimal ] .
+
+#############################
+# 4) 견인(TowedProfile) — 견인포/박격포/대공포/대전차포. 자력이동 불가.
+#    진지에서만 존재: Emplaced/Firing/Halted(+Unknown/Destroyed).
+#    ver1.4: bf:Artillery 하위 견인형, bf:Mortar, bf:AntiAircraftGun,
+#            bf:AntiTankWeapon (emplacementType "towed")
+#    전이 예외: Emplaced→Moving/Approaching = 0.02 (거의 불가)
+#############################
+cta:TowedProfile a cta:KinematicProfile ;
+    rdfs:label "견인화기 프로파일"@ko ;
+    cta:baseSpeed "0.0"^^xsd:decimal ;
+    cta:defaultState cta:Emplaced ;
+    cta:allowsState cta:Emplaced , cta:Firing , cta:Halted , cta:Unknown , cta:Destroyed ;
+    cta:vMaxEntries
+      [ cta:forState cta:Emplaced ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Firing ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Halted ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Unknown ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Destroyed ; cta:vMax "0.0"^^xsd:decimal ] ;
+    cta:profileTransitionOverride
+      [ a cta:StateTransition ; cta:fromState cta:Emplaced ; cta:toState cta:Moving ;      cta:plausibility "0.02"^^xsd:decimal ] ,
+      [ a cta:StateTransition ; cta:fromState cta:Emplaced ; cta:toState cta:Approaching ; cta:plausibility "0.02"^^xsd:decimal ] ,
+      [ a cta:StateTransition ; cta:fromState cta:Firing ;   cta:toState cta:Moving ;      cta:plausibility "0.02"^^xsd:decimal ] ,
+      [ a cta:StateTransition ; cta:fromState cta:Firing ;   cta:toState cta:Approaching ; cta:plausibility "0.02"^^xsd:decimal ] .
+
+#############################
+# 5) 자주(SelfPropelledProfile) — 자주포/자주대공. 스스로 이동 후 사격.
+#    ver1.4: bf:SelfPropelledArtillery, bf:MultipleRocketLauncher
+#############################
+cta:SelfPropelledProfile a cta:KinematicProfile ;
+    rdfs:label "자주화기 프로파일"@ko ;
+    cta:baseSpeed "8.0"^^xsd:decimal ;
+    cta:defaultState cta:Emplaced ;
+    cta:allowsState cta:Moving , cta:Approaching , cta:Withdrawing , cta:Emplaced , cta:Firing ,
+                    cta:Halted , cta:Holding , cta:Unknown , cta:Destroyed ;
+    cta:vMaxEntries
+      [ cta:forState cta:Moving ; cta:vMax "8.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Approaching ; cta:vMax "8.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Withdrawing ; cta:vMax "8.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Unknown ; cta:vMax "8.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Emplaced ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Firing ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Halted ; cta:vMax "0.5"^^xsd:decimal ] ,
+      [ cta:forState cta:Holding ; cta:vMax "0.5"^^xsd:decimal ] .
+
+#############################
+# 6) 공중(AirborneProfile) — UAV/항공기. 정적 상태 없음, 초고속.
+#    ver1.4: bf:AirVehicle, bf:UAV
+#############################
+cta:AirborneProfile a cta:KinematicProfile ;
+    rdfs:label "공중기동 프로파일"@ko ;
+    cta:baseSpeed "50.0"^^xsd:decimal ;
+    cta:defaultState cta:Moving ;
+    cta:allowsState cta:Moving , cta:Approaching , cta:Withdrawing , cta:Engaging ,
+                    cta:Unknown , cta:Destroyed ;
+    cta:vMaxEntries
+      [ cta:forState cta:Moving ; cta:vMax "50.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Approaching ; cta:vMax "50.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Withdrawing ; cta:vMax "50.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Unknown ; cta:vMax "50.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Engaging ; cta:vMax "2.0"^^xsd:decimal ] .
+
+#############################
+# 7) 정적(StaticProfile) — 시설/진지/지형/센서(고정). 위치 불변.
+#    ver1.4: bf:Facility, bf:MilitaryPosition, bf:CommandPost,
+#            bf:LogisticsFacility, bf:GeographicFeature, bf:Sensor(고정)
+#############################
+cta:StaticProfile a cta:KinematicProfile ;
+    rdfs:label "고정시설 프로파일"@ko ;
+    cta:baseSpeed "0.0"^^xsd:decimal ;
+    cta:defaultState cta:Occupying ;
+    cta:allowsState cta:Occupying , cta:Holding , cta:Emplaced , cta:Unknown , cta:Destroyed ;
+    cta:vMaxEntries
+      [ cta:forState cta:Occupying ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Holding ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Emplaced ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Unknown ; cta:vMax "0.0"^^xsd:decimal ] ,
+      [ cta:forState cta:Destroyed ; cta:vMax "0.0"^^xsd:decimal ] .
+
+#################################################################
+#  프로파일 ↔ ver1.4(bf:) 클래스 바인딩
+#  (소비자는 하위클래스에서 없으면 rdfs:subClassOf 상위로 상속)
+#################################################################
+
+# 인원/보병 계열 → 도보
+bf:Personnel  cta:hasKinematicProfile cta:FootProfile .
+bf:Soldier    cta:hasKinematicProfile cta:FootProfile .
+bf:Squad      cta:hasKinematicProfile cta:FootProfile .
+# 부대(제대)는 기본 도보로 두되, 차량화/기계화는 인스턴스 수준에서 재지정
+bf:Unit       cta:hasKinematicProfile cta:FootProfile .
+
+# 궤도 차량
+bf:Tank           cta:hasKinematicProfile cta:TrackedProfile .
+bf:ArmoredVehicle cta:hasKinematicProfile cta:TrackedProfile .
+
+# 차륜 차량
+bf:Truck          cta:hasKinematicProfile cta:WheeledProfile .
+bf:GroundVehicle  cta:hasKinematicProfile cta:WheeledProfile .   # 미세분류 기본값
+
+# 견인 화기
+bf:Mortar          cta:hasKinematicProfile cta:TowedProfile .
+bf:AntiAircraftGun cta:hasKinematicProfile cta:TowedProfile .
+bf:AntiTankWeapon  cta:hasKinematicProfile cta:TowedProfile .
+bf:Artillery       cta:hasKinematicProfile cta:TowedProfile .    # 포병 기본=견인 (자주형은 아래에서 상속 재정의)
+
+# 자주 화기 (bf:Artillery 하위지만 프로파일을 자주로 덮어씀)
+bf:SelfPropelledArtillery cta:hasKinematicProfile cta:SelfPropelledProfile .
+bf:MultipleRocketLauncher cta:hasKinematicProfile cta:SelfPropelledProfile .
+
+# 공중
+bf:AirVehicle cta:hasKinematicProfile cta:AirborneProfile .
+bf:UAV        cta:hasKinematicProfile cta:AirborneProfile .
+
+# 고정 시설/지형/센서
+bf:Facility          cta:hasKinematicProfile cta:StaticProfile .
+bf:MilitaryPosition  cta:hasKinematicProfile cta:StaticProfile .
+bf:CommandPost       cta:hasKinematicProfile cta:StaticProfile .
+bf:LogisticsFacility cta:hasKinematicProfile cta:StaticProfile .
+bf:GeographicFeature cta:hasKinematicProfile cta:StaticProfile .
+bf:Sensor            cta:hasKinematicProfile cta:StaticProfile .
+
+# 최상위 폴백: 분류 불명 실체는 도보(가장 관대한 상태집합)로 처리
+bf:MilitaryEntity cta:hasKinematicProfile cta:FootProfile .

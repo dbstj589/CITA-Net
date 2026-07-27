@@ -1,0 +1,38 @@
+# Full-battle omniscient GT (~1,000,000 triples). Sector-streaming, multi-phase.
+# Scale is driven by target_triples: sectors are grown (after a density probe)
+# until the triple target is met. Coords/IDs/time stay global. Sensor-neutral.
+
+global_seed: 19521006
+
+time:
+  epoch: "1952-10-06T00:00:00Z"
+  window_seconds: 14400      # 4 h representative multi-phase engagement (synthetic,
+                             # not historically verified; treated as a config value)
+  dt_seconds: 120            # coarse for a long window to bound trajectory size
+  phases: 6                  # attack/counter rotation; entry/exit/attrition/reinforce
+
+world_scope:
+  mode: tiled
+  sector_pitch_m: 6000.0     # n_sectors is chosen automatically from target_triples
+
+entities:
+  per_sector: 40             # base roster per sector (roster ratios preserved)
+  attrition_frac: 0.22       # fraction that die (-> Destroyed wreck) within their life
+  reinforce_frac: 0.5        # CCF assault wave size vs base CCF infantry
+
+terrain:
+  mode: tile                 # one periodic sector tile (small/fast at 1000s of sectors)
+  grid_resolution_m: 50.0
+  base_elevation_m: 50.0
+  ridge_amplitude_m: 120.0
+  ridge_sigma_m: 700.0
+  noise_amplitude_m: 12.0
+  canopy_frac: 0.12
+  trench_radius_m: 250.0
+
+ontology_dir: data/battlefield_hill395_large/ontology
+
+target_triples: 1000000
+tolerance: 0.05
+
+output_dir: data/hill395_world_gt_full

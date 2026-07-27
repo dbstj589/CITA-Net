@@ -85,6 +85,61 @@ SOURCE_DESC = {
     "HUMINT": "Scout report / POW interrogation (정찰조/포로)",
 }
 
+# ===========================================================================
+# realistic-v1 profile (OPT-IN via --profile realistic_v1). When None the
+# generator behaves EXACTLY as the frozen baseline (all branches below are
+# guarded by `if profile:` and consume no rng otherwise). This single constant
+# is the authoritative record of the injected uncertainties (§ report table).
+# ===========================================================================
+REALISTIC_V1 = {
+    "name": "realistic_v1",
+    # ① per-SOURCE systematic clock offset (s); folded into the visible obs time.
+    "clock_offset": {"RADAR": 0.0, "VISUAL_OBS": 5.0, "ARTILLERY_OBS": 3.0,
+                     "AERIAL": 10.0, "ACOUSTIC": -20.0, "SIGINT": 40.0, "HUMINT": -60.0},
+    # ① report/record delay added to the visible time (observation vs record time
+    # split). Spec: (kind, *params). exp_clip=(mean,lo,hi); lognorm_clip=(median,sigma,lo,hi).
+    "report_delay": {
+        "RADAR": ("exp_clip", 5.0, 0.0, 10.0), "VISUAL_OBS": ("exp_clip", 5.0, 0.0, 10.0),
+        "ARTILLERY_OBS": ("exp_clip", 5.0, 0.0, 10.0), "AERIAL": ("exp_clip", 5.0, 0.0, 10.0),
+        "SIGINT": ("lognorm_clip", 120.0, 0.6, 60.0, 300.0),
+        "ACOUSTIC": ("lognorm_clip", 120.0, 0.6, 60.0, 300.0),
+        "HUMINT": ("lognorm_clip", 150.0, 0.6, 60.0, 300.0)},
+    # ④ per-source position-error multiplier (scales injected error AND cep_m).
+    "pos_mult": {"ACOUSTIC": 5.0, "RADAR": 0.5, "VISUAL_OBS": 1.0, "SIGINT": 3.0,
+                 "HUMINT": 3.0, "AERIAL": 1.5, "ARTILLERY_OBS": 1.5},
+    # ④ per-source UNKNOWN (classifier abstains) and plausible mis-ID rates,
+    # decided PER OBSERVATION by that observation's source.
+    "unknown_rate": {"RADAR": 0.80, "ACOUSTIC": 0.50, "SIGINT": 0.40, "HUMINT": 0.40,
+                     "AERIAL": 0.25, "ARTILLERY_OBS": 0.20, "VISUAL_OBS": 0.10},
+    "misid_rate": {"VISUAL_OBS": 0.15, "_default": 0.05},
+    # ② fraction of (non-wreck) objects given a >=2-transition (fire-move-fire)
+    # schedule; the rest keep >=1 transition but get per-object time jitter
+    # (diversifies nearby same-type objects that previously shared one schedule).
+    "multi_transition_frac": 0.30,
+    # ③ target KG-A/B relation observation overlap (Jaccard); each relation is
+    # seen by both KGs w.p. overlap, else by exactly one.
+    "kg_relation_overlap": 0.60,
+    # ③ relation enrichment: 1..3 extra unique predicates/object -> unique combos.
+    "relation_enrich_max": 3,
+}
+_LM_PREDS = ["near", "screens", "movesToward", "occupies", "emplacedAt"]
+_UNIT_PREDS = ["supports", "reinforces"]
+
+
+def _draw_delay(spec, rng) -> float:
+    """Report delay (s, >=0) for a source. None -> 0 (legacy)."""
+    if spec is None:
+        return 0.0
+    kind = spec[0]
+    if kind == "exp_clip":
+        _, mean, lo, hi = spec
+        return float(min(hi, max(lo, rng.exponential(mean))))
+    if kind == "lognorm_clip":
+        _, median, sigma, lo, hi = spec
+        return float(min(hi, max(lo, median * math.exp(rng.normal(0.0, sigma)))))
+    return 0.0
+
+
 # ---- object-type taxonomy (faction-functional; faction baked into type so the
 #      model never has to merge ROK with CCF). category drives by-category
 #      blocking; same category across factions => hard negatives. ----------------
@@ -197,6 +252,8 @@ class Knobs:
     obs_per_track: int = 10
     dangling_ratio: float = 0.2
     n_robots: int = 2
+    # OPT-IN uncertainty profile (e.g. REALISTIC_V1). None => frozen-identical.
+    profile: Optional[dict] = None
 
 
 # ===========================================================================
@@ -204,6 +261,44 @@ class Knobs:
 # ===========================================================================
 def _pick(rng, pool):
     return pool[int(rng.integers(0, len(pool)))]
+
+
+def _apply_state_dynamics(objs, rng, profile) -> None:
+    """② profile-only. Give `multi_transition_frac` of the (non-wreck) objects a
+    >=2-transition schedule (fire-move-fire / emplace-fire repeat); jitter the
+    rest so nearby same-type objects no longer share one identical schedule.
+    Mobility-aware so towed weapons never get a 'Moving' state."""
+    frac = profile.get("multi_transition_frac", 0.3)
+    for o in objs:
+        if not o.states or o.states[0][1] == "Destroyed":
+            continue                                   # wrecks stay destroyed
+        mob = TYPES.get(o.true_type, (None, "unknown", 0.0, "Unknown"))[1]
+        if float(rng.random()) < frac:
+            seq = (["Moving", "Firing", "Moving", "Firing"] if mob in ("foot", "tracked", "wheeled")
+                   else ["Emplaced", "Firing", "Emplaced", "Firing"])
+            ts = sorted(float(x) for x in rng.uniform(40.0, 560.0, size=3))
+            o.states = [(0.0, seq[0]), (ts[0], seq[1]), (ts[1], seq[2]), (ts[2], seq[3])]
+        elif len(o.states) >= 2:
+            new = [o.states[0]]
+            for tf, s in o.states[1:]:
+                new.append((max(1.0, min(599.0, tf + float(rng.uniform(-60.0, 60.0)))), s))
+            o.states = sorted(new, key=lambda x: x[0])
+
+
+def _enrich_relations(objs, rng, profile, units, landmarks) -> None:
+    """③ profile-only. Append 1..N extra predicates (to landmarks/units already in
+    this sector) per object so per-entity relation combos become unique and denser.
+    Predicates are drawn from the existing ontology vocabulary only."""
+    n_max = profile.get("relation_enrich_max", 3)
+    lm_ids = list(landmarks)
+    unit_ids = list(units)
+    for o in objs:
+        k = int(rng.integers(1, n_max + 1))
+        for _ in range(k):
+            if unit_ids and float(rng.random()) < 0.35:
+                o.relations.append((_pick(rng, _UNIT_PREDS), ("unit", _pick(rng, unit_ids))))
+            elif lm_ids:
+                o.relations.append((_pick(rng, _LM_PREDS), ("landmark", _pick(rng, lm_ids))))
 
 
 def build_sector(rng: np.random.Generator, knobs: Knobs, sx: float, sy: float
@@ -447,6 +542,12 @@ def build_sector(rng: np.random.Generator, knobs: Knobs, sx: float, sy: float
                         events=[], dangling=True,
                         tracks=tracks_for(rng, t, [_pick(rng, robots)], t)))
 
+    # ---- profile-only post-processing (② state dynamics, ③ relation density).
+    #      Guarded so the frozen baseline is byte-identical. ----
+    if getattr(knobs, "profile", None):
+        _apply_state_dynamics(objs, rng, knobs.profile)
+        _enrich_relations(objs, rng, knobs.profile, units, landmarks)
+
     return objs, units, landmarks, events
 
 
@@ -461,7 +562,8 @@ def _mgrs(e, n):
     return f"52SDT{int(e) % 100000:05d}{int(n) % 100000:05d}"
 
 
-def realise_sector(sector_id, objs, units, rng):
+def realise_sector(sector_id, objs, units, rng, knobs=None):
+    profile = getattr(knobs, "profile", None) if knobs is not None else None
     ent_counter: dict[str, int] = {}
     obj_local: dict[str, dict[str, str]] = {}
     for o in objs:
@@ -469,6 +571,22 @@ def realise_sector(sector_id, objs, units, rng):
         for tr in o.tracks:
             ent_counter[tr.kg_id] = ent_counter.get(tr.kg_id, 0) + 1
             obj_local[o.gold_id][tr.kg_id] = f"ent_{tr.kg_id}_{ent_counter[tr.kg_id]:04d}"
+
+    # ③ profile-only: per-object, per-relation KG-observation assignment. Each
+    # relation is seen by both KGs w.p. `kg_relation_overlap`, else by exactly
+    # one -> partial cross-KG relation overlap (legacy: every KG sees all).
+    relkg: dict[str, dict[int, set]] = {}
+    if profile:
+        ov = profile.get("kg_relation_overlap", 1.0)
+        for o in objs:
+            o_kgs = sorted({tr.kg_id for tr in o.tracks})
+            assign: dict[int, set] = {}
+            for idx in range(len(o.relations)):
+                if len(o_kgs) <= 1 or float(rng.random()) < ov:
+                    assign[idx] = set(o_kgs)
+                else:
+                    assign[idx] = {o_kgs[int(rng.integers(0, len(o_kgs)))]}
+            relkg[o.gold_id] = assign
 
     def resolve(kg, tgt):
         kind, ref = tgt
@@ -489,8 +607,11 @@ def realise_sector(sector_id, objs, units, rng):
             kg = tr.kg_id
             lid = obj_local[o.gold_id][kg]
             ekey = f"{kg}:{lid}"
+            assign = relkg.get(o.gold_id) if profile else None
             rels = []
-            for pred, tgt in o.relations:
+            for idx, (pred, tgt) in enumerate(o.relations):
+                if assign is not None and kg not in assign.get(idx, set()):
+                    continue                            # ③ this KG does not observe this relation
                 r = resolve(kg, tgt)
                 if r:
                     rels.append({"predicate": pred, "target_ref": r[1], "target_kind": r[0],
@@ -504,9 +625,17 @@ def realise_sector(sector_id, objs, units, rng):
                 oid = f"obs_{kg}_{oc[0]:05d}"
                 src = tr.sources[i % len(tr.sources)]
                 # NOISE_MULT scales the actual position error AND the reported cep_m
-                # together (robustness sweep); 1.0 = frozen baseline.
-                cep = SOURCE_CEP.get(src, 50.0) * NOISE_MULT
-                t_obs = tt + KG_CLOCK_OFFSET.get(kg, 0.0) + float(rng.normal(0, 1.0))
+                # together (robustness sweep); 1.0 = frozen baseline. The profile
+                # further scales it per source (④) and shifts the visible time by a
+                # per-source systematic offset + report delay (①).
+                if profile:
+                    cep = SOURCE_CEP.get(src, 50.0) * NOISE_MULT * profile["pos_mult"].get(src, 1.0)
+                    off = profile["clock_offset"].get(src, KG_CLOCK_OFFSET.get(kg, 0.0))
+                    delay = _draw_delay(profile["report_delay"].get(src), rng)
+                    t_obs = tt + off + delay + float(rng.normal(0, 1.0))
+                else:
+                    cep = SOURCE_CEP.get(src, 50.0) * NOISE_MULT
+                    t_obs = tt + KG_CLOCK_OFFSET.get(kg, 0.0) + float(rng.normal(0, 1.0))
                 e_t, n_t = o.pos(tt)
                 sig = cep / 1.1774
                 e_o = e_t + float(rng.normal(0, sig)); n_o = n_t + float(rng.normal(0, sig))
@@ -514,12 +643,29 @@ def realise_sector(sector_id, objs, units, rng):
                 spd, hd = o.vel(tt)
                 if st in ("Emplaced", "Halted", "Destroyed", "Holding", "Occupying", "Firing"):
                     spd = 0.0
-                tconf = round(min(0.99, max(0.2, SOURCE_TYPEREL.get(src, 0.5) * tr.type_conf_scale
+                # ④ per-source type reporting: UNKNOWN (classifier abstains) / plausible
+                # mis-ID decided per-observation by the source's rates. Legacy: the
+                # track-level type/label chosen once in tracks_for.
+                if profile:
+                    u = float(rng.random())
+                    unk = profile["unknown_rate"].get(src, 0.10)
+                    mis = profile["misid_rate"].get(src, profile["misid_rate"]["_default"])
+                    if u < unk:
+                        o_type, o_label, tcs = "UNKNOWN", _pick(rng, UNKNOWN_LABELS), 0.6
+                    elif u < unk + mis and o.true_type in MISID:
+                        o_type = MISID[o.true_type]
+                        o_label, tcs = _pick(rng, LABELS[o_type]), 0.7
+                    else:
+                        o_type = o.true_type
+                        o_label, tcs = _pick(rng, LABELS.get(o.true_type, [o.true_type])), 1.0
+                else:
+                    o_type, o_label, tcs = tr.obj_type, tr.label_text, tr.type_conf_scale
+                tconf = round(min(0.99, max(0.2, SOURCE_TYPEREL.get(src, 0.5) * tcs
                                             + 0.05 * rng.random())), 3)
                 sconf = round(min(0.99, max(0.2, SOURCE_REL.get(src, 0.5) + 0.05 * rng.random())), 3)
-                observations.append({
+                rec = {
                     "obs_id": oid, "kg_id": kg, "source": src, "local_entity_id": lid,
-                    "label_text": tr.label_text, "type": tr.obj_type, "type_confidence": tconf,
+                    "label_text": o_label, "type": o_type, "type_confidence": tconf,
                     "state": st, "state_confidence": sconf, "time": _iso(t_obs),
                     "location": {"crs": CRS, "easting": round(e_o, 2), "northing": round(n_o, 2),
                                  "elevation": 50.0, "mgrs": _mgrs(e_o, n_o)},
@@ -529,7 +675,11 @@ def realise_sector(sector_id, objs, units, rng):
                                    "confidence": r["confidence"]} for r in rels],
                     "events": evs,
                     "provenance": {"wasAttributedTo": src, "generatedAtTime": _iso(t_obs)},
-                })
+                }
+                if profile:
+                    # inspection-only: TRUE observation time (pipeline ignores extra keys)
+                    rec["_true_time"] = _iso(tt)
+                observations.append(rec)
                 entities[ekey]["obs_ids"].append(oid)
 
     observations.sort(key=lambda o: (o["time"], o["obs_id"]))
@@ -686,7 +836,7 @@ def _compat_matrix() -> dict:
     return {a: {b: cell(a, b) for b in STATES} for a in STATES}
 
 
-def write_ontology(ont_dir: Path) -> None:
+def write_ontology(ont_dir: Path, profile: Optional[dict] = None) -> None:
     ont_dir.mkdir(parents=True, exist_ok=True)
 
     def dump_yaml(path: Path, text: str):
@@ -736,12 +886,15 @@ def write_ontology(ont_dir: Path) -> None:
           "# direct sensors (VISUAL_OBS/RADAR/ARTILLERY_OBS); KG B uses standoff /",
           "# indirect sources (AERIAL/SIGINT/ACOUSTIC/HUMINT).\n"]
     for s in SOURCE_CEP:
+        # profile inflates cep by the per-source position multiplier so the blocking
+        # max_cep guard (max over ontology source_cep) still covers the injected error.
+        cep_eff = SOURCE_CEP[s] * (profile["pos_mult"].get(s, 1.0) if profile else 1.0)
         sr.append(f"{s}:")
         sr.append(f"  description: {SOURCE_DESC[s]}")
         sr.append(f"  reliability: {SOURCE_REL[s]}")
         sr.append(f"  type_reliability: {SOURCE_TYPEREL[s]}")
-        sr.append(f"  pos_reliability: {round(1.0 - SOURCE_CEP[s] / 120.0, 2)}")
-        sr.append(f"  cep_m: {SOURCE_CEP[s]}")
+        sr.append(f"  pos_reliability: {round(1.0 - min(cep_eff, 120.0) / 120.0, 2)}")
+        sr.append(f"  cep_m: {round(cep_eff, 1)}")
         sr.append("")
     dump_yaml(ont_dir / "sources.yaml", "\n".join(sr))
 
@@ -821,7 +974,7 @@ def write_sector(split: str, sector_id: str, seed: int, idx: int, knobs: Knobs) 
     sx = (idx % 8) * SECTOR_PITCH
     sy = (idx // 8) * SECTOR_PITCH
     objs, units, landmarks, events = build_sector(rng, knobs, sx, sy)
-    observations, entities, gold, obj_local = realise_sector(sector_id, objs, units, rng)
+    observations, entities, gold, obj_local = realise_sector(sector_id, objs, units, rng, knobs)
 
     sector_dir = DATA_ROOT / "sectors" / sector_id
     (sector_dir / "labels").mkdir(parents=True, exist_ok=True)
@@ -873,7 +1026,7 @@ def build_split(split: str, knobs: Knobs, n_sectors: Optional[int],
 
 def build_suite(target_triples: Optional[int], knobs: Knobs) -> None:
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
-    write_ontology(ONTOLOGY_DIR)
+    write_ontology(ONTOLOGY_DIR, knobs.profile)
     target = target_triples or 1_000_000
     splits, totals = {}, {}
     dev_ids, dev_t = build_split("dev", knobs, n_sectors=12, target_triples=None)
@@ -930,6 +1083,8 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=None)
     ap.add_argument("--noise-mult", type=float, default=1.0,
                     help="scale injected position error AND reported cep_m (1.0=baseline)")
+    ap.add_argument("--profile", default=None, choices=["realistic_v1"],
+                    help="OPT-IN uncertainty profile. Omit => frozen-identical behaviour.")
     ap.add_argument("--out-root", default=None,
                     help="output data root (default data/battlefield_hill395_large). "
                          "REQUIRED to build a non-frozen suite elsewhere.")
@@ -950,12 +1105,14 @@ def main() -> None:
             f"refusing to --build-suite into existing non-empty dir {DATA_ROOT} "
             f"without --force (protects the frozen suite; pass --out-root for a new dir)")
 
+    profile = REALISTIC_V1 if args.profile == "realistic_v1" else None
     knobs = Knobs(identities_per_sector=args.identities_per_sector,
                   obs_per_track=args.obs_per_track,
-                  dangling_ratio=args.dangling_ratio, n_robots=args.n_robots)
+                  dangling_ratio=args.dangling_ratio, n_robots=args.n_robots,
+                  profile=profile)
 
     if args.emit_ontology:
-        write_ontology(ONTOLOGY_DIR)
+        write_ontology(ONTOLOGY_DIR, profile)
         print(f"ontology -> {ONTOLOGY_DIR}")
         return
     if args.build_suite:
@@ -963,7 +1120,7 @@ def main() -> None:
         return
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
     if not (ONTOLOGY_DIR / "classes.yaml").exists():
-        write_ontology(ONTOLOGY_DIR)
+        write_ontology(ONTOLOGY_DIR, profile)
     if args.seed is not None:
         SEED_BASE[args.split] = args.seed
     ids, total = build_split(args.split, knobs, args.n_sectors, args.target_triples)

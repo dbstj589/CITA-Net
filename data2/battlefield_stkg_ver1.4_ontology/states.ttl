@@ -1,0 +1,85 @@
+@prefix cta:  <https://example.org/stkg/cta#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+#################################################################
+#  states.ttl — 관측 상태(11종) + 정적여부 + 상태 전이 규칙
+#
+#  상태 목록/의미는 battlefield_hill395_large 데이터셋의 states.yaml 을
+#  그대로 사용(변경 없음). 전이 규칙(plausibility C[i][j])의 골격도 동일하되,
+#  객체별(클래스별) 세부 전이 예외와 허용 상태는 classes.ttl 에서
+#  battlefield_stkg_ver1.4 의 클래스 계층에 맞춰 변형한다.
+#################################################################
+
+cta:State a owl:Class ;
+    rdfs:label "관측 상태"@ko , "ObservationState"@en ;
+    rdfs:comment "STKG 관측이 한 시점에 가질 수 있는 운동/전술 상태. hill395 states.yaml의 11종을 그대로 사용."@ko .
+
+# --- 11개 상태 (hill395와 동일). cta:isStatic = 위치가 (거의) 고정되는 상태 ---
+cta:Moving       a cta:State ; skos:prefLabel "이동"@ko , "Moving"@en ;       cta:isStatic false .
+cta:Approaching  a cta:State ; skos:prefLabel "접근"@ko , "Approaching"@en ;  cta:isStatic false .
+cta:Withdrawing  a cta:State ; skos:prefLabel "철수"@ko , "Withdrawing"@en ;  cta:isStatic false .
+cta:Engaging     a cta:State ; skos:prefLabel "교전"@ko , "Engaging"@en ;     cta:isStatic false .
+cta:Unknown      a cta:State ; skos:prefLabel "미상"@ko , "Unknown"@en ;      cta:isStatic false .
+cta:Halted       a cta:State ; skos:prefLabel "정지"@ko , "Halted"@en ;       cta:isStatic true .
+cta:Holding      a cta:State ; skos:prefLabel "확보/견지"@ko , "Holding"@en ; cta:isStatic true .
+cta:Occupying    a cta:State ; skos:prefLabel "점령"@ko , "Occupying"@en ;    cta:isStatic true .
+cta:Emplaced     a cta:State ; skos:prefLabel "진지점령/거치"@ko , "Emplaced"@en ; cta:isStatic true .
+cta:Firing       a cta:State ; skos:prefLabel "사격"@ko , "Firing"@en ;       cta:isStatic true .
+cta:Destroyed    a cta:State ; skos:prefLabel "파괴"@ko , "Destroyed"@en ;    cta:isStatic true .
+
+#################################################################
+#  상태 전이 규칙 (C[from][to] ∈ (0,1]) — 같은 실체가 이전 상태에서
+#  이후 상태로 갈 가능성(공참조/추적 타당성). hill395 states.yaml 규칙 계승.
+#  기본값 0.85, 자기전이(=)=1.0. 아래는 그 예외(비대칭)만 명시.
+#  파괴/미상은 클래스와 무관한 전역 규칙이므로 규칙 노드로 기술.
+#################################################################
+
+cta:StateTransition a owl:Class ;
+    rdfs:label "상태 전이 규칙"@ko , "StateTransition"@en ;
+    rdfs:comment "fromState→toState 전이의 타당도(plausibility 0..1). 미지정 쌍은 cta:defaultTransitionPlausibility(0.85), 자기전이는 1.0."@ko .
+
+cta:fromState  a owl:ObjectProperty ; rdfs:domain cta:StateTransition ; rdfs:range cta:State ; rdfs:label "이전 상태"@ko .
+cta:toState    a owl:ObjectProperty ; rdfs:domain cta:StateTransition ; rdfs:range cta:State ; rdfs:label "이후 상태"@ko .
+cta:plausibility a owl:DatatypeProperty ; rdfs:domain cta:StateTransition ; rdfs:range xsd:decimal ; rdfs:label "타당도"@ko .
+
+cta:TransitionModel a owl:NamedIndividual ;
+    cta:defaultTransitionPlausibility "0.85"^^xsd:decimal ;
+    cta:selfTransitionPlausibility "1.0"^^xsd:decimal ;
+    cta:eps "0.01"^^xsd:decimal ;
+    rdfs:comment "미지정 전이=0.85, 자기전이=1.0. b_state = gamma * log(C + eps)."@ko .
+
+# --- 전술적으로 비합리적인 전이 (hill395 low_after) ---
+[ a cta:StateTransition ; rdfs:label "철수→점령 (비합리)"@ko ; cta:fromState cta:Withdrawing ; cta:toState cta:Occupying ;   cta:plausibility "0.20"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "철수→확보"@ko ;         cta:fromState cta:Withdrawing ; cta:toState cta:Holding ;     cta:plausibility "0.25"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "철수→접근"@ko ;         cta:fromState cta:Withdrawing ; cta:toState cta:Approaching ; cta:plausibility "0.30"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "진지→이동"@ko ;         cta:fromState cta:Emplaced ;    cta:toState cta:Moving ;      cta:plausibility "0.30"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "진지→접근"@ko ;         cta:fromState cta:Emplaced ;    cta:toState cta:Approaching ; cta:plausibility "0.30"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "진지→철수"@ko ;         cta:fromState cta:Emplaced ;    cta:toState cta:Withdrawing ; cta:plausibility "0.40"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "사격→이동"@ko ;         cta:fromState cta:Firing ;      cta:toState cta:Moving ;      cta:plausibility "0.40"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "사격→접근"@ko ;         cta:fromState cta:Firing ;      cta:toState cta:Approaching ; cta:plausibility "0.40"^^xsd:decimal ] .
+[ a cta:StateTransition ; rdfs:label "점령→접근"@ko ;         cta:fromState cta:Occupying ;   cta:toState cta:Approaching ; cta:plausibility "0.40"^^xsd:decimal ] .
+
+# --- 전역 규칙: 파괴/미상 ---
+cta:Destroyed
+    cta:transitionRule "from Destroyed: to any active state = 0.01(eps); to Unknown = 0.30; self = 1.0. (파괴된 실체는 되살아나지 않음)"@ko ;
+    cta:transitionToActive "0.01"^^xsd:decimal ;
+    cta:transitionToUnknown "0.30"^^xsd:decimal .
+cta:Unknown
+    cta:transitionRule "Unknown 이 관여하는 전이(양방향) = 0.80. (관측 미상은 어떤 상태로도 넘어갈 여지)."@ko ;
+    cta:transitionPlausibilityAny "0.80"^^xsd:decimal .
+# 임의 활성 상태 → 파괴(피격)는 항상 가능
+[ a cta:StateTransition ; rdfs:label "임의 활성→파괴 (피격)"@ko ; cta:toState cta:Destroyed ; cta:plausibility "0.60"^^xsd:decimal ;
+  rdfs:comment "from = 임의의 활성 상태. 어떤 실체든 이후 파괴될 수 있음."@ko ] .
+
+cta:defaultTransitionPlausibility a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+cta:selfTransitionPlausibility    a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+cta:eps                           a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+cta:isStatic                      a owl:DatatypeProperty ; rdfs:domain cta:State ; rdfs:range xsd:boolean ; rdfs:label "정적상태 여부"@ko .
+cta:transitionRule                a owl:AnnotationProperty .
+cta:transitionToActive            a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+cta:transitionToUnknown           a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+cta:transitionPlausibilityAny     a owl:DatatypeProperty ; rdfs:range xsd:decimal .

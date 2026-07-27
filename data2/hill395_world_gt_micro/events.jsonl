@@ -1,0 +1,10 @@
+{"id": "ev_0001", "type": "FireSupport", "interval": [1500.0, 2700.0], "participants": ["e_0010", "e_0011", "e_0012", "e_0013"], "landmark": "lm_approach"}
+{"id": "ev_0002", "type": "Attack", "interval": [0.0, 2100.0], "participants": ["e_0018", "e_0019", "e_0020", "e_0021", "e_0022"], "landmark": "lm_crest"}
+{"id": "ev_0003", "type": "FireSupport", "interval": [5100.0, 6300.0], "participants": ["e_0010", "e_0011", "e_0012", "e_0013"], "landmark": "lm_approach_w"}
+{"id": "ev_0004", "type": "Attack", "interval": [3600.0, 5700.0], "participants": ["e_0023", "e_0024", "e_0025", "e_0026", "e_0027"], "landmark": "lm_crest"}
+{"id": "ev_0005", "type": "Counterattack", "interval": [6300.0, 7200.0], "participants": ["e_0003"], "landmark": "lm_crest"}
+{"id": "ev_0006", "type": "FireSupport", "interval": [8700.0, 9900.0], "participants": ["e_0010", "e_0011", "e_0012", "e_0013"], "landmark": "lm_approach_e"}
+{"id": "ev_0007", "type": "Attack", "interval": [7200.0, 9300.0], "participants": ["e_0028", "e_0029", "e_0030", "e_0031", "e_0032"], "landmark": "lm_crest"}
+{"id": "ev_0008", "type": "FireSupport", "interval": [12300.0, 13500.0], "participants": ["e_0010", "e_0011", "e_0012", "e_0013"], "landmark": "lm_approach"}
+{"id": "ev_0009", "type": "Attack", "interval": [10800.0, 12900.0], "participants": ["e_0033", "e_0034", "e_0035", "e_0036", "e_0037"], "landmark": "lm_crest"}
+{"id": "ev_0010", "type": "Counterattack", "interval": [13500.0, 14400.0], "participants": ["e_0005"], "landmark": "lm_crest"}

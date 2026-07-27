@@ -1,0 +1,37 @@
+# Two-layer 10-day battle GT (1952-10-06..15). Director schedule (source-based
+# skeleton + interp gap-fills) drives daily loss/retake; unit rules (combat power
+# s, Lanchester-simplified attrition, thresholds withdraw/merge/relief/destroyed)
+# produce the individual squad motion. Same micro terrain (one hill, 3.0x3.6 km).
+# Sensor-neutral. Synthetic; NOT a reconstruction of real battle causality.
+
+mode: battle
+global_seed: 19521006
+
+time:
+  epoch: "1952-10-06T00:00:00Z"
+  window_seconds: 864000        # 10 days
+  dt_seconds: 120               # 2-min dense sampling while moving
+  static_baseline_seconds: 14400  # 4-h baseline for idle/staged squads (10-day lulls)
+
+entities:
+  rok_fwd: 6
+  rok_reserve: 6
+  ccf_echelons: 7               # 9 CCF regiments, ~7 committed -> 7 echelons
+  squads_per_echelon: 5         # 7 x 5 = 35 CCF assault squads
+
+terrain:                        # single small hill (peak-aligned landmarks)
+  grid_resolution_m: 25.0
+  area_width_m: 3000.0
+  area_height_m: 3600.0
+  base_elevation_m: 50.0
+  peak_elevation_m: 395.0
+  peak_sigma_m: 500.0
+  ridge_amplitude_m: 180.0
+  stream_north_offset_m: 3000.0
+  canopy_frac: 0.14
+
+reification:
+  predicates: [engagedWith, firesAt, occupies, withdrawsFrom, reinforces, movesToward, supports]
+
+ontology_dir: data/battlefield_hill395_large/ontology
+output_dir: data/hill395_world_gt_battle10d

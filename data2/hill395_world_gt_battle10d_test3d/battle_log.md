@@ -1,0 +1,25 @@
+# Hill 395 — 10-day battle GT chronicle (synthetic; record=source-based, interp=designed gap-fill)
+
+- 10/06 10:00  [record]  prep_bombard: D1 daytime preparatory fires, no infantry
+- 10/06 19:00  [record]  attack: D1 night wave 1 (repulsed)
+- 10/06 21:00  [record]  attack: D1 night wave 2 (repulsed)
+- 10/06 23:00  [record]  attack: D1 night wave 3 (repulsed)
+- 10/07 08:00  [interp-B]  refit: D2 refit
+- 10/07 20:00  [record]  attack: D2 night: crest lost
+- 10/07 22:30  [record]  counterattack: D2 reserve counterattack retakes crest
+- 10/08 05:00  [record]  attack: D3 dawn+fog: crest lost 08:10 (fog: no friendly fire)
+- 10/08 17:00  [record]  counterattack: D3 17:00 reserve committed, 23:05 retake
+- 10/09 00:30  [record]  attack: D4 post-midnight: crest + right ridge lost
+- 10/09 13:00  [record]  counterattack: D4 daytime MAX preparatory fire then counterattack retake
+- 10/10 04:00  [record]  attack: D5 dawn assault; defenders fall back, MERGE, retake
+- 10/10 08:00  [record]  counterattack: D5 reinforced retake
+- 10/11 08:00  [interp-C]  quiet: D6 daytime lull (artillery only)
+- 10/11 21:00  [record]  attack: D6 night: crest lost
+- 10/12 06:00  [record]  counterattack: D7 morning passage-of-lines counterattack retakes
+- 10/12 14:00  [record]  attack: D7 enemy counter: crest lost again
+- 10/13 22:00  [interp-D]  attack: D8 night small loss
+- 10/14 04:00  [interp-D]  counterattack: D8 dawn retake
+- 10/14 22:00  [interp-D]  attack: D9 night small loss
+- 10/15 04:00  [interp-D]  counterattack: D9 dawn retake
+- 10/15 04:00  [record]  counterattack: D10 dawn surprise counterattack, full recapture then pursue to ridge
+- 10/15 08:00  [record]  withdraw_all: D10 surviving CCF withdraw north off-map

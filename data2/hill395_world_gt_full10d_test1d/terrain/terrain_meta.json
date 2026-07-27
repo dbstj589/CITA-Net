@@ -1,0 +1,32 @@
+{
+  "origin_e": 300000.0,
+  "origin_n": 4238000.0,
+  "res_m": 50.0,
+  "nx": 121,
+  "ny": 161,
+  "mode": "global_real",
+  "tiled": false,
+  "area_width_m": 6000.0,
+  "area_height_m": 8000.0,
+  "base_elevation_m": 50.0,
+  "peak_elevation_m": 396.4128059072565,
+  "peak_e": 303300.0,
+  "peak_n": 4240800.0,
+  "ridge_top_n": 4244400.0,
+  "stream_north_m": 5000.0,
+  "concealment_layers": [
+    "canopy",
+    "trench",
+    "reverse_slope"
+  ],
+  "elevation_min": 25.0,
+  "elevation_max": 396.4128059072565,
+  "features": [
+    "central_peak_~395m",
+    "north_ridge",
+    "yeokgok_stream_linear_low",
+    "eastern_plain_lowland",
+    "mlr_trench_band"
+  ],
+  "note": "procedural approximation of qualitative source description; not a reproduction of real terrain/dimensions."
+}

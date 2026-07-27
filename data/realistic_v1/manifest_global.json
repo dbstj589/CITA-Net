@@ -1,0 +1,112 @@
+{
+  "data_root": "data\\realistic_v1",
+  "domain": "hill395_white_horse_1952",
+  "total_triples": 3990098,
+  "target_triples": 1,
+  "sectors": {
+    "dev": 12,
+    "test": 13,
+    "train": 50
+  },
+  "triples_per_split": {
+    "dev": 639950,
+    "test": 690427,
+    "train": 2659721
+  },
+  "knobs": {
+    "identities_per_sector": 160,
+    "obs_per_track": 10,
+    "dangling_ratio": 0.2,
+    "n_robots": 2,
+    "profile": {
+      "name": "realistic_v1",
+      "clock_offset": {
+        "RADAR": 0.0,
+        "VISUAL_OBS": 5.0,
+        "ARTILLERY_OBS": 3.0,
+        "AERIAL": 10.0,
+        "ACOUSTIC": -20.0,
+        "SIGINT": 40.0,
+        "HUMINT": -60.0
+      },
+      "report_delay": {
+        "RADAR": [
+          "exp_clip",
+          5.0,
+          0.0,
+          10.0
+        ],
+        "VISUAL_OBS": [
+          "exp_clip",
+          5.0,
+          0.0,
+          10.0
+        ],
+        "ARTILLERY_OBS": [
+          "exp_clip",
+          5.0,
+          0.0,
+          10.0
+        ],
+        "AERIAL": [
+          "exp_clip",
+          5.0,
+          0.0,
+          10.0
+        ],
+        "SIGINT": [
+          "lognorm_clip",
+          120.0,
+          0.6,
+          60.0,
+          300.0
+        ],
+        "ACOUSTIC": [
+          "lognorm_clip",
+          120.0,
+          0.6,
+          60.0,
+          300.0
+        ],
+        "HUMINT": [
+          "lognorm_clip",
+          150.0,
+          0.6,
+          60.0,
+          300.0
+        ]
+      },
+      "pos_mult": {
+        "ACOUSTIC": 5.0,
+        "RADAR": 0.5,
+        "VISUAL_OBS": 1.0,
+        "SIGINT": 3.0,
+        "HUMINT": 3.0,
+        "AERIAL": 1.5,
+        "ARTILLERY_OBS": 1.5
+      },
+      "unknown_rate": {
+        "RADAR": 0.8,
+        "ACOUSTIC": 0.5,
+        "SIGINT": 0.4,
+        "HUMINT": 0.4,
+        "AERIAL": 0.25,
+        "ARTILLERY_OBS": 0.2,
+        "VISUAL_OBS": 0.1
+      },
+      "misid_rate": {
+        "VISUAL_OBS": 0.15,
+        "_default": 0.05
+      },
+      "multi_transition_frac": 0.3,
+      "kg_relation_overlap": 0.6,
+      "relation_enrich_max": 3
+    }
+  },
+  "noise_mult": 1.0,
+  "seed_bases": {
+    "train": 1000000,
+    "dev": 2000000,
+    "test": 3000000
+  }
+}

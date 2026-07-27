@@ -1,4 +1,5 @@
 .venv/
+.venv-gpu/
 __pycache__/
 *.pyc
 *.egg-info/
@@ -6,3 +7,8 @@ build/
 dist/
 runs/
 .pytest_cache/
+# world-gt exports too large for GitHub (>100MB); not needed for the CITA-Net
+# training pipeline. Use git-lfs or an external store if they must be versioned.
+data2/hill395_world_gt_full/unified_stkg.nt
+data2/hill395_world_gt_full10d/unified_stkg.nt
+data2/hill395_world_gt_full/trajectories.parquet

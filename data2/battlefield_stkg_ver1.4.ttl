@@ -1,0 +1,583 @@
+@prefix :        <https://example.org/onto/battlefield-stkg#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo:     <http://www.opengis.net/ont/geosparql#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+
+#################################################################
+#  Battlefield Spatio-Temporal Knowledge Graph (STKG) Ontology
+#  전장 도메인 시공간 지식그래프 온톨로지 (OWL 2 DL, Turtle 직렬화)
+#
+#  설계 원칙
+#   - 공간: OGC GeoSPARQL 재사용 (geo:Feature / geo:Geometry / geo:asWKT)
+#   - 시간: W3C OWL-Time 재사용 (time:TemporalEntity / time:Interval)
+#   - 도메인 골격: NATO JC3IEDM(STANAG 5525)의 객체 범주를 참고
+#       (조직/인원/장비/시설/지형지물/통제수단/행위/능력)
+#   - 클래스 배타성: owl:disjointWith / owl:AllDisjointClasses 로
+#       서로 다른 종류의 개체를 논리적으로 구분(온톨로지 매칭의 정합성 점검에 활용)
+#
+#  주의(시간성): 시간에 따라 변하는 관계(지휘관, 위치 등)에는
+#   functional/cardinality를 전역으로 걸지 말 것. 시점별 사실은
+#   n-ary(이벤트/관측 노드) 또는 RDF-star로 시간을 부착해 모델링.
+#################################################################
+
+<https://example.org/onto/battlefield-stkg>
+    a owl:Ontology ;
+    dcterms:title "전장 도메인 시공간 지식그래프 온톨로지"@ko ;
+    dcterms:title "Battlefield Spatio-Temporal Knowledge Graph Ontology"@en ;
+    dcterms:description "탱크·장갑차·화포·군인·부대·진지 등 전장 개체를 시간(OWL-Time)·공간(GeoSPARQL) 맥락과 함께 표현하기 위한 OWL 2 온톨로지."@ko ;
+    owl:versionInfo "0.1.0" ;
+    # 오프라인 환경에서는 아래 두 import를 주석 처리해도 무방.
+    # 추론기(HermiT/ELK 등) 사용 시 전체 공리를 끌어오려면 유지.
+    owl:imports <http://www.opengis.net/ont/geosparql> ;
+    owl:imports <http://www.w3.org/2006/time> .
+
+#################################################################
+# 0. 최상위(추상) 골격
+#################################################################
+
+:MilitaryEntity a owl:Class ;
+    rdfs:label "군사 개체"@ko , "MilitaryEntity"@en ;
+    rdfs:comment "전장 STKG가 다루는 모든 개체의 최상위 클래스."@ko .
+
+# 공간 좌표(geometry)를 가질 수 있는 물리 개체 -> GeoSPARQL Feature로 취급
+:PhysicalObject a owl:Class ;
+    rdfs:subClassOf :MilitaryEntity , geo:Feature ;
+    rdfs:label "물리 개체"@ko , "PhysicalObject"@en ;
+    rdfs:comment "위치(geo:hasGeometry)를 부여할 수 있는 물리적 개체."@ko .
+
+# 시점/구간 등 추상 개념(행위·임무·능력·통제수단·피아식별)
+:AbstractEntity a owl:Class ;
+    rdfs:subClassOf :MilitaryEntity ;
+    rdfs:label "추상 개체"@ko , "AbstractEntity"@en .
+
+#################################################################
+# A. 부대 / 제대 (JC3IEDM: ORGANISATION)
+#    [8] Unit (상위), [9] 중대/소대/분대, [10] 여단/사단/군단
+#    (대대=Battalion 은 사용자가 준 #6)
+#################################################################
+
+:Unit a owl:Class ;
+    rdfs:subClassOf :PhysicalObject ;
+    rdfs:label "부대"@ko , "Unit"@en ;
+    rdfs:comment "지휘체계 상의 군 조직(제대). echelon 속성으로 제대 수준 구분."@ko .
+
+:Squad      a owl:Class ; rdfs:subClassOf :Unit ; rdfs:label "분대"@ko , "Squad"@en .
+:Platoon    a owl:Class ; rdfs:subClassOf :Unit ; rdfs:label "소대"@ko , "Platoon"@en .
+:Company    a owl:Class ; rdfs:subClassOf :Unit ; rdfs:label "중대"@ko , "Company"@en .
+:Battalion  a owl:Class ; rdfs:subClassOf :Unit ; rdfs:label "대대"@ko , "Battalion"@en .
+:Brigade    a owl:Class ; rdfs:subClassOf :Unit ; rdfs:label "여단/연대"@ko , "Brigade"@en .
+:Division   a owl:Class ; rdfs:subClassOf :Unit ; rdfs:label "사단"@ko , "Division"@en .
+:Corps      a owl:Class ; rdfs:subClassOf :Unit ; rdfs:label "군단"@ko , "Corps"@en .
+
+#################################################################
+# B. 장비 / 무기체계 (JC3IEDM: MATERIEL / EQUIPMENT)
+#    [11] Equipment(상위)/WeaponSystem(구 Platform 통합), [12] 자주포, [13] 항공자산/무인기,
+#    [14] 감시정찰자산(센서/레이더), [15] 탄약
+#    (탱크/장갑차/고사포/방사포 = 사용자가 준 #1,#2,#3,#5)
+#################################################################
+
+:Equipment a owl:Class ;
+    rdfs:subClassOf :PhysicalObject ;
+    rdfs:label "장비/물자"@ko , "Equipment"@en .
+
+# --- 기동 플랫폼/무기체계 ---
+# [수정 2026-06-29] '플랫폼(Platform)'과 '무기체계(WeaponSystem)'를 :WeaponSystem 으로 통합.
+#   - :Platform 클래스를 삭제(이 위치의 정의 제거)하고, 그 하위였던 :GroundVehicle/:AirVehicle 를
+#     :WeaponSystem 의 직접 하위로 이전.
+#   - 결과: :WeaponSystem 의 직접 하위 = :GroundVehicle, :AirVehicle, :Artillery.
+:GroundVehicle a owl:Class ; rdfs:subClassOf :WeaponSystem ;   # [수정] 상위 :Platform → :WeaponSystem
+    rdfs:label "지상 차량"@ko , "GroundVehicle"@en .
+
+:ArmoredVehicle a owl:Class ; rdfs:subClassOf :GroundVehicle ;
+    rdfs:label "장갑차"@ko , "ArmoredVehicle"@en ;
+    rdfs:comment "장갑을 갖춘 전투/병력수송 차량(APC/IFV 포함)."@ko .
+
+# [수정 2026-06-29] 전차(Tank)의 상위 클래스를 :ArmoredVehicle → :GroundVehicle 로 변경.
+#   (변경 전) :Tank rdfs:subClassOf :ArmoredVehicle   # 장갑차 ⊏ 지상차량 의 손자
+#   (변경 후) :Tank rdfs:subClassOf :GroundVehicle    # 장갑차와 형제(sibling): 둘 다 지상차량의 직접 하위
+:Tank a owl:Class ; rdfs:subClassOf :GroundVehicle ;   # [수정] :ArmoredVehicle → :GroundVehicle
+    rdfs:label "전차/탱크"@ko , "Tank"@en ;
+    rdfs:comment "주포를 갖춘 궤도형 기갑 전투차량. 지상차량(GroundVehicle)의 직접 하위이며, 장갑차(ArmoredVehicle)와 형제 관계."@ko .  # [수정] 'ArmoredVehicle의 하위' → 'GroundVehicle의 직접 하위'
+
+# [추가 2026-06-29] '트럭(Truck)'을 :GroundVehicle 의 하위로 신설 (첨부 표 '기동' 분류 반영).
+:Truck a owl:Class ; rdfs:subClassOf :GroundVehicle ;
+    rdfs:label "트럭"@ko , "Truck"@en ;
+    rdfs:comment "병력·물자 수송용 차륜 차량. 지상차량(GroundVehicle)의 직접 하위."@ko .
+
+:AirVehicle a owl:Class ; rdfs:subClassOf :WeaponSystem ;   # [수정 2026-06-29] 상위 :Platform → :WeaponSystem (플랫폼·무기체계 통합)
+    rdfs:label "항공자산"@ko , "AirVehicle"@en .
+
+:UAV a owl:Class ; rdfs:subClassOf :AirVehicle ;
+    rdfs:label "무인기/드론"@ko , "UAV"@en .
+
+# --- 무기체계(구 Platform 통합: 기동 플랫폼 + 화포 등) ---
+:WeaponSystem a owl:Class ; rdfs:subClassOf :Equipment ;
+    rdfs:label "무기체계"@ko , "WeaponSystem"@en ;
+    rdfs:comment "지상/항공 기동 플랫폼 및 화포 등 무기 자산을 포괄하는 상위 클래스. [수정 2026-06-29] 구 :Platform 클래스를 이 클래스로 통합함."@ko .  # [수정] 플랫폼 통합 반영
+
+:Artillery a owl:Class ; rdfs:subClassOf :WeaponSystem ;
+    rdfs:label "화포/포병자산"@ko , "Artillery"@en .
+
+# [수정 2026-06-29] 클래스명 변경: :Howitzer(곡사포) → :AntiAircraftGun(고사포).
+#   사용자 요청에 따라 '곡사포'를 '고사포(대공포)'로 대체. IRI·라벨·주석·disjoint 공리를 함께 동기화.
+:AntiAircraftGun a owl:Class ; rdfs:subClassOf :Artillery ;   # [수정] :Howitzer → :AntiAircraftGun
+    rdfs:label "고사포"@ko , "AntiAircraftGun"@en ;
+    rdfs:comment "대공(항공기 요격) 사격용 화포. 화포(Artillery)의 직접 하위."@ko .
+
+:SelfPropelledArtillery a owl:Class ; rdfs:subClassOf :Artillery ;
+    rdfs:label "자주포"@ko , "SelfPropelledArtillery"@en ;
+    rdfs:comment "기동성을 가진 자주 화포. 견인/고정형 화포와 mobilityType으로 구분."@ko .  # [수정 2026-06-29] '고정곡사포' → '견인/고정형 화포'
+
+:MultipleRocketLauncher a owl:Class ; rdfs:subClassOf :Artillery ;
+    rdfs:label "방사포/다연장로켓"@ko , "MultipleRocketLauncher"@en .
+
+# [추가 2026-06-29] 화포(Artillery)의 하위로 '박격포(Mortar)', '대전차화기(AntiTankWeapon)' 신설.
+:Mortar a owl:Class ; rdfs:subClassOf :Artillery ;
+    rdfs:label "박격포"@ko , "Mortar"@en ;
+    rdfs:comment "곡사 사격용 보병 화기. 화포(Artillery)의 직접 하위."@ko .
+
+:AntiTankWeapon a owl:Class ; rdfs:subClassOf :Artillery ;
+    rdfs:label "대전차화기"@ko , "AntiTankWeapon"@en ;
+    rdfs:comment "대전차포·대전차총·대전차로켓·대전차미사일 등 대전차 무기(ATW). 화포(Artillery)의 직접 하위."@ko .
+
+:Munition a owl:Class ; rdfs:subClassOf :Equipment ;
+    rdfs:label "탄약/무장"@ko , "Munition"@en .
+
+# --- 감시정찰자산 ---
+:Sensor a owl:Class ; rdfs:subClassOf :Equipment ;
+    rdfs:label "센서/감시정찰자산"@ko , "Sensor"@en ;
+    rdfs:comment "레이더, EO/IR 등 감시정찰 센서."@ko .
+
+#################################################################
+# B-2. 장비 세부 모델(타입) 계층  [추가 2026-06-29]
+#   - 첨부 표(기동/화력)의 구체 장비 명칭을 '하위 개념의 하위 개념'(모델 타입)으로 추가.
+#   - 모델 명칭은 다수 실물을 갖는 '유형'이므로 ABox 개체가 아니라 rdfs:subClassOf 로 클래스화.
+#   - 모델 간 disjoint 공리는 부여하지 않음(필요 시 추가 가능).
+#   - 참고: 'M1992'는 고사포형/방사포형이 동명이라 IRI를 :M1992_AAG / :M1992_MRL 로 분리.
+#################################################################
+
+# --- 전차/탱크(Tank) 모델 ---
+:T55         a owl:Class ; rdfs:subClassOf :Tank ; rdfs:label "T-55"@en .
+:Cheonma216  a owl:Class ; rdfs:subClassOf :Tank ; rdfs:label "천마-216"@ko .
+:Pokpungho   a owl:Class ; rdfs:subClassOf :Tank ; rdfs:label "폭풍호 (T72)"@ko .
+:Seongunho   a owl:Class ; rdfs:subClassOf :Tank ; rdfs:label "선군호"@ko .
+:K1A1        a owl:Class ; rdfs:subClassOf :Tank ; rdfs:label "K1A1"@en .
+:K2_Heukpyo  a owl:Class ; rdfs:subClassOf :Tank ; rdfs:label "K2 흑표"@ko .
+
+# --- 장갑차(ArmoredVehicle) 모델 ---
+:M2010_APC   a owl:Class ; rdfs:subClassOf :ArmoredVehicle ; rdfs:label "M-2010 APC"@en .
+:M1985_AAV   a owl:Class ; rdfs:subClassOf :ArmoredVehicle ; rdfs:label "M1985_AAV"@en .
+:K200A1      a owl:Class ; rdfs:subClassOf :ArmoredVehicle ; rdfs:label "K200A1"@en .
+:KAAV7A1     a owl:Class ; rdfs:subClassOf :ArmoredVehicle ; rdfs:label "KAAV7A1"@en .
+
+# --- 트럭(Truck) 모델 ---
+:Seungri58           a owl:Class ; rdfs:subClassOf :Truck ; rdfs:label "승리58"@ko .
+:Sinhyeong_Haebangho a owl:Class ; rdfs:subClassOf :Truck ; rdfs:label "신형 해방호"@ko .
+:K311        a owl:Class ; rdfs:subClassOf :Truck ; rdfs:label "K-311"@en .
+:K511        a owl:Class ; rdfs:subClassOf :Truck ; rdfs:label "K-511"@en .
+
+# --- 고사포(AntiAircraftGun) 모델 ---
+:M1983       a owl:Class ; rdfs:subClassOf :AntiAircraftGun ; rdfs:label "M1983"@en .
+:M1992_AAG   a owl:Class ; rdfs:subClassOf :AntiAircraftGun ; rdfs:label "M1992"@en ;
+    rdfs:comment "고사포형 M1992(방사포형 :M1992_MRL 과 구분)."@ko .
+
+# --- 자주포(SelfPropelledArtillery) 모델 ---
+:M1977       a owl:Class ; rdfs:subClassOf :SelfPropelledArtillery ; rdfs:label "M1977"@en .
+:M2018       a owl:Class ; rdfs:subClassOf :SelfPropelledArtillery ; rdfs:label "M2018"@en .
+:K9A1        a owl:Class ; rdfs:subClassOf :SelfPropelledArtillery ; rdfs:label "K-9A1"@en .
+
+# --- 방사포(MultipleRocketLauncher) 모델 ---
+:KN09        a owl:Class ; rdfs:subClassOf :MultipleRocketLauncher ; rdfs:label "KN09"@en .
+:M1992_MRL   a owl:Class ; rdfs:subClassOf :MultipleRocketLauncher ; rdfs:label "M1992"@en ;
+    rdfs:comment "방사포형 M1992(고사포형 :M1992_AAG 과 구분)."@ko .
+:K239_Cheonmu a owl:Class ; rdfs:subClassOf :MultipleRocketLauncher ; rdfs:label "K-239 천무"@ko .
+
+# --- 박격포(Mortar) 모델 ---
+:Mortar_82mm a owl:Class ; rdfs:subClassOf :Mortar ; rdfs:label "82mm 박격포"@ko .
+:M1943_120mm a owl:Class ; rdfs:subClassOf :Mortar ; rdfs:label "박격포 120mm (M1943)"@ko .
+:K105A1      a owl:Class ; rdfs:subClassOf :Mortar ; rdfs:label "K105A1"@en .
+
+# --- 대전차화기(AntiTankWeapon) 모델 ---
+:AntiTankGun   a owl:Class ; rdfs:subClassOf :AntiTankWeapon ; rdfs:label "대전차포"@ko .
+:AntiTankRifle a owl:Class ; rdfs:subClassOf :AntiTankWeapon ; rdfs:label "대전차 소총"@ko .
+:RPG7          a owl:Class ; rdfs:subClassOf :AntiTankWeapon ; rdfs:label "대전차 로켓 - RPG7"@ko .
+:ATGM_AT4      a owl:Class ; rdfs:subClassOf :AntiTankWeapon ; rdfs:label "대전차 미사일 - ATGM-AT4"@ko .
+
+#################################################################
+# C. 인원 / 지휘 (JC3IEDM: PERSON)
+#    [16] Personnel(상위), [17] 지휘소
+#    (군인=Soldier = 사용자가 준 #4)
+#################################################################
+
+:Personnel a owl:Class ; rdfs:subClassOf :PhysicalObject ;
+    rdfs:label "인원"@ko , "Personnel"@en .
+
+:Soldier a owl:Class ; rdfs:subClassOf :Personnel ;
+    rdfs:label "군인"@ko , "Soldier"@en .
+
+#################################################################
+# D. 시설 / 지형지물 (JC3IEDM: FACILITY, FEATURE)
+#    [18] 지휘소/보급시설, [19] 지형(고지·하천)·인공지물(도로·교량)
+#    (진지=MilitaryPosition = 사용자가 준 #7)
+#################################################################
+
+:Facility a owl:Class ; rdfs:subClassOf :PhysicalObject ;
+    rdfs:label "군사 시설"@ko , "Facility"@en .
+
+:MilitaryPosition a owl:Class ; rdfs:subClassOf :Facility ;
+    rdfs:label "진지"@ko , "MilitaryPosition"@en ;
+    rdfs:comment "방어/사격/관측 진지. positionType 으로 세분."@ko .
+
+:CommandPost a owl:Class ; rdfs:subClassOf :Facility ;
+    rdfs:label "지휘소"@ko , "CommandPost"@en .
+
+:LogisticsFacility a owl:Class ; rdfs:subClassOf :Facility ;
+    rdfs:label "보급/병참 시설"@ko , "LogisticsFacility"@en .
+
+:GeographicFeature a owl:Class ; rdfs:subClassOf :PhysicalObject ;
+    rdfs:label "지형지물"@ko , "GeographicFeature"@en .
+
+:TerrainFeature a owl:Class ; rdfs:subClassOf :GeographicFeature ;
+    rdfs:label "자연 지형"@ko , "TerrainFeature"@en ;
+    rdfs:comment "고지/하천/산림 등 자연 지형."@ko .
+
+:Infrastructure a owl:Class ; rdfs:subClassOf :GeographicFeature ;
+    rdfs:label "인공 지물"@ko , "Infrastructure"@en ;
+    rdfs:comment "도로/교량/건물 등 인공 구조물."@ko .
+
+#################################################################
+# E. 추상 개념: 행위·표적·통제수단·능력·피아식별·기상
+#    [20] 작전/임무·교전, [21] 표적, [22] 통제수단,
+#    [23] 능력, [24] 피아식별, [25] 기상
+#################################################################
+
+:Action a owl:Class ; rdfs:subClassOf :AbstractEntity ;
+    rdfs:label "행위/활동"@ko , "Action"@en ;
+    rdfs:comment "JC3IEDM ACTION에 대응. 시간 구간(time:hasTime)을 가짐."@ko .
+
+:Operation a owl:Class ; rdfs:subClassOf :Action ;
+    rdfs:label "작전/임무"@ko , "Operation"@en .
+
+:Engagement a owl:Class ; rdfs:subClassOf :Action ;
+    rdfs:label "교전"@ko , "Engagement"@en ;
+    rdfs:comment "특정 시점/구간에 발생한 전투 상호작용."@ko .
+
+:Target a owl:Class ; rdfs:subClassOf :AbstractEntity ;
+    rdfs:label "표적"@ko , "Target"@en .
+
+:ControlMeasure a owl:Class ; rdfs:subClassOf :AbstractEntity , geo:Feature ;
+    rdfs:label "통제수단"@ko , "ControlMeasure"@en ;
+    rdfs:comment "경계선/위상선(phase line)/목표/접근축/관심지역(NAI,TAI) 등. 공간 범위를 가짐."@ko .
+
+:Capability a owl:Class ; rdfs:subClassOf :AbstractEntity ;
+    rdfs:label "능력"@ko , "Capability"@en ;
+    rdfs:comment "JC3IEDM CAPABILITY에 대응(기동/화력/감시 등)."@ko .
+
+:Weather a owl:Class ; rdfs:subClassOf :AbstractEntity ;
+    rdfs:label "기상"@ko , "Weather"@en ;
+    rdfs:comment "METT-TC의 시간/기상 요소. 시공간 맥락에 결합."@ko .
+
+# --- 피아식별: 열거형(APP-6A 계열) ---
+:Affiliation a owl:Class ; rdfs:subClassOf :AbstractEntity ;
+    rdfs:label "피아식별"@ko , "Affiliation"@en ;
+    owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Friend :Hostile :Neutral :Unknown ) ] .
+
+:Friend  a owl:NamedIndividual , :Affiliation ; rdfs:label "우군"@ko , "Friend"@en .
+:Hostile a owl:NamedIndividual , :Affiliation ; rdfs:label "적"@ko , "Hostile"@en .
+:Neutral a owl:NamedIndividual , :Affiliation ; rdfs:label "중립"@ko , "Neutral"@en .
+:Unknown a owl:NamedIndividual , :Affiliation ; rdfs:label "미상"@ko , "Unknown"@en .
+
+[] a owl:AllDifferent ; owl:distinctMembers ( :Friend :Hostile :Neutral :Unknown ) .
+
+#################################################################
+# 분리(disjointness) 공리  ── 클래스 배타성(서로 다른 종류 구분)
+#################################################################
+
+# 사람 / 장비 / 시설 / 부대는 서로 다른 종류 (한 개체가 둘일 수 없음)
+[] a owl:AllDisjointClasses ;
+   owl:members ( :Personnel :Equipment :Facility :Unit ) .
+
+# 동일 객체가 전차이면서 동시에 방사포일 수 없음 등
+[] a owl:AllDisjointClasses ;
+   owl:members ( :Tank :MultipleRocketLauncher :AntiAircraftGun :SelfPropelledArtillery :Mortar :AntiTankWeapon ) .   # [수정 2026-06-29] Howitzer→AntiAircraftGun, Mortar·AntiTankWeapon 추가
+
+#################################################################
+# 오브젝트 프로퍼티 (관계)  ── OWL 특성 포함
+#################################################################
+
+# --- 지휘/소속 ---
+:hasSubordinate a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:domain :Unit ; rdfs:range :Unit ;
+    owl:inverseOf :isSubordinateTo ;
+    rdfs:label "예하부대"@ko , "hasSubordinate"@en ;
+    rdfs:comment "지휘 하위 부대. 추이적(대대>중대>소대 자동 연결)."@ko .
+
+:isSubordinateTo a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:domain :Unit ; rdfs:range :Unit ;
+    rdfs:label "상급부대"@ko , "isSubordinateTo"@en ;
+    rdfs:comment "추이적. (주의: OWL 2 DL에서는 추이적 속성에 비대칭/비반사/기능을 함께 줄 수 없음)."@ko .
+
+:hasMember a owl:ObjectProperty ;
+    rdfs:domain :Unit ;
+    owl:inverseOf :memberOf ;
+    rdfs:label "구성원"@ko , "hasMember"@en ;
+    rdfs:comment "부대의 구성 인원/장비(중대 hasMember 군인/전차)."@ko .
+
+:memberOf a owl:ObjectProperty ;
+    rdfs:label "소속"@ko , "memberOf"@en .
+
+:commands a owl:ObjectProperty ;
+    rdfs:domain :Personnel ; rdfs:range :Unit ;
+    owl:inverseOf :commandedBy ;
+    rdfs:label "지휘한다"@ko , "commands"@en .
+
+:commandedBy a owl:ObjectProperty ;
+    rdfs:domain :Unit ; rdfs:range :Personnel ;
+    rdfs:label "지휘관"@ko , "commandedBy"@en .
+
+# --- 운용/장비 ---
+:operates a owl:ObjectProperty ;
+    rdfs:domain :Personnel ; rdfs:range :Equipment ;
+    owl:inverseOf :operatedBy ;
+    rdfs:label "운용한다"@ko , "operates"@en .
+
+:operatedBy a owl:ObjectProperty ;
+    rdfs:label "운용주체"@ko , "operatedBy"@en .
+
+:equippedWith a owl:ObjectProperty ;
+    rdfs:domain :Unit ; rdfs:range :Equipment ;
+    rdfs:label "보유장비"@ko , "equippedWith"@en .
+
+:hasCapability a owl:ObjectProperty ;
+    rdfs:range :Capability ;
+    rdfs:label "능력보유"@ko , "hasCapability"@en .
+
+# --- 공간 배치/점유 (GeoSPARQL 위상관계와 함께 사용) ---
+:deployedTo a owl:ObjectProperty ;
+    rdfs:range :PhysicalObject ;
+    rdfs:label "전개위치"@ko , "deployedTo"@en .
+
+:occupies a owl:ObjectProperty ;
+    rdfs:domain :Unit ; rdfs:range :MilitaryPosition ;
+    owl:inverseOf :occupiedBy ;
+    rdfs:label "점령/점유"@ko , "occupies"@en .
+
+:occupiedBy a owl:ObjectProperty ;
+    rdfs:label "점유주체"@ko , "occupiedBy"@en .
+
+:adjacentTo a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "인접"@ko , "adjacentTo"@en ;
+    rdfs:comment "대칭. 정밀 위상은 geo:sfTouches 등 GeoSPARQL 관계를 병용."@ko .
+
+# --- 교전/표적/임무 ---
+:engages a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "교전한다"@ko , "engages"@en ;
+    rdfs:comment "대칭(A가 B와 교전이면 B도 A와 교전)."@ko .
+
+:targets a owl:ObjectProperty ;
+    rdfs:range :Target ;
+    owl:inverseOf :targetedBy ;
+    rdfs:label "표적지정"@ko , "targets"@en .
+
+:targetedBy a owl:ObjectProperty ;
+    rdfs:label "피표적"@ko , "targetedBy"@en .
+
+:conducts a owl:ObjectProperty ;
+    rdfs:domain :Unit ; rdfs:range :Action ;
+    owl:inverseOf :conductedBy ;
+    rdfs:label "수행한다"@ko , "conducts"@en .
+
+:conductedBy a owl:ObjectProperty ;
+    rdfs:label "수행주체"@ko , "conductedBy"@en .
+
+:participatesIn a owl:ObjectProperty ;
+    rdfs:range :Action ;
+    rdfs:label "참여한다"@ko , "participatesIn"@en .
+
+# --- 피아관계 ---
+:hostileTo a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "적대"@ko , "hostileTo"@en .
+
+:alliedWith a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "우호/연합"@ko , "alliedWith"@en .
+
+:hasAffiliation a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:range :Affiliation ;
+    rdfs:label "피아식별값"@ko , "hasAffiliation"@en ;
+    rdfs:comment "기능적 속성 — 한 개체는 하나의 피아식별 값을 가짐."@ko .
+
+#################################################################
+# 데이터 프로퍼티 (속성)
+#################################################################
+
+# --- 공통 식별/상태 ---
+:designation a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "명칭/호칭"@ko , "designation"@en .
+
+:externalId a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "외부식별자"@ko , "externalId"@en .
+
+:operationalStatus a owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:label "작전상태"@ko , "operationalStatus"@en ;
+    rdfs:comment "예: operational / degraded / destroyed / unknown."@ko .
+
+# --- 부대 ---
+:echelon a owl:DatatypeProperty ;
+    rdfs:domain :Unit ; rdfs:range xsd:string ;
+    rdfs:label "제대수준"@ko , "echelon"@en ;
+    rdfs:comment "예: squad/platoon/company/battalion/brigade/division/corps."@ko .
+
+:personnelStrength a owl:DatatypeProperty ;
+    rdfs:domain :Unit ; rdfs:range xsd:integer ;
+    rdfs:label "인원수"@ko , "personnelStrength"@en .
+
+:combatReadiness a owl:DatatypeProperty ;
+    rdfs:domain :Unit ; rdfs:range xsd:string ;
+    rdfs:label "전투준비태세"@ko , "combatReadiness"@en .
+
+# --- 인원 ---
+:rank a owl:DatatypeProperty ;
+    rdfs:domain :Personnel ; rdfs:range xsd:string ;
+    rdfs:label "계급"@ko , "rank"@en .
+
+:militaryRole a owl:DatatypeProperty ;
+    rdfs:domain :Personnel ; rdfs:range xsd:string ;
+    rdfs:label "직책/특기"@ko , "militaryRole"@en .
+
+# --- 장비/플랫폼(스키마 수준 속성: 실제 제원 값은 인스턴스로 채움) ---
+:mobilityType a owl:DatatypeProperty ;
+    rdfs:domain :WeaponSystem ; rdfs:range xsd:string ;   # [수정 2026-06-29] 통합으로 domain :Platform → :WeaponSystem
+    rdfs:label "기동형식"@ko , "mobilityType"@en ;
+    rdfs:comment "예: tracked / wheeled / towed / self-propelled / airborne."@ko .
+
+:crewSize a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "승무원수"@ko , "crewSize"@en .
+
+:armorClass a owl:DatatypeProperty ;
+    rdfs:domain :ArmoredVehicle ; rdfs:range xsd:string ;
+    rdfs:label "방호등급"@ko , "armorClass"@en .
+
+# --- 화포 ---
+:caliberCategory a owl:DatatypeProperty ;
+    rdfs:domain :Artillery ; rdfs:range xsd:string ;
+    rdfs:label "구경분류"@ko , "caliberCategory"@en ;
+    rdfs:comment "스키마 수준 분류값(예: light/medium/heavy). 정밀 제원은 운용기관 데이터로."@ko .
+
+:emplacementType a owl:DatatypeProperty ;
+    rdfs:domain :Artillery ; rdfs:range xsd:string ;
+    rdfs:label "거치형식"@ko , "emplacementType"@en ;
+    rdfs:comment "예: fixed / towed / self-propelled."@ko .  # [수정 2026-06-29] '고정곡사포' 예시 제거(클래스명 변경 반영)
+
+# --- 진지/시설 ---
+:positionType a owl:DatatypeProperty ;
+    rdfs:domain :MilitaryPosition ; rdfs:range xsd:string ;
+    rdfs:label "진지유형"@ko , "positionType"@en ;
+    rdfs:comment "예: defensive / firing / observation."@ko .
+
+:fortificationLevel a owl:DatatypeProperty ;
+    rdfs:domain :MilitaryPosition ; rdfs:range xsd:string ;
+    rdfs:label "축성수준"@ko , "fortificationLevel"@en .
+
+# --- 공간 보조 속성(정밀 좌표는 GeoSPARQL geometry로) ---
+:elevation a owl:DatatypeProperty ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "고도(m)"@ko , "elevation"@en .
+
+# --- 시간(경량 valid-time). 풍부한 시간논리는 OWL-Time(time:hasTime) 사용 ---
+:validFrom a owl:DatatypeProperty ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "유효시작"@ko , "validFrom"@en ;
+    rdfs:comment "사실의 유효시간(valid time) 시작. 정밀 위상관계는 OWL-Time 권장."@ko .
+
+:validTo a owl:DatatypeProperty ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "유효종료"@ko , "validTo"@en .
+
+#################################################################
+# 클래스 제약(restriction) 예시  ── OWL 표현력 시연
+#################################################################
+
+# 모든 교전(Engagement)은 최소 1개의 시간 정보를 가져야 함 (OWL-Time)
+:Engagement rdfs:subClassOf
+    [ a owl:Restriction ;
+      owl:onProperty time:hasTime ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ] .
+
+# [수정 2026-06-29] 상위 클래스 변경(전차: 장갑차→지상차량)에 맞춰 아래 주석의 '장갑차'를 '지상차량'으로 정정.
+#   (아래 공리 자체는 :ArmoredVehicle 을 참조하지 않으므로 논리적 의미는 불변 —
+#    '모든 전차는 기동형식이 tracked' 라는 제약만 부여.)
+# 전차(Tank)는 (정의상) 기동형식이 tracked 인 지상차량 — 충분조건 예시   # [수정] '장갑차'→'지상차량'
+:Tank rdfs:subClassOf
+    [ a owl:Restriction ;
+      owl:onProperty :mobilityType ;
+      owl:hasValue "tracked" ] .
+
+#################################################################
+#  워크드 예시 (ABox)
+#  - 공간(GeoSPARQL WKT) + 시간(OWL-Time Interval) 결합
+#  - "1대대가 06:00~08:00 동안 알파 진지를 점령" 을 모순 없이 표현
+#################################################################
+
+:Bn_1 a :Battalion ;
+    :designation "1대대"@ko ;
+    :echelon "battalion" ;
+    :hasAffiliation :Friend ;
+    :personnelStrength 480 ;
+    :hasSubordinate :Co_A ;
+    :occupies :Pos_Alpha ;
+    geo:hasGeometry :geom_Bn1 .
+
+:Co_A a :Company ;
+    :designation "알파중대"@ko ;
+    :echelon "company" ;
+    :hasAffiliation :Friend ;
+    :hasMember :Tank_001 , :Sgt_Kim .
+
+:Sgt_Kim a :Soldier ;
+    :rank "병장"@ko ;
+    :militaryRole "전차장"@ko ;
+    :operates :Tank_001 .
+
+:Tank_001 a :Tank ;
+    :designation "전차-001"@ko ;
+    :mobilityType "tracked" ;
+    :crewSize 4 ;
+    :operationalStatus "operational" .
+
+:Pos_Alpha a :MilitaryPosition ;
+    :designation "알파 진지"@ko ;
+    :positionType "defensive" ;
+    geo:hasGeometry :geom_Alpha .
+
+# --- 공간: GeoSPARQL geometry(WKT, 경도 위도 순) ---
+:geom_Bn1 a geo:Geometry ;
+    geo:asWKT "POINT(127.1000 37.5000)"^^geo:wktLiteral .
+
+:geom_Alpha a geo:Geometry ;
+    geo:asWKT "POLYGON((127.10 37.50,127.11 37.50,127.11 37.51,127.10 37.51,127.10 37.50))"^^geo:wktLiteral .
+
+# --- 시간: OWL-Time 구간 ---
+:t_0600 a time:Instant ;
+    time:inXSDDateTimeStamp "2025-06-09T06:00:00+09:00"^^xsd:dateTimeStamp .
+:t_0800 a time:Instant ;
+    time:inXSDDateTimeStamp "2025-06-09T08:00:00+09:00"^^xsd:dateTimeStamp .
+:int_morning a time:Interval ;
+    time:hasBeginning :t_0600 ;
+    time:hasEnd :t_0800 .
+
+# --- 교전 이벤트(시간 부착) ---
+:Eng_001 a :Engagement ;
+    :designation "능선 교전"@ko ;
+    time:hasTime :int_morning ;
+    :engages :Bn_1 .
+
+
