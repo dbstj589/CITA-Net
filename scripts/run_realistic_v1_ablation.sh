@@ -13,7 +13,10 @@ if [ ${#VARIANTS[@]} -eq 0 ]; then
   VARIANTS=(m3_full no_motion no_time no_state no_rel no_src)
 fi
 
-PY=.venv/Scripts/python.exe
+# portable venv python: Linux (.venv/bin) or Windows (.venv/Scripts), else PATH
+if   [ -x .venv/bin/python ];         then PY=.venv/bin/python
+elif [ -x .venv/Scripts/python.exe ]; then PY=.venv/Scripts/python.exe
+else PY=python; fi
 DATA=data/realistic_v1
 ONT=$DATA/ontology
 CFGDIR=configs/realistic_v1
