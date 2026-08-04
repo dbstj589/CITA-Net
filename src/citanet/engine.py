@@ -28,6 +28,36 @@ def set_seed(seed: int) -> None:
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
+    _apply_determinism()
+
+
+def _apply_determinism() -> None:
+    """OPT-IN via env CITANET_DETERMINISTIC=1: force bit-reproducible GPU execution.
+
+    Unset (the default) leaves every call below untouched, so the existing CPU and GPU
+    paths stay byte-identical -- frozen / amb160 / study-1 results are unaffected.
+
+    Why this exists: CUDA scatter/atomic accumulation order varies between runs, and over
+    40 epochs that amplifies enough that two runs of the SAME seed diverge. Study 1
+    measured this directly -- `no_time` is a null manipulation on this data (b_time is
+    structurally 0, see docs/PREREG_realistic_v1_study2.md appendix A) yet its dF1 spread
+    was +-0.078, i.e. as large as every real effect being tested.
+
+    CUBLAS_WORKSPACE_CONFIG must be set before the cuBLAS handle is created. The runner
+    exports it too; setting it here is the fallback, and we warn when CUDA is already
+    initialised because at that point it can no longer take effect.
+    """
+    import os
+    if os.environ.get("CITANET_DETERMINISTIC") != "1":
+        return
+    if "CUBLAS_WORKSPACE_CONFIG" not in os.environ:
+        if torch.cuda.is_available() and torch.cuda.is_initialized():
+            print("!! CITANET_DETERMINISTIC=1 but CUBLAS_WORKSPACE_CONFIG was unset and CUDA "
+                  "is already initialised -- export it before starting python")
+        os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+    torch.use_deterministic_algorithms(True)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 
 def read_split(data_root: str | Path, split: str) -> list[str]:
