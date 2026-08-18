@@ -104,6 +104,12 @@ def main() -> None:
     # an M3 product (Sinkhorn decode); skip it cleanly when the decoder is off.
     if bundle.model.decoder is not None:
         sid = read_split(cfg.data_root, "dev")[0]
+        # Part-B serialization does host-side conversions, so run this one-sector
+        # sample on CPU: featurize_sector yields CPU tensors and after GPU training
+        # the model lives on cuda. The bundle is already saved (above), so moving
+        # the model here is harmless. On a CPU run .to("cpu") is a no-op, leaving
+        # the original code path byte-identical.
+        bundle.model.to("cpu")
         feats = featurize_sector(Path(cfg.data_root) / "sectors" / sid, bundle.fs, bundle.ontology, cfg)
         with torch.no_grad():
             out = bundle.model(feats)

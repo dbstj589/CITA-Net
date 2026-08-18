@@ -12,3 +12,10 @@ runs/
 data2/hill395_world_gt_full/unified_stkg.nt
 data2/hill395_world_gt_full10d/unified_stkg.nt
 data2/hill395_world_gt_full/trajectories.parquet
+
+# Per-pair CTA score dump: 85.2M rows / 1.8GB, ten parquet files of 174-190MB each,
+# every one over GitHub's 100MB limit. It is a regenerable intermediate -- rebuild with
+#   CITANET_FEAT_CACHE=runs/realistic_v1/feat_cache python scripts/dump_cta_scores.py
+# (~8 min on the trained checkpoints). The analyses derived from it are versioned:
+# auc_by_term.csv, stratified_auc.csv, knockout_deltas.csv, cases/, report_score.md.
+results/realistic_v1_score_analysis/dump/
