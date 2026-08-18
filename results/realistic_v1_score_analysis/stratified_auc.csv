@@ -1,0 +1,51 @@
+seed,split,term,stratum,level,n,pos_rate,d_auc_vs_sem
+19521006,test,b_time,time_err_sum > median,in-condition,4432671,0.013291534607463537,0.0
+19521006,test,b_time,time_err_sum > median,out-of-condition,4433392,0.014393944862083029,0.0
+19521006,test,b_motion,high-error source present,in-condition,6893097,0.013048561481145558,-0.0004019954802642056
+19521006,test,b_motion,high-error source present,out-of-condition,1972966,0.016617620374603514,-8.170564246035017e-05
+19521006,test,b_state,true state transition in interval,in-condition,3255384,0.013180933493560207,-0.05421094578082719
+19521006,test,b_state,true state transition in interval,out-of-condition,5610679,0.01422679857464667,-0.022427281305075986
+19521006,test,b_rel,distinctive predicate combo,in-condition,4389157,0.011998659423666094,0.012551684128081941
+19521006,test,b_rel,distinctive predicate combo,out-of-condition,4476906,0.015650764166145102,0.0047529160859483
+19521006,test,b_src,heterogeneous source reliability,in-condition,6893097,0.013048561481145558,-0.0005363760285441721
+19521006,test,b_src,heterogeneous source reliability,out-of-condition,1972966,0.016617620374603514,-0.0034087981440710236
+19521007,test,b_time,time_err_sum > median,in-condition,4432671,0.013291534607463537,0.0
+19521007,test,b_time,time_err_sum > median,out-of-condition,4433392,0.014393944862083029,0.0
+19521007,test,b_motion,high-error source present,in-condition,6893097,0.013048561481145558,-0.0004177679587030747
+19521007,test,b_motion,high-error source present,out-of-condition,1972966,0.016617620374603514,-0.00012182757691070467
+19521007,test,b_state,true state transition in interval,in-condition,3255384,0.013180933493560207,-0.05263974377750935
+19521007,test,b_state,true state transition in interval,out-of-condition,5610679,0.01422679857464667,-0.024340955845750134
+19521007,test,b_rel,distinctive predicate combo,in-condition,4389157,0.011998659423666094,0.008162979690191974
+19521007,test,b_rel,distinctive predicate combo,out-of-condition,4476906,0.015650764166145102,0.0027755511934794974
+19521007,test,b_src,heterogeneous source reliability,in-condition,6893097,0.013048561481145558,-0.0007376148280132666
+19521007,test,b_src,heterogeneous source reliability,out-of-condition,1972966,0.016617620374603514,-0.0027405204128112537
+19521008,test,b_time,time_err_sum > median,in-condition,4432671,0.013291534607463537,0.0
+19521008,test,b_time,time_err_sum > median,out-of-condition,4433392,0.014393944862083029,0.0
+19521008,test,b_motion,high-error source present,in-condition,6893097,0.013048561481145558,-0.00043706283134670176
+19521008,test,b_motion,high-error source present,out-of-condition,1972966,0.016617620374603514,-0.00018586876563475574
+19521008,test,b_state,true state transition in interval,in-condition,3255384,0.013180933493560207,-0.053577507534453894
+19521008,test,b_state,true state transition in interval,out-of-condition,5610679,0.01422679857464667,-0.023281415742304135
+19521008,test,b_rel,distinctive predicate combo,in-condition,4389157,0.011998659423666094,0.009672522279109863
+19521008,test,b_rel,distinctive predicate combo,out-of-condition,4476906,0.015650764166145102,0.002742787156072901
+19521008,test,b_src,heterogeneous source reliability,in-condition,6893097,0.013048561481145558,-0.000964309636632521
+19521008,test,b_src,heterogeneous source reliability,out-of-condition,1972966,0.016617620374603514,-0.00304996124060275
+19521009,test,b_time,time_err_sum > median,in-condition,4432671,0.013291534607463537,0.0
+19521009,test,b_time,time_err_sum > median,out-of-condition,4433392,0.014393944862083029,0.0
+19521009,test,b_motion,high-error source present,in-condition,6893097,0.013048561481145558,-0.00044646313472085364
+19521009,test,b_motion,high-error source present,out-of-condition,1972966,0.016617620374603514,-0.0003212357225300666
+19521009,test,b_state,true state transition in interval,in-condition,3255384,0.013180933493560207,-0.0526822843536745
+19521009,test,b_state,true state transition in interval,out-of-condition,5610679,0.01422679857464667,-0.023666090247047578
+19521009,test,b_rel,distinctive predicate combo,in-condition,4389157,0.011998659423666094,0.006036956827521478
+19521009,test,b_rel,distinctive predicate combo,out-of-condition,4476906,0.015650764166145102,0.0008764106314983477
+19521009,test,b_src,heterogeneous source reliability,in-condition,6893097,0.013048561481145558,-0.0005174687761245744
+19521009,test,b_src,heterogeneous source reliability,out-of-condition,1972966,0.016617620374603514,-0.0017488124397193605
+19521010,test,b_time,time_err_sum > median,in-condition,4432671,0.013291534607463537,0.0
+19521010,test,b_time,time_err_sum > median,out-of-condition,4433392,0.014393944862083029,0.0
+19521010,test,b_motion,high-error source present,in-condition,6893097,0.013048561481145558,-0.00041774871239319555
+19521010,test,b_motion,high-error source present,out-of-condition,1972966,0.016617620374603514,-4.859001684442976e-05
+19521010,test,b_state,true state transition in interval,in-condition,3255384,0.013180933493560207,-0.05638518954411953
+19521010,test,b_state,true state transition in interval,out-of-condition,5610679,0.01422679857464667,-0.026679804494252224
+19521010,test,b_rel,distinctive predicate combo,in-condition,4389157,0.011998659423666094,0.007620770025991597
+19521010,test,b_rel,distinctive predicate combo,out-of-condition,4476906,0.015650764166145102,0.00017588732883333513
+19521010,test,b_src,heterogeneous source reliability,in-condition,6893097,0.013048561481145558,-0.0005694799079254409
+19521010,test,b_src,heterogeneous source reliability,out-of-condition,1972966,0.016617620374603514,-0.003501261780921472

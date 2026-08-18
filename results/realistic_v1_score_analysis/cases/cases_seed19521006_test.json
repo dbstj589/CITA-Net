@@ -1,0 +1,861 @@
+{
+  "selection_rule": "(fixed before looking at any case)\n  For each term X, within the `test` split of one seed:\n    (i)  supporting  -- among GOLD-POSITIVE pairs the model ranks highly\n                        (score in the sector's top decile), keep those where |b_X| is the\n                        largest of the five constraint contributions (\"the non-semantic\n                        driver\"), then take the top 3 by b_X (most positive).\n    (ii) rejecting   -- among GOLD-NEGATIVE pairs the model ranks low\n                        (score in the sector's bottom half), keep those where |b_X| is the\n                        largest of the five, then take the top 3 by -b_X (most negative).\n\n\"Model ranks highly/low\" is operationalised on the CTA score, which is what drives\np_transition and feeds the pair head; per-pair decoder assignments are not used, so a\ncase is \"the scorer treats it correctly\", not \"the decoder emitted it\".",
+  "seed": 19521006,
+  "split": "test",
+  "cases": {
+    "b_motion": {
+      "supporting": [],
+      "rejecting": [
+        {
+          "sector": "sec_test_0008",
+          "label": 0,
+          "score": -152.03662109375,
+          "components": {
+            "sem_w0": 0.14273551106452942,
+            "b_time": 0.0,
+            "b_motion": -151.0967254638672,
+            "b_state": -0.331550270318985,
+            "b_rel": 0.52458655834198,
+            "b_src": -1.2756710052490234
+          },
+          "obs_i": {
+            "obs_id": "obs_A_00814",
+            "kg": "A",
+            "source": "RADAR",
+            "entity": "ent_A_0039",
+            "label_text": "분류불가 기동표적",
+            "type": "UNKNOWN",
+            "state": "Engaging",
+            "time": "1952-10-06T00:04:07Z",
+            "true_time": "1952-10-06T00:04:05Z",
+            "easting": 301351.25,
+            "northing": 4244746.99,
+            "cep_m": 15.0
+          },
+          "obs_j": {
+            "obs_id": "obs_B_00414",
+            "kg": "B",
+            "source": "SIGINT",
+            "entity": "ent_B_0022",
+            "label_text": "중공군 침투조",
+            "type": "CCF_Infantry",
+            "state": "Moving",
+            "time": "1952-10-06T00:04:07Z",
+            "true_time": "1952-10-06T00:02:27Z",
+            "easting": 301570.87,
+            "northing": 4245156.78,
+            "cep_m": 150.0
+          },
+          "shared_predicates": [
+            "follows",
+            "movesToward"
+          ],
+          "predicates_i": [
+            "emplacedAt",
+            "follows",
+            "movesToward",
+            "supports"
+          ],
+          "predicates_j": [
+            "follows",
+            "movesToward",
+            "partOf"
+          ]
+        },
+        {
+          "sector": "sec_test_0012",
+          "label": 0,
+          "score": -151.93910217285156,
+          "components": {
+            "sem_w0": 0.04630332440137863,
+            "b_time": 0.0,
+            "b_motion": -151.0183563232422,
+            "b_state": -0.331550270318985,
+            "b_rel": 0.6295039057731628,
+            "b_src": -1.2650139331817627
+          },
+          "obs_i": {
+            "obs_id": "obs_A_01070",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0054",
+            "label_text": "국군 전초분대",
+            "type": "ROK_Infantry",
+            "state": "Firing",
+            "time": "1952-10-06T00:09:09Z",
+            "true_time": "1952-10-06T00:08:59Z",
+            "easting": 325409.52,
+            "northing": 4244316.13,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_01208",
+            "kg": "B",
+            "source": "HUMINT",
+            "entity": "ent_B_0061",
+            "label_text": "국군 전초분대",
+            "type": "ROK_Infantry",
+            "state": "Engaging",
+            "time": "1952-10-06T00:09:09Z",
+            "true_time": "1952-10-06T00:07:21Z",
+            "easting": 325687.81,
+            "northing": 4243759.55,
+            "cep_m": 270.0
+          },
+          "shared_predicates": [
+            "emplacedAt",
+            "occupies"
+          ],
+          "predicates_i": [
+            "emplacedAt",
+            "occupies",
+            "supports"
+          ],
+          "predicates_j": [
+            "emplacedAt",
+            "occupies",
+            "partOf"
+          ]
+        },
+        {
+          "sector": "sec_test_0006",
+          "label": 0,
+          "score": -151.84982299804688,
+          "components": {
+            "sem_w0": 0.44490307569503784,
+            "b_time": 0.0,
+            "b_motion": -150.99588012695312,
+            "b_state": -0.331550270318985,
+            "b_rel": 0.2997637689113617,
+            "b_src": -1.2670645713806152
+          },
+          "obs_i": {
+            "obs_id": "obs_A_00775",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0038",
+            "label_text": "중공군 돌격조",
+            "type": "CCF_Infantry",
+            "state": "Engaging",
+            "time": "1952-10-06T00:05:05Z",
+            "true_time": "1952-10-06T00:04:54Z",
+            "easting": 337562.48,
+            "northing": 4238651.95,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_01243",
+            "kg": "B",
+            "source": "ACOUSTIC",
+            "entity": "ent_B_0065",
+            "label_text": "미상 차량",
+            "type": "UNKNOWN",
+            "state": "Holding",
+            "time": "1952-10-06T00:05:05Z",
+            "true_time": "1952-10-06T00:03:16Z",
+            "easting": 337419.34,
+            "northing": 4238015.62,
+            "cep_m": 300.0
+          },
+          "shared_predicates": [
+            "occupies",
+            "partOf"
+          ],
+          "predicates_i": [
+            "follows",
+            "near",
+            "occupies",
+            "partOf"
+          ],
+          "predicates_j": [
+            "emplacedAt",
+            "occupies",
+            "partOf"
+          ]
+        }
+      ]
+    },
+    "b_state": {
+      "supporting": [
+        {
+          "sector": "sec_test_0008",
+          "label": 1,
+          "score": 0.3307420015335083,
+          "components": {
+            "sem_w0": 0.7856490015983582,
+            "b_time": 0.0,
+            "b_motion": -2.085004780383315e-06,
+            "b_state": 0.02187355048954487,
+            "b_rel": 0.78687983751297,
+            "b_src": -1.2636582851409912
+          },
+          "obs_i": {
+            "obs_id": "obs_A_00853",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0041",
+            "label_text": "미상 표적",
+            "type": "UNKNOWN",
+            "state": "Approaching",
+            "time": "1952-10-06T00:02:32Z",
+            "true_time": "1952-10-06T00:02:27Z",
+            "easting": 301207.1,
+            "northing": 4244647.12,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_00863",
+            "kg": "B",
+            "source": "SIGINT",
+            "entity": "ent_B_0046",
+            "label_text": "중공군 잔존대",
+            "type": "CCF_Infantry",
+            "state": "Approaching",
+            "time": "1952-10-06T00:05:23Z",
+            "true_time": "1952-10-06T00:01:38Z",
+            "easting": 301277.27,
+            "northing": 4244823.72,
+            "cep_m": 150.0
+          },
+          "shared_predicates": [
+            "movesToward",
+            "partOf"
+          ],
+          "predicates_i": [
+            "follows",
+            "movesToward",
+            "partOf"
+          ],
+          "predicates_j": [
+            "movesToward",
+            "partOf"
+          ]
+        },
+        {
+          "sector": "sec_test_0008",
+          "label": 1,
+          "score": 0.4721578359603882,
+          "components": {
+            "sem_w0": 0.8440532684326172,
+            "b_time": 0.0,
+            "b_motion": -0.0010153255425393581,
+            "b_state": 0.02187355048954487,
+            "b_rel": 0.8743109107017517,
+            "b_src": -1.2670645713806152
+          },
+          "obs_i": {
+            "obs_id": "obs_A_01344",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0063",
+            "label_text": "아군 보병",
+            "type": "ROK_Infantry",
+            "state": "Holding",
+            "time": "1952-10-06T00:02:32Z",
+            "true_time": "1952-10-06T00:02:27Z",
+            "easting": 301755.25,
+            "northing": 4244176.15,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_01355",
+            "kg": "B",
+            "source": "ACOUSTIC",
+            "entity": "ent_B_0073",
+            "label_text": "국군 소총소대",
+            "type": "ROK_Infantry",
+            "state": "Holding",
+            "time": "1952-10-06T00:05:01Z",
+            "true_time": "1952-10-06T00:03:16Z",
+            "easting": 301987.41,
+            "northing": 4244080.29,
+            "cep_m": 300.0
+          },
+          "shared_predicates": [
+            "emplacedAt",
+            "near",
+            "occupies",
+            "partOf"
+          ],
+          "predicates_i": [
+            "emplacedAt",
+            "near",
+            "occupies",
+            "partOf"
+          ],
+          "predicates_j": [
+            "emplacedAt",
+            "near",
+            "occupies",
+            "partOf",
+            "screens"
+          ]
+        },
+        {
+          "sector": "sec_test_0008",
+          "label": 1,
+          "score": 0.4791896343231201,
+          "components": {
+            "sem_w0": 0.8474987149238586,
+            "b_time": 0.0,
+            "b_motion": -0.000835169106721878,
+            "b_state": 0.02187355048954487,
+            "b_rel": 0.8743109107017517,
+            "b_src": -1.2636582851409912
+          },
+          "obs_i": {
+            "obs_id": "obs_A_01344",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0063",
+            "label_text": "아군 보병",
+            "type": "ROK_Infantry",
+            "state": "Holding",
+            "time": "1952-10-06T00:02:32Z",
+            "true_time": "1952-10-06T00:02:27Z",
+            "easting": 301755.25,
+            "northing": 4244176.15,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_01353",
+            "kg": "B",
+            "source": "SIGINT",
+            "entity": "ent_B_0073",
+            "label_text": "국군 전초분대",
+            "type": "ROK_Infantry",
+            "state": "Holding",
+            "time": "1952-10-06T00:04:20Z",
+            "true_time": "1952-10-06T00:01:38Z",
+            "easting": 301740.4,
+            "northing": 4244202.54,
+            "cep_m": 150.0
+          },
+          "shared_predicates": [
+            "emplacedAt",
+            "near",
+            "occupies",
+            "partOf"
+          ],
+          "predicates_i": [
+            "emplacedAt",
+            "near",
+            "occupies",
+            "partOf"
+          ],
+          "predicates_j": [
+            "emplacedAt",
+            "near",
+            "occupies",
+            "partOf",
+            "screens"
+          ]
+        }
+      ],
+      "rejecting": [
+        {
+          "sector": "sec_test_0002",
+          "label": 0,
+          "score": -9.907971382141113,
+          "components": {
+            "sem_w0": -0.04152129217982292,
+            "b_time": 0.0,
+            "b_motion": -3.183951412211172e-05,
+            "b_state": -8.599705696105957,
+            "b_rel": 0.0,
+            "b_src": -1.2667120695114136
+          },
+          "obs_i": {
+            "obs_id": "obs_A_02714",
+            "kg": "A",
+            "source": "RADAR",
+            "entity": "ent_A_0139",
+            "label_text": "미상 차량",
+            "type": "UNKNOWN",
+            "state": "Destroyed",
+            "time": "1952-10-06T00:03:22Z",
+            "true_time": "1952-10-06T00:03:16Z",
+            "easting": 312813.56,
+            "northing": 4239029.13,
+            "cep_m": 15.0
+          },
+          "obs_j": {
+            "obs_id": "obs_B_01706",
+            "kg": "B",
+            "source": "AERIAL",
+            "entity": "ent_B_0086",
+            "label_text": "M46 tank",
+            "type": "US_Tank",
+            "state": "Firing",
+            "time": "1952-10-06T00:05:13Z",
+            "true_time": "1952-10-06T00:04:54Z",
+            "easting": 312764.13,
+            "northing": 4237865.63,
+            "cep_m": 37.5
+          },
+          "shared_predicates": [],
+          "predicates_i": [
+            "near",
+            "reinforces",
+            "supports"
+          ],
+          "predicates_j": [
+            "firesAt"
+          ]
+        },
+        {
+          "sector": "sec_test_0002",
+          "label": 0,
+          "score": -9.202422142028809,
+          "components": {
+            "sem_w0": 0.3143179714679718,
+            "b_time": 0.0,
+            "b_motion": -4.6821627620374784e-05,
+            "b_state": -8.599705696105957,
+            "b_rel": 0.3497243821620941,
+            "b_src": -1.2667120695114136
+          },
+          "obs_i": {
+            "obs_id": "obs_A_02714",
+            "kg": "A",
+            "source": "RADAR",
+            "entity": "ent_A_0139",
+            "label_text": "미상 차량",
+            "type": "UNKNOWN",
+            "state": "Destroyed",
+            "time": "1952-10-06T00:03:22Z",
+            "true_time": "1952-10-06T00:03:16Z",
+            "easting": 312813.56,
+            "northing": 4239029.13,
+            "cep_m": 15.0
+          },
+          "obs_j": {
+            "obs_id": "obs_B_02596",
+            "kg": "B",
+            "source": "AERIAL",
+            "entity": "ent_B_0128",
+            "label_text": "UN 차량대",
+            "type": "VehicleColumn",
+            "state": "Firing",
+            "time": "1952-10-06T00:04:15Z",
+            "true_time": "1952-10-06T00:04:05Z",
+            "easting": 312676.56,
+            "northing": 4238383.8,
+            "cep_m": 37.5
+          },
+          "shared_predicates": [
+            "reinforces",
+            "supports"
+          ],
+          "predicates_i": [
+            "near",
+            "reinforces",
+            "supports"
+          ],
+          "predicates_j": [
+            "emplacedAt",
+            "movesToward",
+            "reinforces",
+            "supports"
+          ]
+        },
+        {
+          "sector": "sec_test_0002",
+          "label": 0,
+          "score": -9.203397750854492,
+          "components": {
+            "sem_w0": 0.32287538051605225,
+            "b_time": 0.0,
+            "b_motion": -7.836730947019532e-05,
+            "b_state": -8.599705696105957,
+            "b_rel": 0.3497243821620941,
+            "b_src": -1.27621328830719
+          },
+          "obs_i": {
+            "obs_id": "obs_A_02714",
+            "kg": "A",
+            "source": "RADAR",
+            "entity": "ent_A_0139",
+            "label_text": "미상 차량",
+            "type": "UNKNOWN",
+            "state": "Destroyed",
+            "time": "1952-10-06T00:03:22Z",
+            "true_time": "1952-10-06T00:03:16Z",
+            "easting": 312813.56,
+            "northing": 4239029.13,
+            "cep_m": 15.0
+          },
+          "obs_j": {
+            "obs_id": "obs_B_02595",
+            "kg": "B",
+            "source": "ACOUSTIC",
+            "entity": "ent_B_0128",
+            "label_text": "중공군 차량대",
+            "type": "VehicleColumn",
+            "state": "Firing",
+            "time": "1952-10-06T00:04:05Z",
+            "true_time": "1952-10-06T00:03:16Z",
+            "easting": 312674.78,
+            "northing": 4238149.26,
+            "cep_m": 300.0
+          },
+          "shared_predicates": [
+            "reinforces",
+            "supports"
+          ],
+          "predicates_i": [
+            "near",
+            "reinforces",
+            "supports"
+          ],
+          "predicates_j": [
+            "emplacedAt",
+            "movesToward",
+            "reinforces",
+            "supports"
+          ]
+        }
+      ]
+    },
+    "b_rel": {
+      "supporting": [
+        {
+          "sector": "sec_test_0009",
+          "label": 1,
+          "score": 0.2942715883255005,
+          "components": {
+            "sem_w0": 0.8357607126235962,
+            "b_time": 0.0,
+            "b_motion": -1.9978438103862572e-06,
+            "b_state": -0.331550270318985,
+            "b_rel": 1.04917311668396,
+            "b_src": -1.2591099739074707
+          },
+          "obs_i": {
+            "obs_id": "obs_B_01632",
+            "kg": "B",
+            "source": "SIGINT",
+            "entity": "ent_B_0083",
+            "label_text": "미상 표적",
+            "type": "UNKNOWN",
+            "state": "Moving",
+            "time": "1952-10-06T00:02:28Z",
+            "true_time": "1952-10-06T00:00:49Z",
+            "easting": 307097.18,
+            "northing": 4243904.61,
+            "cep_m": 150.0
+          },
+          "obs_j": {
+            "obs_id": "obs_A_01630",
+            "kg": "A",
+            "source": "RADAR",
+            "entity": "ent_A_0081",
+            "label_text": "미상 보병",
+            "type": "UNKNOWN",
+            "state": "Firing",
+            "time": "1952-10-06T00:09:50Z",
+            "true_time": "1952-10-06T00:09:48Z",
+            "easting": 307094.91,
+            "northing": 4243967.63,
+            "cep_m": 15.0
+          },
+          "shared_predicates": [
+            "emplacedAt",
+            "partOf",
+            "supports"
+          ],
+          "predicates_i": [
+            "emplacedAt",
+            "partOf",
+            "supports"
+          ],
+          "predicates_j": [
+            "emplacedAt",
+            "partOf",
+            "supports"
+          ]
+        },
+        {
+          "sector": "sec_test_0009",
+          "label": 1,
+          "score": 0.27561068534851074,
+          "components": {
+            "sem_w0": 0.7980564832687378,
+            "b_time": 0.0,
+            "b_motion": -0.0009096580324694514,
+            "b_state": -0.331550270318985,
+            "b_rel": 1.04917311668396,
+            "b_src": -1.2391589879989624
+          },
+          "obs_i": {
+            "obs_id": "obs_A_00313",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0016",
+            "label_text": "적 보병",
+            "type": "CCF_Infantry",
+            "state": "Engaging",
+            "time": "1952-10-06T00:02:30Z",
+            "true_time": "1952-10-06T00:02:27Z",
+            "easting": 307498.32,
+            "northing": 4245356.3,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_00328",
+            "kg": "B",
+            "source": "AERIAL",
+            "entity": "ent_B_0017",
+            "label_text": "중공군 증원대",
+            "type": "CCF_Infantry",
+            "state": "Withdrawing",
+            "time": "1952-10-06T00:08:24Z",
+            "true_time": "1952-10-06T00:08:10Z",
+            "easting": 307365.62,
+            "northing": 4245501.02,
+            "cep_m": 37.5
+          },
+          "shared_predicates": [
+            "follows",
+            "movesToward",
+            "partOf"
+          ],
+          "predicates_i": [
+            "follows",
+            "movesToward",
+            "partOf"
+          ],
+          "predicates_j": [
+            "follows",
+            "movesToward",
+            "partOf"
+          ]
+        },
+        {
+          "sector": "sec_test_0004",
+          "label": 1,
+          "score": 0.19208967685699463,
+          "components": {
+            "sem_w0": 0.7546618580818176,
+            "b_time": 0.0,
+            "b_motion": -2.7064095320383785e-06,
+            "b_state": -0.331550270318985,
+            "b_rel": 1.04917311668396,
+            "b_src": -1.2801923751831055
+          },
+          "obs_i": {
+            "obs_id": "obs_A_01762",
+            "kg": "A",
+            "source": "RADAR",
+            "entity": "ent_A_0088",
+            "label_text": "분류불가 기동표적",
+            "type": "UNKNOWN",
+            "state": "Moving",
+            "time": "1952-10-06T00:00:57Z",
+            "true_time": "1952-10-06T00:00:49Z",
+            "easting": 324204.61,
+            "northing": 4237707.88,
+            "cep_m": 15.0
+          },
+          "obs_j": {
+            "obs_id": "obs_B_01778",
+            "kg": "B",
+            "source": "HUMINT",
+            "entity": "ent_B_0090",
+            "label_text": "미군 전차",
+            "type": "US_Tank",
+            "state": "Firing",
+            "time": "1952-10-06T00:06:57Z",
+            "true_time": "1952-10-06T00:06:32Z",
+            "easting": 324764.36,
+            "northing": 4237476.75,
+            "cep_m": 270.0
+          },
+          "shared_predicates": [
+            "firesAt",
+            "reinforces",
+            "screens",
+            "supports"
+          ],
+          "predicates_i": [
+            "firesAt",
+            "reinforces",
+            "screens",
+            "supports"
+          ],
+          "predicates_j": [
+            "firesAt",
+            "reinforces",
+            "screens",
+            "supports"
+          ]
+        }
+      ],
+      "rejecting": [
+        {
+          "sector": "sec_test_0005",
+          "label": 0,
+          "score": -1.2867283821105957,
+          "components": {
+            "sem_w0": 0.36749008297920227,
+            "b_time": 0.0,
+            "b_motion": -3.119855136901606e-06,
+            "b_state": -1.086599588394165,
+            "b_rel": 0.6994487643241882,
+            "b_src": -1.2670645713806152
+          },
+          "obs_i": {
+            "obs_id": "obs_A_00298",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0016",
+            "label_text": "중공군 재공격대",
+            "type": "CCF_Infantry",
+            "state": "Firing",
+            "time": "1952-10-06T00:07:26Z",
+            "true_time": "1952-10-06T00:07:21Z",
+            "easting": 331186.17,
+            "northing": 4239149.04,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_02629",
+            "kg": "B",
+            "source": "ACOUSTIC",
+            "entity": "ent_B_0129",
+            "label_text": "미상 차량",
+            "type": "UNKNOWN",
+            "state": "Destroyed",
+            "time": "1952-10-06T00:12:11Z",
+            "true_time": "1952-10-06T00:08:59Z",
+            "easting": 330868.42,
+            "northing": 4238463.09,
+            "cep_m": 300.0
+          },
+          "shared_predicates": [
+            "movesToward",
+            "near"
+          ],
+          "predicates_i": [
+            "movesToward",
+            "near"
+          ],
+          "predicates_j": [
+            "movesToward",
+            "near"
+          ]
+        },
+        {
+          "sector": "sec_test_0005",
+          "label": 0,
+          "score": -1.5932555198669434,
+          "components": {
+            "sem_w0": 0.060961950570344925,
+            "b_time": 0.0,
+            "b_motion": -2.0892432530672522e-06,
+            "b_state": -1.086599588394165,
+            "b_rel": 0.6994487643241882,
+            "b_src": -1.2670645713806152
+          },
+          "obs_i": {
+            "obs_id": "obs_A_00298",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0016",
+            "label_text": "중공군 재공격대",
+            "type": "CCF_Infantry",
+            "state": "Firing",
+            "time": "1952-10-06T00:07:26Z",
+            "true_time": "1952-10-06T00:07:21Z",
+            "easting": 331186.17,
+            "northing": 4239149.04,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_02620",
+            "kg": "B",
+            "source": "ACOUSTIC",
+            "entity": "ent_B_0128",
+            "label_text": "분류불가 기동표적",
+            "type": "UNKNOWN",
+            "state": "Destroyed",
+            "time": "1952-10-06T00:10:55Z",
+            "true_time": "1952-10-06T00:09:48Z",
+            "easting": 330941.21,
+            "northing": 4238914.95,
+            "cep_m": 300.0
+          },
+          "shared_predicates": [
+            "movesToward",
+            "near"
+          ],
+          "predicates_i": [
+            "movesToward",
+            "near"
+          ],
+          "predicates_j": [
+            "movesToward",
+            "near"
+          ]
+        },
+        {
+          "sector": "sec_test_0005",
+          "label": 0,
+          "score": -1.2179384231567383,
+          "components": {
+            "sem_w0": 0.4362789988517761,
+            "b_time": 0.0,
+            "b_motion": -2.107395857819938e-06,
+            "b_state": -1.086599588394165,
+            "b_rel": 0.6994487643241882,
+            "b_src": -1.2670645713806152
+          },
+          "obs_i": {
+            "obs_id": "obs_A_00298",
+            "kg": "A",
+            "source": "ARTILLERY_OBS",
+            "entity": "ent_A_0016",
+            "label_text": "중공군 재공격대",
+            "type": "CCF_Infantry",
+            "state": "Firing",
+            "time": "1952-10-06T00:07:26Z",
+            "true_time": "1952-10-06T00:07:21Z",
+            "easting": 331186.17,
+            "northing": 4239149.04,
+            "cep_m": 52.5
+          },
+          "obs_j": {
+            "obs_id": "obs_B_02630",
+            "kg": "B",
+            "source": "ACOUSTIC",
+            "entity": "ent_B_0129",
+            "label_text": "미상 표적",
+            "type": "UNKNOWN",
+            "state": "Destroyed",
+            "time": "1952-10-06T00:11:27Z",
+            "true_time": "1952-10-06T00:09:48Z",
+            "easting": 331070.98,
+            "northing": 4238824.44,
+            "cep_m": 300.0
+          },
+          "shared_predicates": [
+            "movesToward",
+            "near"
+          ],
+          "predicates_i": [
+            "movesToward",
+            "near"
+          ],
+          "predicates_j": [
+            "movesToward",
+            "near"
+          ]
+        }
+      ]
+    },
+    "b_src": {
+      "supporting": [],
+      "rejecting": []
+    }
+  }
+}

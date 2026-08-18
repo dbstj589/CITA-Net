@@ -1,0 +1,5 @@
+variant,seed,split,ok,d_precision,d_recall,d_f1
+m3_full,19521006,dev,True,0.0,0.0,0.0
+m3_full,19521006,test,True,0.0,0.0,0.0
+no_motion,19521006,dev,True,0.0,0.0,0.0
+no_motion,19521006,test,True,0.0,0.0,0.0
